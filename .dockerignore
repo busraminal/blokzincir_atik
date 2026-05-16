@@ -1,0 +1,9 @@
+# Docker build context = proje kökü (atık/)
+BLOCKCHAIN/atik-dlt/node_modules
+**/node_modules
+**/__pycache__
+**/.venv
+**/.git
+**/*.pyc
+.git
+mcps

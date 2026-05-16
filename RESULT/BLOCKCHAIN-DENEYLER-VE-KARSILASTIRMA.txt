@@ -1,0 +1,157 @@
+================================================================================
+ATIK — BLOCKCHAIN / DLT BÖLÜMÜ İÇİN RAPORLANABİLİR DENEYLER VE TEKNİK KARŞILAŞTIRMA
+(Kod ve dokümantasyonla uyumlu; ölçüm hücrelerini kendi koştuğunuz deneylerle doldurun.)
+================================================================================
+
+--- A) Bu projede “farklı teknikler” neler? (Özet tablo) ---
+
++---------------------------+------------------------------------------+-----------------------------+
+| Teknik / yaklaşım         | Ne sağlar?                               | Projede nerede?             |
++---------------------------+------------------------------------------+-----------------------------+
+| Dosya tabanlı hash zinciri| SHA-256 ile blok bağlama; işlem geçmişi| lib/ledger.js + chain.json|
+| İşlem tabanlı durum (UTXO benzeri değil, state machine) | Kayıt oluştur, aşama ilerlet, yama, oracle işareti | applyTransaction() türleri |
+| İzinli DLT (Hyperledger Fabric) | Çok düğüm, MSP, orderer, chaincode     | USE_FABRIC=1, fabricClient|
+| Chaincode — Go            | contractapi; WASTE_{id} anahtar modeli   | chaincode/atik-waste-go   |
+| Chaincode — JavaScript    | Aynı mantık (Node shim)                  | chaincode/atik-waste-javascript |
+| Tek API yüzeyi            | Aynı REST; arka uç mod değişir           | server.js                 |
++---------------------------+------------------------------------------+-----------------------------+
+
+Not: FABRIC-Gercek-Sistem.txt dosyasında açıkça belirtildiği gibi demo zincir
+“dağıtık mutabakat” içermez; Fabric ise orderer + peer + kanal ile mutabakatlı
+yazım modeli sunar. Raporda bu ayrım deneyin “gerekçesi” olarak yazılmalıdır.
+
+
+--- B) Demo hash zinciri — teknik detay (rapora kısaltarak alınabilir) ---
+
+1) Blok yapısı: index, timestamp, prevHash, tx (işlem), hash.
+2) Hash fonksiyonu: SHA-256( prevHash + JSON.stringify(tx) + index ) — ledger.js.
+3) Genesis: önceki hash sıfırlarla doldurulmuş sabit başlangıç; GENESIS işlemi.
+4) Kalıcılık: data/chain.json (tek süreç, tek makine).
+
+İşlem (transaction) türleri — “farklı senaryoları zincire işleme” deneyi olarak anlatılabilir:
+  • GENESIS          — zincirin başlangıcı
+  • CREATE_WASTE     — yeni atık kaydı
+  • ADVANCE_STAGE    — yaşam döngüsü aşamaları (kayit → … → kapandi)
+  • PATCH_RECORD     — alan güncellemesi + olay günlüğü (events)
+  • LOGISTICS_ATTEST — dış kaynak (oracle) doğrulamasının zincire işlenmesi
+
+Bu çeşitlilik, raporda “yalnızca transfer değil; atık yönetimi domain işlemleri”
+diye vurgulanabilir.
+
+
+--- C) Önerilen deney 1 — Zincir bütünlüğü doğrulama (kolay, güçlü) ---
+
+Amaç: Hash zincirinin tutarlı olduğunu göstermek.
+
+Yöntem (elle veya küçük script):
+  a) Uygulama kapalıyken chain.json yedek alın.
+  b) chain.json içinde orta bir bloğun "hash" alanını tek karakter değiştirin.
+  c) Uygulamayı açıp zinciri okuyan kodla veya kendi doğrulama döngünüzle
+     her blok için: hesaplanan H = SHA256(prevHash + tx + index) == blok.hash
+     kontrolü yapın; bozulan bloktan itibaren uyumsuzluk beklenir.
+
+Rapor tablosu:
+  +------------------+----------------------------+
+  | Senaryo          | Gözlem                     |
+  +------------------+----------------------------+
+  | Orijinal dosya   | Tüm bloklar tutarlı: EVET  |
+  | Hash bozulmuş    | İlk uyumsuzluk indeksi: __ |
+  +------------------+----------------------------+
+
+Not: Mevcut loadOrInit zinciri olduğu gibi yükler; ayrı bir “verifyChain()”
+yardımcı programı yazmak raporu güçlendirir (isteğe bağlı mini script).
+
+
+--- D) Önerilen deney 2 — Aynı API, iki arka uç (karşılaştırma) ---
+
+Amaç: Mimari modülerliği göstermek.
+
+Adımlar:
+  1) USE_FABRIC kapalı: GET http://127.0.0.1:PORT/health
+     → mode: "file-ledger", blocks / records alanları.
+  2) Fabric ağı + USE_FABRIC açık: aynı uç
+     → mode: "hyperledger-fabric", chaincode / channel bilgisi.
+  3) Her iki modda POST /api/waste (veya arayüzden kayıt) + GET /api/waste.
+
+Rapor tablosu:
+  +------------------+--------------------------+--------------------------+
+  | Ölçüt            | file-ledger              | hyperledger-fabric       |
+  +------------------+--------------------------+--------------------------+
+  | /health mode     |                          |                          |
+  | Kayıt görünürlüğü|                          |                          |
+  | Notlar           | Tek makine; anında yazım | WSL/Docker; commit gecikmesi |
+  +------------------+--------------------------+--------------------------+
+
+Fabric canlı kontrol akışı için hazır plan: BLOCKCHAIN/atik-dlt/BLOCKCHAIN_DEMO_KANIT.md
+(docker ps, /health, /api/waste, blokzincir.html?server=1).
+
+
+--- E) Önerilen deney 3 — Chaincode dili karşılaştırması (tasarım deneyi) ---
+
+Amaç: “Aynı veri modeli, farklı uygulama dili” — taşınabilirlik.
+
+İçerik:
+  • Go sürümü: CreateWaste, ReadWaste, SaveWaste, DeleteWaste, QueryAllWastes
+    (main.go — Fabric Contract API).
+  • JavaScript sürümü: aynı işlevler (atik-waste-javascript — FABRIC-Gercek-Sistem.txt
+    deploy örneği JS chaincode yolunu verir).
+
+Raporda tablo:
+  +----------------------+--------+------------------+
+  | Kriter               | Go CC  | JavaScript CC    |
+  +----------------------+--------+------------------+
+  | Derleme / paketleme  |        |                  |
+  | Deploy kolaylığı   |        |                  |
+  | Okunabilirlik      |        |                  |
+  +----------------------+--------+------------------+
+
+Not: İkisini de aynı test-network’e deploy edip ölçmek zorunlu değil; “implementasyon
+alternatifleri olarak geliştirildi, biri seçilerek demo yürütüldü” denebilir.
+
+
+--- F) Önerilen deney 4 — İşlem türü senaryoları (domain testi) ---
+
+Her satırı raporda “kabul testi” gibi yazın (Evet/Hayır + ekran notu):
+
+  +-------------------+----------------------------------------+------------------+
+  | İşlem / senaryo   | Beklenen                               | Sonuç            |
+  +-------------------+----------------------------------------+------------------+
+  | CREATE_WASTE      | Yeni id listede                        |                  |
+  | ADVANCE_STAGE     | Aşama sırası bozulmadan ilerler        |                  |
+  | PATCH_RECORD      | Alan + events güncellenir              |                  |
+  | LOGISTICS_ATTEST  | logisticsApiValidated true olur        |                  |
+  +-------------------+----------------------------------------+------------------+
+
+Fabric modunda bu iş kurallarının ne kadarının chaincode’da, ne kadarının
+Node katmanında kısıtlandığına dikkat: raporda dürüstçe yazın (ör. aşama
+geçişi kuralları ağırlıklı olarak API/chaincode birleşiminde).
+
+
+--- G) İsteğe bağlı — Basit performans (abartmadan) ---
+
+  • file-ledger: N ardışık appendTx (API veya script) — ortalama ms.
+  • fabric: N CreateWaste — ortalama ms (WSL + Docker gecikmesi yüksek çıkabilir).
+
+Donanım ve ortam notu şart: CPU modeli, Docker Desktop, tek peer test-network vb.
+
+
+--- H) Hocaya tek cümle (BLOCKCHAIN_DEMO_KANIT.md ile uyumlu) ---
+
+“Hyperledger Fabric test-network üzerinde orderer ve peer düğümleri ile kanalda
+çalışan atikwaste chaincode’a Node gateway üzerinden bağlanıyoruz; geliştirme ve
+hızlı gösterim için aynı API ile dosya tabanlı SHA-256 hash zinciri modu da
+korunuyor.”
+
+
+--- I) Kaynak dosyalar (raporda dipnot / ek olarak) ---
+
+  • BLOCKCHAIN/atik-dlt/lib/ledger.js
+  • BLOCKCHAIN/atik-dlt/server.js (USE_FABRIC, /api/waste)
+  • BLOCKCHAIN/atik-dlt/FABRIC-Gercek-Sistem.txt
+  • BLOCKCHAIN/atik-dlt/BLOCKCHAIN_DEMO_KANIT.md
+  • BLOCKCHAIN/atik-dlt/chaincode/atik-waste-go/main.go
+  • BLOCKCHAIN/atik-dlt/chaincode/atik-waste-javascript/
+
+================================================================================
+Dosya sonu
+================================================================================

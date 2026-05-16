@@ -1,0 +1,28 @@
+ATIK — proje kökü klasör haritası
+================================
+
+BLOCKCHAIN/
+  atik-dlt/          Node + Express API, demo zincir, Hyperledger Fabric scriptleri, chaincode
+
+WEB/
+  *.html, assets/    Statik arayüz (Atik.html, blokzincir, paneller…)
+  scripts/           PDF/EWC yardımcı scriptleri
+
+MACHINE_LEARNING/
+  atik_ai_multi_agent_decision-main/
+                     FastAPI, eşleştirme motoru, PyTorch tahmin, agentlar
+
+MLOPS/
+                     Docker Compose (Postgres + FastAPI + init-db). Başlat: .\MLOPS\up.ps1 — README.txt. Tahmin/LLM uçları: /api/v1/predict/*, /api/v1/llm/*
+
+DATA/
+                     Kaynak veri: ewc_kodlari.pdf, *.xlsx, ham JSON/CSV
+                     Sunucu: http://localhost:PORT/data/<dosya>  (npm start açıkken)
+
+RESULT/
+                     Raporlar, dışa aktarımlar, sunum çıktıları (isteğe bağlı)
+                     Sunucu: http://localhost:PORT/results/<dosya>
+
+Kök: package.json (npm start), start-atik-dev.ps1 / .bat, .vscode/
+
+Eski yol "Atık web/..." kaldırıldı; workspace klasörü doğrudan bu yapıdır.

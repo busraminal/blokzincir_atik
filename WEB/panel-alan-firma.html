@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atık AI | Alan firma paneli</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ecoBlue: "#2D9CDB", ecoGreen: "#27AE60", ecoGray: "#333333" },
+          fontFamily: { sans: ["Poppins", "Inter", "system-ui", "sans-serif"] },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="panel-alan" data-required-role="receiver">
+  <div class="max-w-3xl mx-auto px-4 py-10">
+    <a href="profil.html" class="text-sm font-semibold text-ecoBlue hover:underline">← Profilime dön</a>
+    <h1 class="mt-6 text-3xl font-bold">Alan firma</h1>
+    <p class="mt-3 text-gray-600 text-sm leading-relaxed">
+      Atığı kabul eden geri kazanım veya ara işlem tesisi görünümü. Kabul, tartım ve ayrıştırma kayıtları burada listelenebilir.
+    </p>
+    <div class="mt-8 rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+      <p class="text-sm text-gray-500">Henüz bağlı veri yok — <a class="text-ecoBlue font-semibold hover:underline" href="blokzincir.html">Blokzincir</a> kayıtlarıyla eşleştirilebilir.</p>
+    </div>
+  </div>
+  <script src="assets/auth.js" defer></script>
+</body>
+</html>

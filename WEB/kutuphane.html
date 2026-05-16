@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atık yönetimi mevzuatı ve resmi kaynaklar: ÇŞİKB, sıfır atık, mevzuat portalları — özet ve bağlantılar." />
+  <title>Atık AI | Mevzuat kütüphanesi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoOrange: "#F2994A",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="kutuphane">
+  <div class="min-h-screen relative overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-ecoBlue focus:text-white focus:font-semibold focus:shadow-lg focus:outline-none">İçeriğe atla</a>
+      <header class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm shadow-slate-900/[0.04]">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm transition group-hover:shadow-md">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden lg:flex items-center gap-0.5 xl:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-full px-2.5 xl:px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">AI Asistan</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="giris.html" data-nav="giris" class="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 transition hover:opacity-[0.96] hover:shadow-lg">Giriş yap</a>
+            <button type="button" data-site-menu-btn class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden lg:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a data-nav="home" href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">AI Asistan</a>
+            <a data-nav="giris" href="giris.html" class="rounded-xl px-3 py-3 text-ecoBlue font-semibold hover:bg-ecoBlue/5">Giriş yap</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content" class="glass-panel rounded-[2rem] border border-white/60 p-6 md:p-10 shadow-soft mt-6 md:mt-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-ecoBlue">Resmi kaynaklar</p>
+        <h1 class="mt-2 text-3xl md:text-4xl font-bold text-ecoGray">Mevzuat ve kütüphane</h1>
+        <p class="mt-4 max-w-3xl text-gray-700 leading-relaxed">
+          Aşağıdaki kartlar <strong>bilgilendirme</strong> amaçlıdır; güncel ve bağlayıcı metin için her zaman kaynak sitedeki orijinal düzenlemelere bakın. Bir karta tıklayarak özet, dikkat edilmesi gerekenler ve doğrudan bağlantıyı görüntüleyin.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-2">
+          <button type="button" data-lib-filter="all" class="lib-filter rounded-full px-4 py-2 text-sm font-semibold bg-ecoBlue text-white shadow-sm">Tümü</button>
+          <button type="button" data-lib-filter="bakanlik" class="lib-filter rounded-full px-4 py-2 text-sm font-semibold border border-gray-200 bg-white text-gray-700 hover:bg-gray-50">Bakanlık / portal</button>
+          <button type="button" data-lib-filter="mevzuat" class="lib-filter rounded-full px-4 py-2 text-sm font-semibold border border-gray-200 bg-white text-gray-700 hover:bg-gray-50">Mevzuat</button>
+          <button type="button" data-lib-filter="uygulama" class="lib-filter rounded-full px-4 py-2 text-sm font-semibold border border-gray-200 bg-white text-gray-700 hover:bg-gray-50">Uygulama alanları</button>
+        </div>
+
+        <div id="lib-grid" class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3"></div>
+      </main>
+
+      <div class="mt-6">
+        <a href="Atik.html" class="inline-flex items-center gap-2 rounded-full bg-ecoGreen/10 px-4 py-2 text-sm font-semibold text-ecoGreen shadow-sm hover:bg-ecoGreen/15 transition">← Ana sayfa</a>
+      </div>
+
+      <footer class="mt-16 md:mt-20 border-t border-slate-200/80 bg-gradient-to-b from-transparent to-white/70">
+        <div class="py-12 md:py-14">
+          <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p class="flex items-center gap-2 font-bold text-ecoGray"><span class="text-xl" aria-hidden="true">♻</span> Atık AI</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Atık üreticileri ile geri kazanım firmalarını buluşturan sade, modern bir eşleştirme ve takip deneyimi.</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="nasil.html">Nasıl çalışır?</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="turler.html">Atık türleri</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blokzincir.html">Takip ve blokzincir</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blog.html">Blog ve topluluk</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="kutuphane.html">Mevzuat kütüphanesi</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="chatbot.html">AI Asistan</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kurumsal</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="giris.html">Giriş ve kayıt</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Not</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Bağlantılar üçüncü taraf resmi sitelere gider; adresler zamanla değişebilir.</p>
+            </div>
+          </div>
+          <p class="mt-12 pt-8 border-t border-slate-200/70 text-center text-xs text-slate-500">© <span id="site-year"></span> Atık AI · Sürdürülebilir atık yönetimi</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <div id="lib-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/50" aria-hidden="true">
+    <div class="glass-panel max-w-lg w-full max-h-[90vh] overflow-y-auto rounded-2xl border border-white/80 p-6 shadow-2xl" role="dialog" aria-labelledby="lib-modal-title">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <p id="lib-modal-source" class="text-xs font-semibold uppercase tracking-wider text-ecoBlue"></p>
+          <h2 id="lib-modal-title" class="mt-1 text-xl font-bold text-ecoGray pr-4"></h2>
+        </div>
+        <button type="button" id="lib-modal-close" class="text-2xl leading-none text-gray-400 hover:text-gray-700 shrink-0">&times;</button>
+      </div>
+      <p id="lib-modal-summary" class="mt-4 text-sm text-gray-700 leading-relaxed"></p>
+      <div class="mt-5">
+        <p class="text-xs font-bold uppercase tracking-wider text-gray-500">Dikkat / zorunluluk özeti</p>
+        <ul id="lib-modal-obligations" class="mt-2 list-disc pl-5 text-sm text-gray-700 space-y-1.5"></ul>
+      </div>
+      <p id="lib-modal-disclaimer" class="mt-4 text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 leading-relaxed"></p>
+      <a id="lib-modal-link" href="#" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center justify-center w-full rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-5 py-3 text-sm font-semibold text-white shadow-md hover:opacity-[0.97]">Kaynağı sitede aç</a>
+    </div>
+  </div>
+
+  <script src="assets/site-nav.js" defer></script>
+  <script>
+    (function () {
+      var LIB_ITEMS = [
+        {
+          id: "csb",
+          cat: "bakanlik",
+          title: "Çevre, Şehircilik ve İklim Değişikliği Bakanlığı",
+          source: "ÇŞİKB",
+          url: "https://www.csb.gov.tr/",
+          summary:
+            "Ülkemizde çevre ve iklim politikalarının ana kurumu; atık, sıfır atık, çevre izni ve ilgili düzenlemelerin yürütülmesinde merkezi rol oynar. Alt birim ve duyurular için resmi site üzerinden güncel sayfaları takip etmek gerekir.",
+          obligations: [
+            "İşletme yükümlülükleri ve güncel tebliğ/yönetmelikler için bakanlık ve il müdürlükleri duyurularını izleyin.",
+            "Çevre izni, atık kodları ve raporlama gereklilikleri faaliyet türüne göre değişir; tek tip cevap verilemez.",
+          ],
+        },
+        {
+          id: "sifir-atik",
+          cat: "bakanlik",
+          title: "Sıfır Atık Bilgi Sistemi",
+          source: "Sıfır Atık · ÇŞİKB",
+          url: "https://sifiratik.gov.tr/",
+          summary:
+            "Sıfır atık yönetim sistemi, eğitim ve bilgilendirme içeriklerinin toplandığı resmi portal. Belediye, kurum ve işletme düzeyinde uygulamalarla ilgili genel çerçeve burada duyurulur.",
+          obligations: [
+            "Belge ve sıfır atık hedefleri kurum türüne göre farklıdır; portal üzerindeki güncel kılavuzlara bakın.",
+            "Atık azaltma hiyerarşisi (önleme, yeniden kullanım, geri dönüşüm, geri kazanım, bertaraf) resmi yaklaşımın özüdür.",
+          ],
+        },
+        {
+          id: "sifir-mevzuat",
+          cat: "mevzuat",
+          title: "Sıfır Atık — mevzuat sayfası",
+          source: "Sıfır Atık portalı",
+          url: "https://sifiratik.gov.tr/sifir-atik/mevzuat",
+          summary:
+            "Sıfır atık ile ilişkili yönetmelik ve düzenlemelere yönelik derlenmiş bağlantı ve bilgilerin sunulduğu bölüm. Metin değişiklikleri Resmi Gazete ile kesinleşir.",
+          obligations: [
+            "Yürürlük tarihlerini ve son değişiklikleri mutlaka Resmi Gazete / mevzuat metninden doğrulayın.",
+            "İşletme içi prosedürlerinizi güncel yönetmelik maddeleriyle eşleştirin.",
+          ],
+        },
+        {
+          id: "mevzuat-gov",
+          cat: "mevzuat",
+          title: "Mevzuat Bilgi Sistemi (mevzuat.gov.tr)",
+          source: "T.C. Resmi Mevzuat",
+          url: "https://www.mevzuat.gov.tr/",
+          summary:
+            "Kanun, yönetmelik, tebliğ ve Cumhurbaşkanlığı kararnamelerinin aranıp görüntülenebildiği resmi portal. Atık yönetimi, çevre ve bertaraf konulu düzenlemeler burada yayınlanır.",
+          obligations: [
+            "Hukuki dayanak için tam metin ve yürürlük bilgisini bu sistemden veya Resmi Gazete’den alın.",
+            "Arama yaparken “atık”, “çevre”, “ambalaj”, “tehlikeli atık” gibi anahtar kelimeler kullanın.",
+          ],
+        },
+        {
+          id: "resmi-gazete",
+          cat: "mevzuat",
+          title: "Türkiye Resmî Gazete",
+          source: "Resmî Gazete",
+          url: "https://www.resmigazete.gov.tr/",
+          summary:
+            "Yeni ve değiştirilen mevzuatın yayımlandığı resmi kaynak. Yönetmelik değişikliklerinin kesin hükmü için gazete nüshası esas alınır.",
+          obligations: [
+            "İç denetim ve uyum çalışmalarında referans tarihini Resmî Gazete ile sabitleyin.",
+            "PDF/HTML sürümlerinin güncelliğini kontrol edin.",
+          ],
+        },
+        {
+          id: "rg-atik-yonetim-20150402",
+          cat: "mevzuat",
+          title: "Atık yönetimi ile ilgili Resmî Gazete (2 Nisan 2015)",
+          source: "Resmî Gazete · PDF",
+          url: "https://www.resmigazete.gov.tr/eskiler/2015/04/20150402-2-1.pdf",
+          summary:
+            "Resmî Gazete’de yayımlanan; atık yönetimi mevzuatı çerçevesindeki düzenlemelere ilişkin resmi PDF nüshasıdır. Atık sınıfları, kodlama ve yükümlülükler için güncel tam metinleri her zaman mevzuat.gov.tr ve son değişiklik gazeteleri ile birlikte doğrulayın.",
+          obligations: [
+            "PDF’teki madde ve eklerin yürürlük tarihini ve sonraki değişiklikleri Mevzuat Bilgi Sistemi veya yeni Resmî Gazete nüshaları ile karşılaştırın.",
+            "İşletme içi atık türü ve kod eşlemesi için tehlikeli atık listesi ve güncel yönetmelikleri kullanın.",
+          ],
+        },
+        {
+          id: "atik-yonetim-genel",
+          cat: "uygulama",
+          title: "Atık yönetimi (genel çerçeve)",
+          source: "Özet bilgilendirme",
+          url: "https://sifiratik.gov.tr/sifir-atik/mevzuat",
+          summary:
+            "Atıkların oluşumundan bertarafına kadar sınıflandırma, geçici depolama, taşıma ve lisanslı tesislere devralma süreçleri yönetmeliklerle düzenlenir. Tehlikeli ve tehlikesiz atık ayrımı operasyonel ve cezai açıdan kritiktir.",
+          obligations: [
+            "Atık kodları (ör. tehlikeli atık listesi) ve taşıma/evrak uyumu için güncel yönetmeliklere uygun hareket edin.",
+            "Bertaraf veya geri kazanım için yetkili tesislerle sözleşme ve takip formalarını saklayın.",
+          ],
+        },
+        {
+          id: "ambalaj",
+          cat: "uygulama",
+          title: "Ambalaj atıkları ve geri kazanım",
+          source: "Mevzuat çerçevesi",
+          url: "https://www.mevzuat.gov.tr/",
+          summary:
+            "Ambalaj atıklarının toplanması, geri kazanım hedefleri ve sorumluluk paylaşımı özel düzenlemelere tabidir. Üretici, ithalatçı ve dağıtım zinciri rolleri ayrı ayrı tanımlanabilir.",
+          obligations: [
+            "Ambalaj türü ve hacminize göre beyan, kayıt veya sistem katılımı gerekip gerekmediğini mevzuattan kontrol edin.",
+            "Geri kazanım oranları ve raporlama dönemleri değişebilir; güncel tebliğleri izleyin.",
+          ],
+        },
+        {
+          id: "tehlikeli",
+          cat: "uygulama",
+          title: "Tehlikeli atıklar",
+          source: "Mevzuat çerçevesi",
+          url: "https://www.mevzuat.gov.tr/",
+          summary:
+            "Tehlikeli atıkların üretiminden nihai bertarafına kadar taşıma belgeleri, uygun ambalajlama, etiketleme ve lisanslı alıcı/tesis zorunlulukları sıkı şekilde düzenlenir.",
+          obligations: [
+            "MSDS / güvenlik bilgi formu ve atık kodu eşleştirmesi yapın.",
+            "Taşıma ve geçici depolama için yetki ve süre sınırlarına uyun; kayıtları saklayın.",
+          ],
+        },
+        {
+          id: "elektronik",
+          cat: "uygulama",
+          title: "Elektronik atık ve e-atık toplama",
+          source: "Uygulama / mevzuat",
+          url: "https://www.csb.gov.tr/",
+          summary:
+            "Elektronik ürünlerin ömrü sonunda toplanması, geri dönüşüm ve tehlikeli bileşenlerin yönetimi için ayrı düzenlemeler ve üretici sorumluluğu modelleri bulunur.",
+          obligations: [
+            "Kurumsal e-atık için veri silme / imha prosedürlerini iş güvenliği ve KVKK ile birlikte ele alın.",
+            "Lisanslı toplama noktaları veya üretici geri alım programlarına yönlendirin.",
+          ],
+        },
+        {
+          id: "atik-yakma",
+          cat: "uygulama",
+          title: "Atıkların yakılması (enerji/bertaraf)",
+          source: "Mevzuat çerçevesi",
+          url: "https://www.mevzuat.gov.tr/",
+          summary:
+            "Atık yakma tesisleri emisyon limitleri, izin ve izleme yükümlülüklerine tabidir. Hangi atık türlerinin hangi tesislerde işlenebileceği yönetmeliklerle sınırlıdır.",
+          obligations: [
+            "Çevre izni kapsamı dışına çıkmayın; kabul edilebilir atık listelerini güncel tutun.",
+            "Emisyon ölçüm raporlarını ve işletme günlüklerini mevzuatta öngörülen sürelerle saklayın.",
+          ],
+        },
+      ];
+
+      var DISCLAIMER =
+        "Bu özetler eğitim ve yönlendirme içindir; hukuki danışmanlık veya resmi yorum yerine geçmez. Kesin metin ve güncel hükümler için bağlantıdaki kaynağa başvurun.";
+
+      var grid = document.getElementById("lib-grid");
+      var modal = document.getElementById("lib-modal");
+      var activeFilter = "all";
+
+      function escapeHtml(s) {
+        if (!s) return "";
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function openModal(item) {
+        document.getElementById("lib-modal-source").textContent = item.source;
+        document.getElementById("lib-modal-title").textContent = item.title;
+        document.getElementById("lib-modal-summary").textContent = item.summary;
+        var ul = document.getElementById("lib-modal-obligations");
+        ul.innerHTML = "";
+        (item.obligations || []).forEach(function (line) {
+          var li = document.createElement("li");
+          li.textContent = line;
+          ul.appendChild(li);
+        });
+        document.getElementById("lib-modal-disclaimer").textContent = DISCLAIMER;
+        var a = document.getElementById("lib-modal-link");
+        a.href = item.url;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        modal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeModal() {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      document.getElementById("lib-modal-close").addEventListener("click", closeModal);
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+      });
+
+      function render() {
+        grid.innerHTML = "";
+        LIB_ITEMS.forEach(function (item) {
+          if (activeFilter !== "all" && item.cat !== activeFilter) return;
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className =
+            "text-left rounded-2xl border border-gray-100 bg-white p-5 shadow-soft hover:border-ecoBlue/30 hover:shadow-md transition focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40";
+          btn.innerHTML =
+            '<p class="text-xs font-semibold uppercase tracking-wider text-ecoBlue">' +
+            escapeHtml(item.source) +
+            '</p><h3 class="mt-2 text-base font-bold text-ecoGray leading-snug">' +
+            escapeHtml(item.title) +
+            '</h3><p class="mt-2 text-sm text-gray-600 line-clamp-2">' +
+            escapeHtml(item.summary) +
+            '</p><p class="mt-3 text-xs font-semibold text-ecoGreen">Detay ve kaynak →</p>';
+          btn.addEventListener("click", function () {
+            openModal(item);
+          });
+          grid.appendChild(btn);
+        });
+      }
+
+      document.querySelectorAll(".lib-filter").forEach(function (b) {
+        b.addEventListener("click", function () {
+          activeFilter = b.getAttribute("data-lib-filter") || "all";
+          document.querySelectorAll(".lib-filter").forEach(function (x) {
+            var on = x.getAttribute("data-lib-filter") === activeFilter;
+            x.className =
+              "lib-filter rounded-full px-4 py-2 text-sm font-semibold border transition " +
+              (on
+                ? "bg-ecoBlue text-white border-ecoBlue shadow-sm"
+                : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50");
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

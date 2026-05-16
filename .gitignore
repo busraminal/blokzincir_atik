@@ -1,0 +1,43 @@
+# Gizli / yerel ortam
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Bağımlılıklar
+node_modules/
+**/node_modules/
+
+# Yerel çalışma verisi (zincir, mesajlar)
+BLOCKCHAIN/atik-dlt/data/
+**/data/*.json
+contact_threads.json
+**/contact_threads.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Docker / log
+*.log
+
+# IDE / işletim sistemi
+.cursor/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+
+# Derleme / önbellek
+dist/
+build/
+.cache/
+*.egg-info/

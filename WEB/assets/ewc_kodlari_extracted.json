@@ -1,0 +1,1462 @@
+[
+  {
+    "code": "010304",
+    "label": "01 03 04 ve 01 03 05 dusındaki dizer maden alıkları"
+  },
+  {
+    "code": "010305",
+    "label": "01 03 04 ve 01 03 05 dusındaki dizer maden alıkları"
+  },
+  {
+    "code": "010307",
+    "label": "01 03 07 dısundaki_digcr_tozumsu ve pudramsı"
+  },
+  {
+    "code": "010407",
+    "label": "01 04 07*"
+  },
+  {
+    "code": "010408",
+    "label": "01 04 08"
+  },
+  {
+    "code": "010412",
+    "label": "01 04 12"
+  },
+  {
+    "code": "010505",
+    "label": "01 05 05 ve 01 05 06 dısndaki barit içeren sondaj_camurları"
+  },
+  {
+    "code": "010506",
+    "label": "01 05 05 ve 01 05 06 dısndaki barit içeren sondaj_camurları"
+  },
+  {
+    "code": "010510",
+    "label": "10.01 05 10 01 07 ve 10 01 18 dısındaki gaz temizleme atıkları"
+  },
+  {
+    "code": "020101",
+    "label": "02 01 01"
+  },
+  {
+    "code": "020102",
+    "label": "02 01 02"
+  },
+  {
+    "code": "020106",
+    "label": "02 01 06"
+  },
+  {
+    "code": "020108",
+    "label": "02 01 08"
+  },
+  {
+    "code": "020110",
+    "label": "02 01 10"
+  },
+  {
+    "code": "020199",
+    "label": "02 01 99"
+  },
+  {
+    "code": "020204",
+    "label": "02 02 04"
+  },
+  {
+    "code": "020301",
+    "label": "02 03 01"
+  },
+  {
+    "code": "020302",
+    "label": "02 03 02"
+  },
+  {
+    "code": "020401",
+    "label": "02 04 01"
+  },
+  {
+    "code": "020403",
+    "label": "02 04 03"
+  },
+  {
+    "code": "020502",
+    "label": "02 05 02"
+  },
+  {
+    "code": "020603",
+    "label": "02 06 03"
+  },
+  {
+    "code": "020701",
+    "label": "02 07 01"
+  },
+  {
+    "code": "020702",
+    "label": "02 07 02"
+  },
+  {
+    "code": "020703",
+    "label": "02 07 03"
+  },
+  {
+    "code": "020799",
+    "label": "02 07 99"
+  },
+  {
+    "code": "030307",
+    "label": "03 03 07"
+  },
+  {
+    "code": "030308",
+    "label": "03 03 08"
+  },
+  {
+    "code": "030309",
+    "label": "03 03 09"
+  },
+  {
+    "code": "030310",
+    "label": "03 03 10"
+  },
+  {
+    "code": "030399",
+    "label": "03 03 99"
+  },
+  {
+    "code": "040101",
+    "label": "04 01 01"
+  },
+  {
+    "code": "040108",
+    "label": "04 01 08"
+  },
+  {
+    "code": "040109",
+    "label": "04 01 09"
+  },
+  {
+    "code": "040214",
+    "label": "04 02 14 dısındaki perdah atıkları"
+  },
+  {
+    "code": "040216",
+    "label": "04 02 16 dısndaki boya maddeleri"
+  },
+  {
+    "code": "040219",
+    "label": "04 02 19 dısmdaki saha içi atıksu arıtımından kaynaklanan camurlar"
+  },
+  {
+    "code": "040222",
+    "label": "04 02 22"
+  },
+  {
+    "code": "050109",
+    "label": "05 0109 dısındaki saha iciatıksu antımından kaynaklanan çamurlar"
+  },
+  {
+    "code": "050112",
+    "label": "05 01 12*"
+  },
+  {
+    "code": "050699",
+    "label": "05 06 99"
+  },
+  {
+    "code": "060101",
+    "label": "06 01 01*"
+  },
+  {
+    "code": "060102",
+    "label": "06 01 02*"
+  },
+  {
+    "code": "060199",
+    "label": "06 01 99"
+  },
+  {
+    "code": "060201",
+    "label": "06 02 01 *"
+  },
+  {
+    "code": "060203",
+    "label": "06 02 03 *"
+  },
+  {
+    "code": "060299",
+    "label": "06 02 99"
+  },
+  {
+    "code": "060302",
+    "label": "06 03 02*"
+  },
+  {
+    "code": "060311",
+    "label": "06 03 11*"
+  },
+  {
+    "code": "060313",
+    "label": "06 03 13*"
+  },
+  {
+    "code": "060314",
+    "label": "06 03 14"
+  },
+  {
+    "code": "060315",
+    "label": "06 03 15*"
+  },
+  {
+    "code": "060316",
+    "label": "06 03 16"
+  },
+  {
+    "code": "060399",
+    "label": "06 03 99"
+  },
+  {
+    "code": "060403",
+    "label": "06 04 03*"
+  },
+  {
+    "code": "060405",
+    "label": "06 04 05*"
+  },
+  {
+    "code": "060499",
+    "label": "06 04 99"
+  },
+  {
+    "code": "060502",
+    "label": "06 05 02 dısıdaki saha içi atıksu arıtımından kaynaklanan _Samurlar"
+  },
+  {
+    "code": "060503",
+    "label": "06 05 03"
+  },
+  {
+    "code": "060602",
+    "label": "06 06 02*"
+  },
+  {
+    "code": "060605",
+    "label": "06 06 05"
+  },
+  {
+    "code": "060701",
+    "label": "06 07 01 *"
+  },
+  {
+    "code": "060702",
+    "label": "06 07 02*"
+  },
+  {
+    "code": "060705",
+    "label": "06 07 05*"
+  },
+  {
+    "code": "060799",
+    "label": "06 07 99"
+  },
+  {
+    "code": "060899",
+    "label": "06 08 99"
+  },
+  {
+    "code": "060902",
+    "label": "06 09 02"
+  },
+  {
+    "code": "060903",
+    "label": "06 09 03*"
+  },
+  {
+    "code": "060904",
+    "label": "06 09 04"
+  },
+  {
+    "code": "060999",
+    "label": "06 09 99"
+  },
+  {
+    "code": "061002",
+    "label": "06 10 02*"
+  },
+  {
+    "code": "061099",
+    "label": "06 10 99"
+  },
+  {
+    "code": "061101",
+    "label": "06 11 01"
+  },
+  {
+    "code": "061301",
+    "label": "06 13 01"
+  },
+  {
+    "code": "061302",
+    "label": "06 13 02"
+  },
+  {
+    "code": "061303",
+    "label": "06 13 03"
+  },
+  {
+    "code": "061305",
+    "label": "06 13 05*"
+  },
+  {
+    "code": "061399",
+    "label": "06 13 99"
+  },
+  {
+    "code": "070101",
+    "label": "07 01 01 *"
+  },
+  {
+    "code": "070108",
+    "label": "07 01 08*"
+  },
+  {
+    "code": "070109",
+    "label": "07 01 09*"
+  },
+  {
+    "code": "070214",
+    "label": "07 02 14 dısındaki katkı maddelerinin atıkları"
+  },
+  {
+    "code": "070216",
+    "label": "07 02 16 dışında silikon iccren atıklar"
+  },
+  {
+    "code": "070217",
+    "label": "07 02 17"
+  },
+  {
+    "code": "070299",
+    "label": "07 02 99"
+  },
+  {
+    "code": "070304",
+    "label": "07 03 04*"
+  },
+  {
+    "code": "070404",
+    "label": "07 0404*"
+  },
+  {
+    "code": "070407",
+    "label": "07 04 07*"
+  },
+  {
+    "code": "070409",
+    "label": "07 04 09*"
+  },
+  {
+    "code": "070411",
+    "label": "07 04 11 dısundaki saha içi atıksu antımından kaynaklanan _çamurlar"
+  },
+  {
+    "code": "070503",
+    "label": "07 05 03 *"
+  },
+  {
+    "code": "070513",
+    "label": "07 05 13 dısundaki katanklar"
+  },
+  {
+    "code": "070603",
+    "label": "07 06 03 *"
+  },
+  {
+    "code": "070609",
+    "label": "07 06 09*"
+  },
+  {
+    "code": "070610",
+    "label": "07 06 10*"
+  },
+  {
+    "code": "070612",
+    "label": "07 06 12"
+  },
+  {
+    "code": "070699",
+    "label": "07 06 99"
+  },
+  {
+    "code": "070701",
+    "label": "07 07 01*"
+  },
+  {
+    "code": "070703",
+    "label": "07 07 03*"
+  },
+  {
+    "code": "070707",
+    "label": "07 07 07*"
+  },
+  {
+    "code": "070709",
+    "label": "07 07 09*"
+  },
+  {
+    "code": "070711",
+    "label": "07 07 11*"
+  },
+  {
+    "code": "070799",
+    "label": "07 07 99"
+  },
+  {
+    "code": "080114",
+    "label": "08 01 14"
+  },
+  {
+    "code": "080115",
+    "label": "08 01 15 dısındaki bova ve vernik içeren sulu çamurlar"
+  },
+  {
+    "code": "080118",
+    "label": "08 01 18"
+  },
+  {
+    "code": "080119",
+    "label": "08 01 19 disındaki sulu boya va da vernik iceren sulu süspansivonlar"
+  },
+  {
+    "code": "080217",
+    "label": "08 02 17*"
+  },
+  {
+    "code": "080312",
+    "label": "08 03 12 dısındaki mürekkep atıkları"
+  },
+  {
+    "code": "080317",
+    "label": "08 03 17 dısındaki atık baskı tonerleri"
+  },
+  {
+    "code": "080409",
+    "label": "08 04 09-"
+  },
+  {
+    "code": "080411",
+    "label": "08 04 11"
+  },
+  {
+    "code": "080413",
+    "label": "08 04 13*"
+  },
+  {
+    "code": "080415",
+    "label": "08 04 15*"
+  },
+  {
+    "code": "080501",
+    "label": "08 05 01 *"
+  },
+  {
+    "code": "080514",
+    "label": "08 05 14 dusundaki mürekkep çamurları"
+  },
+  {
+    "code": "090106",
+    "label": "09 01 06 dışındaki gumuş geri kazanımı için yapılan arıtmadan kalan sulu sıvı"
+  },
+  {
+    "code": "090110",
+    "label": "09 01 10"
+  },
+  {
+    "code": "090111",
+    "label": "09 01 11 dusindaki pille çalsan tek kullanımlık_fotopraf makineleri"
+  },
+  {
+    "code": "090112",
+    "label": "09 01 12"
+  },
+  {
+    "code": "090113",
+    "label": "09 01 13*"
+  },
+  {
+    "code": "100101",
+    "label": "10 01 01"
+  },
+  {
+    "code": "100102",
+    "label": "10 01 02"
+  },
+  {
+    "code": "100103",
+    "label": "10 01 03"
+  },
+  {
+    "code": "100104",
+    "label": "410 01 04*ün alundaki kazan tozu haric) dip külü cüruf ve kazan tozu"
+  },
+  {
+    "code": "100105",
+    "label": "10 01 05"
+  },
+  {
+    "code": "100107",
+    "label": "10 01 07"
+  },
+  {
+    "code": "100109",
+    "label": "10 01 09*"
+  },
+  {
+    "code": "100113",
+    "label": "10 01 13*"
+  },
+  {
+    "code": "100114",
+    "label": "10 01 14 disıdaki beraber vakılmadan kaynaklanan dip külücuruf ve kazan tozu"
+  },
+  {
+    "code": "100116",
+    "label": "10 01 16 dısundaki beraber_yakmadan kaynak lanan uçucu kül"
+  },
+  {
+    "code": "100118",
+    "label": "10.01 05 10 01 07 ve 10 01 18 dısındaki gaz temizleme atıkları"
+  },
+  {
+    "code": "100122",
+    "label": "10 01 22 dısındaki kazan temizlemesi sonucu sıkan sulu çamurlar"
+  },
+  {
+    "code": "100201",
+    "label": "10 02 01"
+  },
+  {
+    "code": "100202",
+    "label": "10 02 02"
+  },
+  {
+    "code": "100207",
+    "label": "10 02 07*"
+  },
+  {
+    "code": "100208",
+    "label": "10 02 08"
+  },
+  {
+    "code": "100210",
+    "label": "10 02 10"
+  },
+  {
+    "code": "100299",
+    "label": "10 02 99"
+  },
+  {
+    "code": "100315",
+    "label": "10 03 15*"
+  },
+  {
+    "code": "100316",
+    "label": "1003 16"
+  },
+  {
+    "code": "100318",
+    "label": "10 03 18"
+  },
+  {
+    "code": "100319",
+    "label": "10 03 19*"
+  },
+  {
+    "code": "100320",
+    "label": "10 03 20"
+  },
+  {
+    "code": "100321",
+    "label": "10 03 21*"
+  },
+  {
+    "code": "100323",
+    "label": "10 03 23 dısındaki gaz arıtımı katı atıkları"
+  },
+  {
+    "code": "100325",
+    "label": "10 03 25 dısıdaki caz arıtımı camurları ve filtre kekleri"
+  },
+  {
+    "code": "100327",
+    "label": "1003 27 dısındaki sogutma suyu arıma atıkları"
+  },
+  {
+    "code": "100328",
+    "label": "10 03 28"
+  },
+  {
+    "code": "100329",
+    "label": "10 03 29*"
+  },
+  {
+    "code": "100330",
+    "label": "10 03 30"
+  },
+  {
+    "code": "100399",
+    "label": "10 03 99"
+  },
+  {
+    "code": "100402",
+    "label": "10 04 02*"
+  },
+  {
+    "code": "100403",
+    "label": "10 04 03"
+  },
+  {
+    "code": "100404",
+    "label": "10 04 04+"
+  },
+  {
+    "code": "100405",
+    "label": "10 04 05*"
+  },
+  {
+    "code": "100407",
+    "label": "10 04 07+"
+  },
+  {
+    "code": "100409",
+    "label": "10 04 09+"
+  },
+  {
+    "code": "100410",
+    "label": "10 04 10"
+  },
+  {
+    "code": "100499",
+    "label": "10 04 99"
+  },
+  {
+    "code": "100504",
+    "label": "10 05 04"
+  },
+  {
+    "code": "100505",
+    "label": "10 05 05*"
+  },
+  {
+    "code": "100508",
+    "label": "10 05 08"
+  },
+  {
+    "code": "100509",
+    "label": "10 05 09"
+  },
+  {
+    "code": "100510",
+    "label": "10 05 10*"
+  },
+  {
+    "code": "100523",
+    "label": "10 05 23*"
+  },
+  {
+    "code": "100526",
+    "label": "10 05 26"
+  },
+  {
+    "code": "100599",
+    "label": "10 05 99"
+  },
+  {
+    "code": "100602",
+    "label": "10 06 02"
+  },
+  {
+    "code": "100603",
+    "label": "10 06 03"
+  },
+  {
+    "code": "100606",
+    "label": "10 06 06"
+  },
+  {
+    "code": "100607",
+    "label": "10 06 075"
+  },
+  {
+    "code": "100702",
+    "label": "10 07 02"
+  },
+  {
+    "code": "100705",
+    "label": "10 07 05"
+  },
+  {
+    "code": "100707",
+    "label": "10 07 07*"
+  },
+  {
+    "code": "100708",
+    "label": "10 07 08"
+  },
+  {
+    "code": "100749",
+    "label": "10 07 49"
+  },
+  {
+    "code": "100810",
+    "label": "10 08 10 dısındaki cüruf;toz ve kıpıntlar"
+  },
+  {
+    "code": "100812",
+    "label": "10 08 12 dısıdaki anot uirctiminden kaynaklanan karbon icerikli atıklar"
+  },
+  {
+    "code": "100815",
+    "label": "10 08 15 dısındaki baca xazı lozu"
+  },
+  {
+    "code": "100816",
+    "label": "10 08 16"
+  },
+  {
+    "code": "100905",
+    "label": "10 09 05*"
+  },
+  {
+    "code": "100907",
+    "label": "10 09 07*"
+  },
+  {
+    "code": "100909",
+    "label": "10 09 09 dısındaki baca gazı tozu"
+  },
+  {
+    "code": "100910",
+    "label": "10 09 10"
+  },
+  {
+    "code": "100913",
+    "label": "10 09 13 dısındaki catlak belirleme kimyasalları atız"
+  },
+  {
+    "code": "101005",
+    "label": "10 10 05 dısındaki henuz dökum yapılamanus maça ve kum dvkum kahpları"
+  },
+  {
+    "code": "101006",
+    "label": "10 10 06"
+  },
+  {
+    "code": "101007",
+    "label": "10 10 07 dusındaki döküm yapılmıs_ maça ve_kum dökum kahpları"
+  },
+  {
+    "code": "101009",
+    "label": "10 10 09 dısındaki baca"
+  },
+  {
+    "code": "101011",
+    "label": "10 10 11 dısindaki diger partiküller"
+  },
+  {
+    "code": "101013",
+    "label": "10 10 13 dısıdaki bazlayıcı atıkları"
+  },
+  {
+    "code": "101015",
+    "label": "10 10 15 dısındaki çatlak belirleme kimgasalları atığı"
+  },
+  {
+    "code": "101109",
+    "label": "10 11 09 dısında ısıl islemden <nce hazırlanan harman atıgL"
+  },
+  {
+    "code": "101112",
+    "label": "10 11 12"
+  },
+  {
+    "code": "101116",
+    "label": "10 11 16"
+  },
+  {
+    "code": "101117",
+    "label": "10 11 17*"
+  },
+  {
+    "code": "101119",
+    "label": "10 11 19 dısundaki saha içi atıksu anıtımından kaynaklanan katı atıklar"
+  },
+  {
+    "code": "101201",
+    "label": "10 12 01"
+  },
+  {
+    "code": "101204",
+    "label": "10 12 04 dusındaki gaz arıtma katı atıkları"
+  },
+  {
+    "code": "101206",
+    "label": "10 12 06"
+  },
+  {
+    "code": "101208",
+    "label": "10 12 08"
+  },
+  {
+    "code": "101210",
+    "label": "10 12 10"
+  },
+  {
+    "code": "101211",
+    "label": "10 12 11*"
+  },
+  {
+    "code": "101212",
+    "label": "10 12 12"
+  },
+  {
+    "code": "101213",
+    "label": "10 12 13"
+  },
+  {
+    "code": "101299",
+    "label": "10 12 99"
+  },
+  {
+    "code": "101309",
+    "label": "10 13 09 dısındaki asbestli cimento_üretimi atıkları"
+  },
+  {
+    "code": "101310",
+    "label": "10 13 09 ve 10 13 10 dısındaki cimento bazhı kompozit malzeme ürclim atıkları"
+  },
+  {
+    "code": "101312",
+    "label": "toz (10 13 12 ve 10"
+  },
+  {
+    "code": "101401",
+    "label": "10 14 01*"
+  },
+  {
+    "code": "110109",
+    "label": "11 01 09 dısındaki camurlar ve filtrc kckleri"
+  },
+  {
+    "code": "110111",
+    "label": "11 01 11 dısıdaki sulu durulama sıvıları"
+  },
+  {
+    "code": "110115",
+    "label": "11 01 15*"
+  },
+  {
+    "code": "110205",
+    "label": "11 02 05 dsındaki bakır hidrometalurjisi atıkları"
+  },
+  {
+    "code": "120103",
+    "label": "12 01 03"
+  },
+  {
+    "code": "120105",
+    "label": "12 01 05"
+  },
+  {
+    "code": "120106",
+    "label": "12 01 06*"
+  },
+  {
+    "code": "120116",
+    "label": "12 01 16 dısındaki kumlama maddeleri atıkları"
+  },
+  {
+    "code": "130202",
+    "label": "13 02 02 dısındaki  emiciler, filtre"
+  },
+  {
+    "code": "130208",
+    "label": "13 02 08*"
+  },
+  {
+    "code": "130301",
+    "label": "13 03 01 dısundaki mincral esashı klor_iceren yaltım ve 1s1iletim yagları"
+  },
+  {
+    "code": "130306",
+    "label": "13 03 06*"
+  },
+  {
+    "code": "130308",
+    "label": "13 03 08*"
+  },
+  {
+    "code": "130309",
+    "label": "13 03 09*"
+  },
+  {
+    "code": "130403",
+    "label": "13 04 03*"
+  },
+  {
+    "code": "130501",
+    "label": "13 05 01 *"
+  },
+  {
+    "code": "130502",
+    "label": "13 05 02"
+  },
+  {
+    "code": "130506",
+    "label": "13 05 06"
+  },
+  {
+    "code": "130703",
+    "label": "13 07 03"
+  },
+  {
+    "code": "130802",
+    "label": "13 08 02"
+  },
+  {
+    "code": "140602",
+    "label": "14 06 02"
+  },
+  {
+    "code": "140605",
+    "label": "14 06 05*"
+  },
+  {
+    "code": "150101",
+    "label": "15 01 01"
+  },
+  {
+    "code": "150102",
+    "label": "15 01 02"
+  },
+  {
+    "code": "150103",
+    "label": "15 01 03"
+  },
+  {
+    "code": "150110",
+    "label": "15 01 10*"
+  },
+  {
+    "code": "150111",
+    "label": "15 01 11*"
+  },
+  {
+    "code": "150202",
+    "label": "15 02 02*"
+  },
+  {
+    "code": "150205",
+    "label": "15 02 05"
+  },
+  {
+    "code": "160107",
+    "label": "16 01 07'den 7601 IFe ve 16 01 13 ile 1601 14 dısındaki tehlikeli parçalar"
+  },
+  {
+    "code": "160113",
+    "label": "16 01 07'den 7601 IFe ve 16 01 13 ile 1601 14 dısındaki tehlikeli parçalar"
+  },
+  {
+    "code": "160114",
+    "label": "16 01 07'den 7601 IFe ve 16 01 13 ile 1601 14 dısındaki tehlikeli parçalar"
+  },
+  {
+    "code": "160209",
+    "label": "16 02 09 dısındaki PCB içeren va da PCB ile kontamine olmus ıskarta ekipmanlar"
+  },
+  {
+    "code": "160212",
+    "label": "16 02 09'dan 16 02 12'ye kadar olanların dışındaki tehlikeli parçalar"
+  },
+  {
+    "code": "160213",
+    "label": "16 02 09dan 16 02 13*e kadar olanların dısındaki uskarta ckipmanlar"
+  },
+  {
+    "code": "160303",
+    "label": "16 03 03 dısındaki anorganik atıklar"
+  },
+  {
+    "code": "160305",
+    "label": "16 03 05 dışındaki organik atıklar"
+  },
+  {
+    "code": "160504",
+    "label": "1605 04 dısuda basınçh tanklar içindcki pazlar"
+  },
+  {
+    "code": "160505",
+    "label": "16 05 05"
+  },
+  {
+    "code": "160506",
+    "label": "16 05 06*"
+  },
+  {
+    "code": "160507",
+    "label": "16 05 07*"
+  },
+  {
+    "code": "160508",
+    "label": "16 05 08"
+  },
+  {
+    "code": "160509",
+    "label": "16 05 09"
+  },
+  {
+    "code": "160601",
+    "label": "16 06 01*"
+  },
+  {
+    "code": "160602",
+    "label": "16 06 02 ya da 16 06 03'ün altıda"
+  },
+  {
+    "code": "160603",
+    "label": "16 06 02 ya da 16 06 03'ün altıda"
+  },
+  {
+    "code": "160605",
+    "label": "16 06 05"
+  },
+  {
+    "code": "160606",
+    "label": "16 06 06"
+  },
+  {
+    "code": "160709",
+    "label": "16 07 09"
+  },
+  {
+    "code": "160799",
+    "label": "16 07 99"
+  },
+  {
+    "code": "160801",
+    "label": "16 08 01"
+  },
+  {
+    "code": "160802",
+    "label": "16 08 02*"
+  },
+  {
+    "code": "160807",
+    "label": "katalizörler (16 08 07 hariç)"
+  },
+  {
+    "code": "161001",
+    "label": "16 10 01 dusındaki sulu swv1 atıkları"
+  },
+  {
+    "code": "161003",
+    "label": "16 10 03 dusındaki sulu derisik maddeler"
+  },
+  {
+    "code": "161004",
+    "label": "16 10 04"
+  },
+  {
+    "code": "161101",
+    "label": "16 11 01 dışındaki  metalurjik   proseslerden kaynaklanan  karbon bazhı  astar"
+  },
+  {
+    "code": "161105",
+    "label": "16 11 05*"
+  },
+  {
+    "code": "170102",
+    "label": "17 01 02"
+  },
+  {
+    "code": "170103",
+    "label": "17 01 03"
+  },
+  {
+    "code": "170106",
+    "label": "17 01 06*"
+  },
+  {
+    "code": "170107",
+    "label": "17 01 07"
+  },
+  {
+    "code": "170201",
+    "label": "17 02 01"
+  },
+  {
+    "code": "170202",
+    "label": "17 02 02"
+  },
+  {
+    "code": "170203",
+    "label": "17 02 03"
+  },
+  {
+    "code": "170204",
+    "label": "17 02 04*"
+  },
+  {
+    "code": "170301",
+    "label": "17 03 01 dıgındaki bitümlü karısımlar"
+  },
+  {
+    "code": "170407",
+    "label": "17 04 07"
+  },
+  {
+    "code": "170409",
+    "label": "17 04 09*"
+  },
+  {
+    "code": "170410",
+    "label": "17 04 10 dusındaki kablolar"
+  },
+  {
+    "code": "170503",
+    "label": "17 05 03*"
+  },
+  {
+    "code": "170505",
+    "label": "17 05 05 dusındaki toprak ve taslar"
+  },
+  {
+    "code": "170507",
+    "label": "17 05 07 dısındaki dcmiryolu cakılı"
+  },
+  {
+    "code": "170603",
+    "label": "17 06 03*"
+  },
+  {
+    "code": "170801",
+    "label": "17 08 01 dısundaki alçı bazlı insaat malzemeleri"
+  },
+  {
+    "code": "170902",
+    "label": "17 09 02*"
+  },
+  {
+    "code": "180101",
+    "label": "18 01 01"
+  },
+  {
+    "code": "180103",
+    "label": "Kcsiciler ( 18 01 03 haric)"
+  },
+  {
+    "code": "180106",
+    "label": "18 01 06*"
+  },
+  {
+    "code": "180108",
+    "label": "18 01 08 dısındaki ilaclar"
+  },
+  {
+    "code": "180109",
+    "label": "18 01 09"
+  },
+  {
+    "code": "180110",
+    "label": "18 01 10*"
+  },
+  {
+    "code": "180202",
+    "label": "Kcsicilcr (18 02 02 haric)"
+  },
+  {
+    "code": "180203",
+    "label": "18 02 03"
+  },
+  {
+    "code": "180205",
+    "label": "18 02 05*"
+  },
+  {
+    "code": "180207",
+    "label": "18 02 07 dusındakiilas"
+  },
+  {
+    "code": "180208",
+    "label": "18 02 08"
+  },
+  {
+    "code": "190115",
+    "label": "19 01 15 dısıdaki kazan"
+  },
+  {
+    "code": "190117",
+    "label": "1901 17dısnndaki_piroliz atıkları"
+  },
+  {
+    "code": "190118",
+    "label": "19 01 18"
+  },
+  {
+    "code": "190119",
+    "label": "19 01 19"
+  },
+  {
+    "code": "190205",
+    "label": "19 02 05 dısındaki fizikseE"
+  },
+  {
+    "code": "190208",
+    "label": "19 02 08 vc 19 02 09 dısında vanabilir atıklar"
+  },
+  {
+    "code": "190209",
+    "label": "19 02 08 vc 19 02 09 dısında vanabilir atıklar"
+  },
+  {
+    "code": "190304",
+    "label": "19 03 04 dısındaki stabilize olmuş atıklar"
+  },
+  {
+    "code": "190306",
+    "label": "19 03 06 dusındaki kaulastırlmıs atıklar"
+  },
+  {
+    "code": "190402",
+    "label": "19 04 02*"
+  },
+  {
+    "code": "190503",
+    "label": "19 05 03"
+  },
+  {
+    "code": "190604",
+    "label": "19 06 04"
+  },
+  {
+    "code": "190605",
+    "label": "19 06 05"
+  },
+  {
+    "code": "190699",
+    "label": "19 06 99"
+  },
+  {
+    "code": "190702",
+    "label": "19 07 02 dısmdaki düzenli depolama sahası sızıntı suları"
+  },
+  {
+    "code": "190703",
+    "label": "19 07 03"
+  },
+  {
+    "code": "190809",
+    "label": "19 08 09 disırdaki yap_ve_su aynsmasından çıkan yag_karzsımları ve"
+  },
+  {
+    "code": "190811",
+    "label": "19 08 11 dısındakicndustrivel"
+  },
+  {
+    "code": "190812",
+    "label": "19 08 12"
+  },
+  {
+    "code": "190813",
+    "label": "19 08 13*"
+  },
+  {
+    "code": "190814",
+    "label": "19 08 14"
+  },
+  {
+    "code": "190899",
+    "label": "19 08 99"
+  },
+  {
+    "code": "190902",
+    "label": "19 09 02"
+  },
+  {
+    "code": "191001",
+    "label": "19 10 01"
+  },
+  {
+    "code": "191003",
+    "label": "19 10 03*"
+  },
+  {
+    "code": "191005",
+    "label": "19 10 05 dısındaki dizer kalıntılar"
+  },
+  {
+    "code": "191194",
+    "label": "19 11 94"
+  },
+  {
+    "code": "191201",
+    "label": "19 12 01"
+  },
+  {
+    "code": "191202",
+    "label": "19 12 02"
+  },
+  {
+    "code": "191203",
+    "label": "19 12 03"
+  },
+  {
+    "code": "191204",
+    "label": "19 12 04"
+  },
+  {
+    "code": "191205",
+    "label": "19 12 05"
+  },
+  {
+    "code": "191210",
+    "label": "19 12 10"
+  },
+  {
+    "code": "191211",
+    "label": "19 12 11'"
+  },
+  {
+    "code": "191212",
+    "label": "19 12 12"
+  },
+  {
+    "code": "191301",
+    "label": "19 13 01*"
+  },
+  {
+    "code": "191302",
+    "label": "19 13 02"
+  },
+  {
+    "code": "191303",
+    "label": "19 13 03"
+  },
+  {
+    "code": "191304",
+    "label": "19 13 04"
+  },
+  {
+    "code": "191305",
+    "label": "19 13 05"
+  },
+  {
+    "code": "191306",
+    "label": "19 13 06"
+  },
+  {
+    "code": "191307",
+    "label": "19 13 07+"
+  },
+  {
+    "code": "191308",
+    "label": "19 13 08"
+  },
+  {
+    "code": "200102",
+    "label": "20 01 02"
+  },
+  {
+    "code": "200115",
+    "label": "20 01 15*"
+  },
+  {
+    "code": "200121",
+    "label": "20 01 21 ve 20 01 23 dışındaki tehlikeli parçalar"
+  },
+  {
+    "code": "200123",
+    "label": "20 01 21 ve 20 01 23 dışındaki tehlikeli parçalar"
+  },
+  {
+    "code": "200126",
+    "label": "20 01 26*"
+  },
+  {
+    "code": "200127",
+    "label": "20 01 27 dısındakE"
+  },
+  {
+    "code": "200129",
+    "label": "20 01 29 dısındaki deterjanlar"
+  },
+  {
+    "code": "200130",
+    "label": "20 01 30"
+  },
+  {
+    "code": "200132",
+    "label": "20 01 32"
+  },
+  {
+    "code": "200133",
+    "label": "20 01 33'"
+  },
+  {
+    "code": "200134",
+    "label": "20 01 34"
+  },
+  {
+    "code": "200135",
+    "label": "20 01 35*"
+  },
+  {
+    "code": "200136",
+    "label": "20 01 36"
+  },
+  {
+    "code": "200137",
+    "label": "20 01 37*"
+  },
+  {
+    "code": "200138",
+    "label": "20 01 38"
+  },
+  {
+    "code": "200140",
+    "label": "20 01 40"
+  },
+  {
+    "code": "200199",
+    "label": "20 01 99"
+  },
+  {
+    "code": "200202",
+    "label": "20 02 02"
+  },
+  {
+    "code": "200203",
+    "label": "2002 03"
+  },
+  {
+    "code": "200301",
+    "label": "20 03 01"
+  },
+  {
+    "code": "200302",
+    "label": "20 03 02"
+  },
+  {
+    "code": "200306",
+    "label": "20 03 06"
+  },
+  {
+    "code": "200307",
+    "label": "2003 07"
+  },
+  {
+    "code": "200399",
+    "label": "20 03 99"
+  }
+]

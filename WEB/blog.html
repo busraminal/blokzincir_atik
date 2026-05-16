@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atık AI blog ve topluluk: sorular, yanıtlar ve deneyim paylaşımı." />
+  <title>Atık AI | Blog ve Topluluk</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoOrange: "#F2994A",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="blog">
+  <div class="min-h-screen relative overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-ecoBlue focus:text-white focus:font-semibold focus:shadow-lg focus:outline-none">İçeriğe atla</a>
+      <header class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm shadow-slate-900/[0.04]">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm transition group-hover:shadow-md">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">AI Asistan</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="giris.html" data-nav="giris" class="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 transition hover:opacity-[0.96] hover:shadow-lg">Giriş yap</a>
+            <button type="button" data-site-menu-btn class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden md:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a data-nav="home" href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">AI Asistan</a>
+            <a data-nav="giris" href="giris.html" class="rounded-xl px-3 py-3 text-ecoBlue font-semibold hover:bg-ecoBlue/5">Giriş yap</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content" class="glass-panel rounded-[2rem] border border-white/60 p-8 md:p-10 shadow-soft mt-6 md:mt-8">
+        <div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
+          <section>
+            <p class="text-sm font-semibold uppercase tracking-[0.22em] text-ecoGreen">Topluluk Alanı</p>
+            <h1 class="mt-3 text-3xl md:text-4xl font-bold text-ecoGray">Soru sorun, yardım alın, deneyim paylaşın</h1>
+            <p class="mt-5 max-w-3xl text-gray-700 leading-7">
+              Topluluk alanı: Atık süreçleriyle ilgili sorularınızı yazın, kullanıcı yanıtlarıyla ilerleyin ve deneyimlerinizi paylaşın.
+            </p>
+            <div class="mt-8 space-y-6">
+              <div id="blog-user-posts" class="space-y-6"></div>
+              <article class="rounded-3xl border border-gray-100 bg-white p-6 shadow-soft" data-static-post-id="static-karton" data-static-word="yanıt">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <h2 class="text-xl font-semibold text-ecoGray">Karton atık için doğru geri kazanım süreci nasıl planlanır?</h2>
+                    <p class="mt-1 text-sm text-gray-500">Marmara Ambalaj • Soru</p>
+                  </div>
+                  <span id="static-karton-reply-count" class="rounded-full bg-ecoBlue/10 px-3 py-1 text-xs font-semibold text-ecoBlue">2 yanıt</span>
+                </div>
+                <p class="mt-4 text-sm leading-7 text-gray-600">
+                  Haftalık 3 ton karışık karton atığımız var. Hangi adımlarla süreci daha hızlı ve doğru yönetebiliriz?
+                </p>
+                <div class="mt-5 rounded-2xl bg-slate-50 p-4 hidden">
+                  <p class="text-sm font-semibold text-ecoGray">Yanıt</p>
+                  <p class="mt-2 text-sm leading-6 text-gray-600">
+                    EcoLojistik: Haftalık planlı alım yapıyoruz. Lisans bilgimizi ve fiyat aralığını özel mesajdan iletebiliriz.
+                  </p>
+                </div>
+                <div class="mt-3 rounded-2xl bg-slate-50 p-4 hidden">
+                  <p class="text-sm font-semibold text-ecoGray">Yanıt</p>
+                  <p class="mt-2 text-sm leading-6 text-gray-600">
+                    Deneyim paylaşımı: Tonajı palet bazlı ayırırsanız daha iyi geri dönüş alırsınız. Bu yaklaşımla daha hızlı ilerledik.
+                  </p>
+                </div>
+
+                <div class="mt-5 rounded-2xl border border-slate-100 bg-white p-4">
+                  <div class="flex items-center justify-between gap-3">
+                    <p class="text-sm font-semibold text-ecoGray">Yorumlar ve yanıtlar</p>
+                  </div>
+                  <div id="static-karton-replies" class="mt-3 space-y-3"></div>
+                  <form id="static-karton-reply-form" data-static-reply-form="1" data-post-id="static-karton" class="mt-4 space-y-3">
+                    <textarea name="replyBody" rows="2" required maxlength="4000" placeholder="Yanıtını yaz..." class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-ecoBlue/30"></textarea>
+                    <button type="submit" class="rounded-full bg-ecoBlue/10 px-5 py-2.5 text-sm font-semibold text-ecoBlue hover:bg-ecoBlue/15 transition">Gönder</button>
+                  </form>
+                </div>
+              </article>
+
+              <article class="rounded-3xl border border-gray-100 bg-white p-6 shadow-soft" data-static-post-id="static-elektronik" data-static-word="yorum">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <h2 class="text-xl font-semibold text-ecoGray">Elektronik atık gönderiminde süreç nasıl ilerliyor?</h2>
+                    <p class="mt-1 text-sm text-gray-500">OfisTek Kullanıcısı • Yardım</p>
+                  </div>
+                  <span id="static-elektronik-reply-count" class="rounded-full bg-ecoGreen/10 px-3 py-1 text-xs font-semibold text-ecoGreen">1 yorum</span>
+                </div>
+                <p class="mt-4 text-sm leading-7 text-gray-600">
+                  Küçük ofis ekipmanlarımızı toplu olarak vermek istiyoruz. Taşıma sırasında hangi evrakların gerektiğini deneyimleyen biri yazabilir mi?
+                </p>
+                <div class="mt-5 rounded-2xl bg-slate-50 p-4 hidden">
+                  <p class="text-sm font-semibold text-ecoGray">Yanıt</p>
+                  <p class="mt-2 text-sm leading-6 text-gray-600">
+                    Yeşil Lojistik Network: Cihaz listesi, yaklaşık ağırlık ve pickup adresi ile süreç başlıyor. Platform üstünden ön talep açmanız yeterli oluyor.
+                  </p>
+                </div>
+
+                <div class="mt-5 rounded-2xl border border-slate-100 bg-white p-4">
+                  <div class="flex items-center justify-between gap-3">
+                    <p class="text-sm font-semibold text-ecoGray">Yorumlar ve yanıtlar</p>
+                  </div>
+                  <div id="static-elektronik-replies" class="mt-3 space-y-3"></div>
+                  <form id="static-elektronik-reply-form" data-static-reply-form="1" data-post-id="static-elektronik" class="mt-4 space-y-3">
+                    <textarea name="replyBody" rows="2" required maxlength="4000" placeholder="Yanıtını yaz..." class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-ecoBlue/30"></textarea>
+                    <button type="submit" class="rounded-full bg-ecoBlue/10 px-5 py-2.5 text-sm font-semibold text-ecoBlue hover:bg-ecoBlue/15 transition">Gönder</button>
+                  </form>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <aside class="space-y-6">
+            <section class="rounded-3xl bg-gradient-to-br from-ecoBlue to-ecoGreen p-6 text-white shadow-soft">
+              <h2 class="text-2xl font-semibold">Yeni soru / yardım paylaş</h2>
+              <p class="mt-3 text-sm leading-7 text-white/85">
+                Atık süreçleriyle ilgili sorularınızı yazın. Diğer kullanıcılar yanıt vererek yol gösterebilir; deneyim paylaşımları da çözüme katkı sağlar.
+              </p>
+              <form id="blog-share-form" class="mt-6 space-y-4">
+                <input name="title" type="text" required maxlength="200" autocomplete="off" placeholder="Başlık" class="w-full rounded-2xl border border-white/20 bg-white/15 px-4 py-3 text-sm text-white placeholder:text-white/70 outline-none focus:ring-2 focus:ring-white/40" />
+                <select name="category" required class="w-full rounded-2xl border border-white/20 bg-white/15 px-4 py-3 text-sm text-white outline-none focus:ring-2 focus:ring-white/40">
+                  <option value="" class="text-ecoGray" selected disabled>Kategori seçin</option>
+                  <option value="sirket" class="text-ecoGray">Soru</option>
+                  <option value="kullanici" class="text-ecoGray">Yardım</option>
+                  <option value="firma" class="text-ecoGray">Deneyim</option>
+                </select>
+                <textarea name="body" rows="5" required maxlength="8000" placeholder="Soru veya yardım metninizi yazın (deneyim paylaşımları da olabilir)" class="w-full min-h-[8rem] resize-y rounded-2xl border border-white/20 bg-white/15 px-4 py-3 text-sm text-white placeholder:text-white/70 outline-none focus:ring-2 focus:ring-white/40"></textarea>
+                <p id="blog-form-inline-error" class="hidden text-sm text-amber-100 font-medium" role="alert"></p>
+                <p id="blog-form-feedback" class="hidden text-sm font-medium text-white bg-white/15 border border-white/25 rounded-2xl px-4 py-3" role="status" aria-live="polite"></p>
+                <button type="submit" class="w-full rounded-full bg-white px-5 py-3 text-sm font-semibold text-ecoBlue shadow-sm transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ecoBlue">Gönder</button>
+              </form>
+            </section>
+
+            <section class="rounded-3xl bg-white p-6 shadow-soft">
+              <h2 class="text-xl font-semibold text-ecoGray">Bu alanın amacı</h2>
+              <ul class="mt-4 space-y-3 text-sm leading-7 text-gray-600">
+                <li>Atık süreçleriyle ilgili sorularınızı paylaşın ve yardım alın.</li>
+                <li>Deneyimlerinizi ve pratik ipuçlarını paylaşarak diğer kullanıcıları destekleyin.</li>
+                <li>Yanıtlara cevap vererek bilgi ve çözüm birikimine katkı sağlayın.</li>
+              </ul>
+            </section>
+          </aside>
+        </div>
+
+        <div class="mt-8">
+          <a href="Atik.html" class="inline-flex items-center gap-2 rounded-full bg-ecoGreen/10 px-4 py-2 text-sm font-semibold text-ecoGreen shadow-sm hover:bg-ecoGreen/15 transition">
+            ← Ana Sayfaya Dön
+          </a>
+        </div>
+      </main>
+
+      <footer class="mt-16 md:mt-20 border-t border-slate-200/80 bg-gradient-to-b from-transparent to-white/70">
+        <div class="py-12 md:py-14">
+          <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p class="flex items-center gap-2 font-bold text-ecoGray"><span class="text-xl" aria-hidden="true">♻</span> Atık AI</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Atık üreticileri ile geri kazanım firmalarını buluşturan sade, modern bir eşleştirme ve takip deneyimi.</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="nasil.html">Nasıl çalışır?</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="turler.html">Atık türleri</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blokzincir.html">Takip ve blokzincir</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blog.html">Blog ve topluluk</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="kutuphane.html">Mevzuat kütüphanesi</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="chatbot.html">AI Asistan (sohbet)</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kurumsal</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="giris.html">Giriş ve kayıt</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Not</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Tanıtım ve prototip arayüz. Blokzincir özelliği isteğe bağlı sunucu ile çalışır.</p>
+            </div>
+          </div>
+          <p class="mt-12 pt-8 border-t border-slate-200/70 text-center text-xs text-slate-500">© <span id="site-year"></span> Atık AI · Sürdürülebilir atık yönetimi</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="assets/site-nav.js" defer></script>
+  <script>
+    (function () {
+      var STORAGE_KEY = "atikAiBlogUserPosts";
+      var REPLIES_KEY = "atikAiBlogUserReplies_v1";
+      var form = document.getElementById("blog-share-form");
+      var listEl = document.getElementById("blog-user-posts");
+      var okMsg = document.getElementById("blog-form-feedback");
+      var errInline = document.getElementById("blog-form-inline-error");
+      if (!form || !listEl) return;
+
+      function escapeHtml(s) {
+        if (!s) return "";
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function escapeAttr(s) {
+        return escapeHtml(s).replace(/`/g, "&#96;");
+      }
+
+      function catLabel(v) {
+        var m = { sirket: "Soru", kullanici: "Yardım", firma: "Deneyim" };
+        return m[v] || v;
+      }
+
+      function catBadgeClass(v) {
+        if (v === "kullanici") return "bg-emerald-100 text-emerald-800";
+        if (v === "firma") return "bg-amber-100 text-amber-900";
+        return "bg-ecoBlue/10 text-ecoBlue";
+      }
+
+      function loadPosts() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return [];
+          var arr = JSON.parse(raw);
+          return Array.isArray(arr) ? arr : [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function savePosts(arr) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+        } catch (e) {
+          /* quota veya gizli mod */
+        }
+      }
+
+      function formatDate(iso) {
+        try {
+          return new Date(iso).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" });
+        } catch (e) {
+          return "";
+        }
+      }
+
+      function loadRepliesAll() {
+        try {
+          var raw = localStorage.getItem(REPLIES_KEY);
+          if (!raw) return {};
+          var obj = JSON.parse(raw);
+          return obj && typeof obj === "object" ? obj : {};
+        } catch (_e) {
+          return {};
+        }
+      }
+
+      function saveRepliesAll(obj) {
+        try {
+          localStorage.setItem(REPLIES_KEY, JSON.stringify(obj));
+        } catch (_e) {
+          /* quota veya gizli mod */
+        }
+      }
+
+      function loadRepliesFor(postId) {
+        var all = loadRepliesAll();
+        var arr = all[postId];
+        return Array.isArray(arr) ? arr : [];
+      }
+
+      function getSessionUserLabel() {
+        try {
+          var s = JSON.parse(localStorage.getItem("atik_session_v1") || "null");
+          if (s && s.name) return s.name;
+        } catch (_e) {}
+        return "Kullanıcı";
+      }
+
+      function render() {
+        var posts = loadPosts();
+        listEl.innerHTML = "";
+        for (var i = posts.length - 1; i >= 0; i--) {
+          var p = posts[i];
+          var replies = loadRepliesFor(p.id);
+          var repliesHtml = "";
+          for (var r = 0; r < replies.length; r++) {
+            var rep = replies[r];
+            repliesHtml +=
+              '<div class="rounded-2xl bg-slate-50 border border-slate-100 p-4">' +
+              '<p class="text-xs font-semibold text-slate-500"> ' +
+              escapeHtml(rep.authorName || "Kullanıcı") +
+              (rep.at ? " • " + escapeHtml(formatDate(rep.at)) : "") +
+              "</p>" +
+              '<p class="mt-2 text-sm leading-6 text-gray-700 whitespace-pre-wrap">' +
+              escapeHtml(rep.body || "") +
+              "</p>" +
+              "</div>";
+          }
+          var art = document.createElement("article");
+          art.className =
+            "rounded-3xl border border-ecoBlue/15 bg-gradient-to-br from-white to-slate-50/80 p-6 shadow-soft ring-1 ring-ecoBlue/10";
+          art.innerHTML =
+            '<div class="flex flex-wrap items-start justify-between gap-3">' +
+            '<div class="min-w-0">' +
+            '<h2 class="text-lg font-semibold text-ecoGray leading-snug">' +
+            escapeHtml(p.title) +
+            '</h2><p class="mt-1 text-sm text-gray-500">Sizin paylaşımınız · ' +
+            escapeHtml(catLabel(p.category)) +
+            " · " +
+            escapeHtml(formatDate(p.at)) +
+            '</p></div><span class="shrink-0 rounded-full px-3 py-1 text-xs font-semibold ' +
+            catBadgeClass(p.category) +
+            '">' +
+            escapeHtml(String(replies.length)) +
+            ' yanıt</span></div><p class="mt-4 text-sm leading-7 text-gray-700 whitespace-pre-wrap">' +
+            escapeHtml(p.body) +
+            "</p>" +
+            '<div class="mt-5">' +
+            '<div class="flex items-center justify-between gap-3 mb-2">' +
+            '<p class="text-sm font-semibold text-ecoGray">Yorumlar ve yanıtlar</p>' +
+            '<span class="text-xs font-semibold text-slate-400">' +
+            escapeHtml(String(replies.length)) +
+            " yanıt</span></div>" +
+            '<div class="space-y-3">' +
+            repliesHtml +
+            "</div>" +
+            '<form class="mt-4 space-y-3" data-reply-form="1" data-post-id="' +
+            escapeAttr(p.id) +
+            '">' +
+            '<textarea name="replyBody" rows="3" required maxlength="4000" placeholder="Yanıtını yaz..." class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-ecoBlue/30"></textarea>' +
+            '<button type="submit" class="rounded-full bg-ecoBlue/10 px-5 py-2.5 text-sm font-semibold text-ecoBlue hover:bg-ecoBlue/15 transition">Gönder</button>' +
+            "</form>" +
+            "</div>";
+          listEl.appendChild(art);
+        }
+      }
+
+      function showOk(text) {
+        if (errInline) {
+          errInline.classList.add("hidden");
+          errInline.textContent = "";
+        }
+        if (okMsg) {
+          okMsg.textContent = text;
+          okMsg.classList.remove("hidden");
+        }
+      }
+
+      function showErr(text) {
+        if (okMsg) {
+          okMsg.classList.add("hidden");
+          okMsg.textContent = "";
+        }
+        if (errInline) {
+          errInline.textContent = text;
+          errInline.classList.remove("hidden");
+        } else {
+          alert(text);
+        }
+      }
+
+      listEl.addEventListener("submit", function (e) {
+        var form = e.target && e.target.closest ? e.target.closest('[data-reply-form="1"]') : null;
+        if (!form) return;
+        e.preventDefault();
+
+        var postId = form.getAttribute("data-post-id") || "";
+        var textarea = form.querySelector('textarea[name="replyBody"]');
+        var body = textarea ? (textarea.value || "").toString().trim() : "";
+
+        if (!postId || !body) {
+          showErr("Lütfen yanıt metnini yazın.");
+          return;
+        }
+
+        var repliesAll = loadRepliesAll();
+        if (!repliesAll[postId]) repliesAll[postId] = [];
+        repliesAll[postId].push({
+          id: "r-" + Date.now(),
+          authorName: getSessionUserLabel(),
+          body: body,
+          at: new Date().toISOString(),
+        });
+        saveRepliesAll(repliesAll);
+
+        if (textarea) textarea.value = "";
+        showOk("Yanıtınız eklendi.");
+        render();
+        listEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+
+      function buildRepliesHtmlFromArray(replies) {
+        var out = "";
+        for (var r = 0; r < replies.length; r++) {
+          var rep = replies[r];
+          out +=
+            '<div class="rounded-2xl bg-slate-50 border border-slate-100 p-4">' +
+            '<p class="text-xs font-semibold text-slate-500"> ' +
+            escapeHtml(rep.authorName || "Kullanıcı") +
+            (rep.at ? " • " + escapeHtml(formatDate(rep.at)) : "") +
+            "</p>" +
+            '<p class="mt-2 text-sm leading-6 text-gray-700 whitespace-pre-wrap">' +
+            escapeHtml(rep.body || "") +
+            "</p>" +
+            "</div>";
+        }
+        return out;
+      }
+
+      function renderStaticRepliesFor(postId) {
+        var article = document.querySelector('article[data-static-post-id="' + postId + '"]');
+        if (!article) return;
+        var word = article.getAttribute("data-static-word") || "yanıt";
+
+        var baseReplies = getStaticBaseReplies(postId);
+        var replies = baseReplies.concat(loadRepliesFor(postId));
+
+        var countEl = document.getElementById(postId + "-reply-count");
+        if (countEl) countEl.textContent = String(replies.length) + " " + word;
+
+        var container = document.getElementById(postId + "-replies");
+        if (container) container.innerHTML = buildRepliesHtmlFromArray(replies);
+      }
+
+      function initStaticReplies() {
+        try {
+          document.querySelectorAll('article[data-static-post-id]').forEach(function (a) {
+            var postId = a.getAttribute("data-static-post-id") || "";
+            if (postId) renderStaticRepliesFor(postId);
+          });
+        } catch (_e) {}
+      }
+
+      function getStaticBaseReplies(postId) {
+        if (!postId) return [];
+        if (postId === "static-karton") {
+          return [
+            {
+              authorName: "EcoLojistik",
+              body: "Haftalık planlı alım yapıyoruz. Lisans bilgimizi ve fiyat aralığını özel mesajdan iletebiliriz.",
+              at: null,
+            },
+            {
+              authorName: "Deneyim paylaşımı",
+              body: "Tonajı palet bazlı ayırırsanız daha iyi geri dönüş alırsınız. Bu yaklaşımla daha hızlı ilerledik.",
+              at: null,
+            },
+          ];
+        }
+        if (postId === "static-elektronik") {
+          return [
+            {
+              authorName: "Yeşil Lojistik Network",
+              body: "Cihaz listesi, yaklaşık ağırlık ve pickup adresi ile süreç başlıyor. Platform üstünden ön talep açmanız yeterli oluyor.",
+              at: null,
+            },
+          ];
+        }
+        return [];
+      }
+
+      document.addEventListener("submit", function (e) {
+        var f = e.target && e.target.closest ? e.target.closest('form[data-static-reply-form="1"]') : null;
+        if (!f) return;
+        e.preventDefault();
+
+        var postId = f.getAttribute("data-post-id") || "";
+        var textarea = f.querySelector('textarea[name="replyBody"]');
+        var body = textarea ? (textarea.value || "").toString().trim() : "";
+
+        if (!postId || !body) {
+          showErr("Lütfen yanıt metnini yazın.");
+          return;
+        }
+
+        var repliesAll = loadRepliesAll();
+        if (!repliesAll[postId]) repliesAll[postId] = [];
+        repliesAll[postId].push({
+          id: "r-" + Date.now(),
+          authorName: getSessionUserLabel(),
+          body: body,
+          at: new Date().toISOString(),
+        });
+        saveRepliesAll(repliesAll);
+
+        if (textarea) textarea.value = "";
+        showOk("Yanıtınız eklendi.");
+        renderStaticRepliesFor(postId);
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var fd = new FormData(form);
+        var title = (fd.get("title") || "").toString().trim();
+        var category = (fd.get("category") || "").toString();
+        var body = (fd.get("body") || "").toString().trim();
+        if (!title || !category || !body) {
+          showErr("Başlık, kategori ve mesaj alanlarını doldurun.");
+          return;
+        }
+        var posts = loadPosts();
+        posts.push({
+          id: "p-" + Date.now(),
+          title: title,
+          category: category,
+          body: body,
+          at: new Date().toISOString(),
+        });
+        savePosts(posts);
+        form.reset();
+        showOk("Paylaşımınız soldaki listeye eklendi.");
+        render();
+        listEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+
+      render();
+      initStaticReplies();
+    })();
+  </script>
+</body>
+</html>

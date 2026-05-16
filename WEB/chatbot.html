@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atık AI sohbet asistanı — platform, takip ve atık yönetimi hakkında hızlı yanıtlar." />
+  <title>Atık AI | AI Asistan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoOrange: "#F2994A",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <style>
+    #chat-messages::-webkit-scrollbar {
+      width: 8px;
+    }
+    #chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(45, 156, 219, 0.35);
+      border-radius: 999px;
+    }
+    button.chat-quick:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    @keyframes chat-dot {
+      0%,
+      80%,
+      100% {
+        opacity: 0.35;
+        transform: translateY(0);
+      }
+      40% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+    }
+    .chat-dot {
+      animation: chat-dot 1.2s ease-in-out infinite;
+    }
+    .chat-dot:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+    .chat-dot:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="chatbot">
+  <div class="min-h-screen relative overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-ecoBlue focus:text-white focus:font-semibold focus:shadow-lg focus:outline-none">İçeriğe atla</a>
+      <header class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm shadow-slate-900/[0.04]">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm transition group-hover:shadow-md">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">AI Asistan</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="giris.html" data-nav="giris" class="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 transition hover:opacity-[0.96] hover:shadow-lg">Giriş yap</a>
+            <button type="button" data-site-menu-btn class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden md:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a data-nav="home" href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">AI Asistan</a>
+            <a data-nav="giris" href="giris.html" class="rounded-xl px-3 py-3 text-ecoBlue font-semibold hover:bg-ecoBlue/5">Giriş yap</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content" class="mt-6 md:mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
+        <section class="glass-panel rounded-[2rem] border border-white/60 shadow-soft flex flex-col min-h-[min(70vh,640px)] max-h-[calc(100vh-8rem)] lg:max-h-[min(72vh,680px)]" aria-labelledby="chat-heading">
+          <div
+            id="chat-connection-hint"
+            class="hidden shrink-0 border-b border-amber-200/80 bg-amber-50/95 px-4 py-3 md:px-6 text-[12px] leading-relaxed text-amber-950 rounded-t-[2rem]"
+            role="status"
+          >
+            <p class="font-semibold text-amber-900">Bağlantı / kurulum</p>
+            <p id="chat-connection-hint-body" class="mt-1 text-amber-950/90"></p>
+          </div>
+          <div class="border-b border-gray-100 px-5 py-4 md:px-6 flex items-start justify-between gap-3 shrink-0">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-ecoBlue/20 to-ecoGreen/20 text-lg shadow-sm" aria-hidden="true">💬</div>
+              <div class="min-w-0">
+                <h1 id="chat-heading" class="text-lg font-bold text-ecoGray">Atık AI Asistan</h1>
+              </div>
+            </div>
+            <div class="flex flex-col items-end gap-1.5 shrink-0">
+              <span
+                id="chat-status-badge"
+                class="inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600"
+                role="status"
+                >…</span
+              >
+              <div id="chat-model-wrap" class="hidden w-[min(100%,220px)]">
+                <label for="chat-model-select" class="sr-only">Ollama modeli</label>
+                <select
+                  id="chat-model-select"
+                  class="w-full rounded-lg border border-gray-200 bg-white px-2 py-1.5 text-[11px] font-medium text-gray-700 shadow-sm outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20 disabled:opacity-50"
+                  aria-label="Ollama modeli"
+                ></select>
+              </div>
+              <button
+                type="button"
+                id="chat-reconnect"
+                class="text-[11px] font-medium text-ecoBlue hover:text-ecoGreen underline underline-offset-2 decoration-ecoBlue/30"
+              >
+                Bağlantıyı yenile
+              </button>
+            </div>
+          </div>
+          <div
+            id="chat-messages"
+            class="flex-1 overflow-y-auto px-4 py-4 md:px-6 space-y-4 min-h-[200px]"
+            role="log"
+            aria-live="polite"
+            aria-relevant="additions"
+            aria-busy="false"
+          ></div>
+          <form id="chat-form" class="border-t border-gray-100 p-4 md:p-5 shrink-0" aria-label="Sohbet gönder">
+            <label for="chat-input" class="sr-only">Mesajınız</label>
+            <div class="flex flex-col gap-2">
+              <div class="flex gap-2 items-end">
+                <div class="flex-1 min-w-0 relative">
+                  <textarea
+                    id="chat-input"
+                    rows="1"
+                    autocomplete="off"
+                    maxlength="2000"
+                    placeholder="Atık yönetimi, blokzincir veya mevzuat hakkında sorun…"
+                    class="w-full min-h-[48px] max-h-[160px] rounded-2xl border border-gray-200 bg-white px-4 py-3 pr-12 text-sm leading-relaxed outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20 resize-y"
+                  ></textarea>
+                </div>
+                <div class="flex flex-col gap-1.5 shrink-0">
+                  <button
+                    type="submit"
+                    id="chat-submit"
+                    class="rounded-2xl bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 sm:px-5 py-3 text-sm font-semibold text-white shadow-md shadow-ecoBlue/20 hover:opacity-[0.96] disabled:opacity-50 disabled:pointer-events-none min-h-[48px]"
+                  >
+                    Gönder
+                  </button>
+                  <button
+                    type="button"
+                    id="chat-stop"
+                    class="hidden rounded-2xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-900 hover:bg-amber-100 min-h-[40px]"
+                  >
+                    Durdur
+                  </button>
+                </div>
+              </div>
+              <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-400">
+                <span><span id="chat-char-count">0</span> / 2000 · Enter gönderir, Shift+Enter satır kırar</span>
+                <span id="chat-toast" class="text-ecoGreen font-medium min-h-[1rem]" aria-live="polite"></span>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <aside class="space-y-4 lg:pr-1 lg:self-start">
+          <div class="glass-panel rounded-2xl border border-white/60 p-5 shadow-soft text-sm text-gray-600">
+            <p class="font-semibold text-ecoGray">Hızlı sorular</p>
+            <ul class="mt-3 space-y-2">
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-ecoBlue/5 hover:bg-ecoBlue/10 px-3 py-2 text-ecoBlue font-medium transition text-[13px] leading-snug" data-q="Blokzincir takip sayfası ne işe yarar ve sunucu moduna nasıl geçerim?">Blokzincir ve sunucu modu</button></li>
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-ecoGreen/5 hover:bg-ecoGreen/10 px-3 py-2 text-ecoGreen font-medium transition text-[13px] leading-snug" data-q="Atık AI platformunda ilan ve teklif süreci nasıl işliyor?">İlan ve teklif süreci</button></li>
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-ecoOrange/10 hover:bg-ecoOrange/15 px-3 py-2 text-ecoOrange font-medium transition text-[13px] leading-snug" data-q="Tehlikeli atık ve ambalaj atıklarında işletme olarak dikkat etmem gereken başlıklar neler?">Tehlikeli / ambalaj atığı</button></li>
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-slate-100 hover:bg-slate-200/80 px-3 py-2 text-slate-700 font-medium transition text-[13px] leading-snug" data-q="Sıfır atık ve mevzuat bilgisine nereden ulaşırım? Resmi kaynak öner.">Sıfır atık ve mevzuat</button></li>
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-ecoBlue/5 hover:bg-ecoBlue/10 px-3 py-2 text-ecoBlue font-medium transition text-[13px] leading-snug" data-q="Uygunluk puanı ve karbon tahmini blokzincir ekranında ne anlama geliyor?">Uygunluk puanı / CO₂e</button></li>
+            </ul>
+            <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-gray-400">Örnek senaryolar</p>
+            <ul class="mt-2 space-y-2">
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-slate-100/90 hover:bg-slate-200/80 px-3 py-2 text-slate-800 font-medium transition text-[13px] leading-snug" data-q="Senaryo: İstanbul’da haftalık 2 ton karışık ambalaj atığım var. Toplayıcı firma seçerken hangi belgeleri ve lojistik adımları kontrol etmeliyim?">Senaryo: ambalaj toplama (İstanbul)</button></li>
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-ecoBlue/5 hover:bg-ecoBlue/10 px-3 py-2 text-ecoBlue font-medium transition text-[13px] leading-snug" data-q="Senaryo: Küçük bir üreticiyim. Atığımın yolculuğunu dijital olarak izlemek için blokzincir panelinde hangi aşamaları doldurmalıyım?">Senaryo: küçük üretici izlenebilirlik</button></li>
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-ecoGreen/5 hover:bg-ecoGreen/10 px-3 py-2 text-ecoGreen font-medium transition text-[13px] leading-snug" data-q="Senaryo: Elektronik atık topluyorum. Veri silme, taşıma ve lisanslı alıcıya teslim için kontrol listesi öner.">Senaryo: elektronik atık</button></li>
+              <li><button type="button" class="chat-quick text-left w-full rounded-xl bg-ecoOrange/10 hover:bg-ecoOrange/15 px-3 py-2 text-ecoOrange font-medium transition text-[13px] leading-snug" data-q="Senaryo: Depo kapasitem %90 doldu. Bertaraf ve kapasite alanlarını blokzincir kaydında nasıl güncellemeliyim?">Senaryo: kapasite ve bertaraf</button></li>
+            </ul>
+            <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-gray-400">Kaynaklar</p>
+            <ul class="mt-2 space-y-1.5 text-sm">
+              <li>
+                <a href="kutuphane.html" class="text-ecoBlue hover:underline font-medium">Mevzuat kütüphanesi</a>
+              </li>
+              <li>
+                <a href="blokzincir.html" class="text-ecoBlue hover:underline font-medium">Blokzincir takip</a>
+              </li>
+              <li>
+                <a href="turler.html" class="text-ecoBlue hover:underline font-medium">Atık türleri</a>
+              </li>
+            </ul>
+            <button type="button" id="chat-reset" class="mt-4 w-full rounded-xl border border-gray-200 bg-white py-2.5 text-xs font-semibold text-gray-600 hover:bg-gray-50 transition">
+              Sohbeti sıfırla
+            </button>
+          </div>
+        </aside>
+      </main>
+
+      <div class="mt-6">
+        <a href="Atik.html" class="inline-flex items-center gap-2 rounded-full bg-ecoGreen/10 px-4 py-2 text-sm font-semibold text-ecoGreen shadow-sm hover:bg-ecoGreen/15 transition">← Ana sayfa</a>
+      </div>
+
+      <footer class="mt-16 md:mt-20 border-t border-slate-200/80 bg-gradient-to-b from-transparent to-white/70">
+        <div class="py-12 md:py-14">
+          <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p class="flex items-center gap-2 font-bold text-ecoGray"><span class="text-xl" aria-hidden="true">♻</span> Atık AI</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Atık üreticileri ile geri kazanım firmalarını buluşturan sade, modern bir eşleştirme ve takip deneyimi.</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="nasil.html">Nasıl çalışır?</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="turler.html">Atık türleri</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blokzincir.html">Takip ve blokzincir</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blog.html">Blog ve topluluk</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="kutuphane.html">Mevzuat kütüphanesi</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="chatbot.html">AI Asistan</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kurumsal</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="giris.html">Giriş ve kayıt</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Not</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Tanıtım ve prototip arayüz. Blokzincir özelliği isteğe bağlı sunucu ile çalışır.</p>
+            </div>
+          </div>
+          <p class="mt-12 pt-8 border-t border-slate-200/70 text-center text-xs text-slate-500">© <span id="site-year"></span> Atık AI · Sürdürülebilir atık yönetimi</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="assets/ara-islem-recommendations.js" defer></script>
+  <script src="assets/site-nav.js" defer></script>
+  <script>
+    (function () {
+      var __params = new URLSearchParams(window.location.search);
+      var loc0 = window.location;
+      var isHttp0 = loc0.protocol === "http:" || loc0.protocol === "https:";
+      var pagePort0 = String(loc0.port || (loc0.protocol === "https:" ? "443" : "80"));
+
+      /**
+       * Sayfa ile API farklı portlarda olabilir (normal).
+       * Örnek: Live Server http://127.0.0.1:5501/.../chatbot.html — API için ayrıca atik-dlt’te npm start (ör. 5055).
+       * 5500–5502, 5173 vb. önizleme portlarında sayfa, istekler otomatik http://127.0.0.1:5055 API’ye gider.
+       * CHATBOT_API_BASE doluysa tam adres; boşsa CHATBOT_API_HOST + CHATBOT_API_PORT.
+       * Elle: ?apiBase=http://127.0.0.1:5055 veya ?port=5055
+       */
+      var CHATBOT_API_BASE = "";
+      var CHATBOT_API_HOST = "127.0.0.1";
+      var CHATBOT_API_PORT = "";
+
+      var PREVIEW_PORTS = { "5500": 1, "5501": 1, "5502": 1, "8080": 1, "8000": 1, "5173": 1, "4173": 1 };
+      var paramPort = (__params.get("port") || "").trim();
+      var explicitBase = (__params.get("apiBase") || __params.get("base") || "").trim().replace(/\/+$/, "");
+      var cfgBase = (CHATBOT_API_BASE || "").trim().replace(/\/+$/, "");
+      var cfgPort = (CHATBOT_API_PORT || "").trim();
+      var cfgHost = (CHATBOT_API_HOST || "127.0.0.1").trim() || "127.0.0.1";
+
+      var apiPort = "";
+      var API_BASE = "";
+
+      if (explicitBase) {
+        API_BASE = explicitBase;
+        try {
+          apiPort = new URL(explicitBase).port || (explicitBase.indexOf("https://") === 0 ? "443" : "80");
+        } catch (_e) {}
+      } else if (cfgBase) {
+        API_BASE = cfgBase;
+        try {
+          apiPort = new URL(cfgBase).port || (cfgBase.indexOf("https://") === 0 ? "443" : "80");
+        } catch (_e2) {}
+      } else if (cfgPort) {
+        API_BASE = "http://" + cfgHost + ":" + cfgPort;
+        apiPort = cfgPort;
+      } else if (paramPort) {
+        apiPort = paramPort;
+      } else if (isHttp0 && PREVIEW_PORTS[pagePort0]) {
+        apiPort = "5055";
+      } else if (isHttp0) {
+        apiPort = pagePort0;
+      } else {
+        apiPort = "5055";
+      }
+
+      if (!API_BASE) {
+        var loc = window.location;
+        var isHttp = loc.protocol === "http:" || loc.protocol === "https:";
+        var apiHost = loc.hostname || "127.0.0.1";
+        if (!isHttp) {
+          API_BASE = "http://127.0.0.1:" + apiPort;
+        } else {
+          var pagePort = String(loc.port || (loc.protocol === "https:" ? "443" : "80"));
+          API_BASE = pagePort === apiPort ? "" : "http://" + apiHost + ":" + apiPort;
+        }
+      }
+
+      var forceLocalOnly = __params.get("api") === "0";
+      var llmEnabled = false;
+      var chatModelLabel = "";
+      var chatProvider = "";
+      var llmThread = [];
+      /** Ekranda görünen tüm kullanıcı/asistan mesajları (karşılama mesajı hariç) — sayfa değişince geri yüklenir */
+      var uiTranscript = [];
+      var CHAT_STORAGE_KEY = "atik_chatbot_session_v1";
+      var CHAT_MODEL_STORAGE_KEY = "atik_chatbot_ollama_model";
+      var chatAbort = null;
+      /** Ardışık mesaj / iptal: eski fetch’in catch/finally’i aktif isteği bozmasın */
+      var chatRequestId = 0;
+      var lastUserBubbleWrap = null;
+      var streamingBotWrap = null;
+
+      function apiUrl(p) {
+        return API_BASE ? API_BASE + p : p;
+      }
+
+      function apiEndpointLabel() {
+        var h = window.location.hostname || "127.0.0.1";
+        return API_BASE || window.location.origin || "http://" + h + ":" + apiPort;
+      }
+
+      var KB = [
+        {
+          keys: ["merhaba", "selam", "hey", "günaydın", "iyi günler", "sa"],
+          reply:
+            "Merhaba! Atık AI hakkında sorularınızda yardımcı olabilirim: blokzincir takibi, sunucu modu, atık türleri veya blog. Ne öğrenmek istersiniz?",
+        },
+        {
+          keys: ["blokzincir", "blok zincir", "zincir", "takip panel", "dlt", "kayıt aşama", "atık kayıt"],
+          reply:
+            "**Blokzincir** panelinde atık kayıtlarınızı aşamalar halinde izleyebilirsiniz (kayıt → taşıma → merkez → ayrıştırma → kapanış). Yerel tarayıcıda veya `atik-dlt` sunucusuyla çalışabilirsiniz. Sunucu modu için adres satırına `?server=1` ekleyin.",
+        },
+        {
+          keys: ["sunucu", "npm", "localhost", "5040", "5055", "bağlan", "api"],
+          reply:
+            "Sayfayı isterseniz Live Server ile açın; **API** ayrı çalışmalı: `atik-dlt` klasöründe **npm start** (port `.env` içindeki `PORT`, ör. **5055**). Sayfa ile aynı origin/port üzerinden erişim kurulduğundan emin olun. Blokzincir sunucu modu için `?server=1` ekleyin. Elle API hedefi için `?apiBase=...` veya `?port=...` kullanabilirsiniz.",
+        },
+        {
+          keys: ["ollama", "llama", "yerel model", "ücretsiz llm"],
+          reply:
+            "**Ollama** ile ücretsiz yerel LLM: ollama.com üzerinden kurun, `ollama pull llama3.2` (veya başka model). `atik-dlt/.env` içinde **USE_OLLAMA=1** ve **OLLAMA_MODEL=...** ayarlayıp **npm start**; uygulama üzerinden konuşun.",
+        },
+        {
+          keys: ["fabric", "hyperledger", "kurumsal"],
+          reply:
+            "Tam kurumsal senaryoda **Hyperledger Fabric** kullanılabilir; proje içinde `npm run start:fabric` ve kurulum notları var. Demo için önce dosya tabanlı zincir yeterlidir.",
+        },
+        {
+          keys: ["atık tür", "atık tipleri", "metal", "plastik", "elektronik", "karton"],
+          reply:
+            "Metal, plastik, elektronik ve diğer gruplar **Atık türleri** bölümünde özetlenir. Blokzincir formunda da tür seçimi karbon tahmini için kullanılır.",
+        },
+        {
+          keys: [
+            "tehlikeli atık",
+            "ambalaj atık",
+            "ambalaj atıklarında",
+            "tehlikeli / ambalaj",
+            "işletme olarak dikkat",
+            "dikkat etmem gereken başlıklar",
+          ],
+          reply:
+            "Tehlikeli atık ve ambalaj atıklarında işletme olarak dikkat etmen gereken başlıklar:\n\n- Atığı doğru tanımlama ve sınıflandırma: atık kodu/katagori (EWC) ve tehlike özelliklerini netleştir.\n- Kaynağında ayrıştırma ve etiketleme: uygun konteyner, sızıntı önlemleri ve etiket bilgilerinin (içerik/uyarı) tam olması.\n- Lisanslı süreç: tehlikeli atıkların taşınması ve bertarafı için yetkilendirilmiş/izinli taşıyıcı ve bertaraf tesisleriyle çalış.\n- Kayıt ve raporlama: atığın miktarı, teslim/transfer kayıtları ve periyodik raporlamaların eksiksiz tutulması.\n- İzinler ve yetki zinciri: ambalaj atıkları için yetkilendirilmiş kuruluş/uyum mekanizmaları ve sözleşmelerin takibi.\n- Personel eğitimi ve saha prosedürleri: depolama, sızıntı/olası dökülme, acil durum planları.\n\nNot: Kesin yükümlülükler işletmenin faaliyet türüne ve atık sınıfına göre değişir; ilgili yönetmelik kapsamını (Tehlikeli Atıklar ve Ambalaj Atıkları) kontrol et.",
+        },
+        {
+          keys: ["sıfır atık", "sifir atik", "sıfır atık ve mevzuat", "sıfır atık mevzuat", "resmi kaynak"],
+          reply:
+            "Sıfır atık ve mevzuat için doğru başlangıç noktası:\n\n1) Önce uygulama kapsamını netleştir: tesis/işletme faaliyetine göre hangi yükümlülükler geçerli.\n2) İlgili ana mevzuatı belirle: Türkiye’de Sıfır Atık Yönetmeliği (ve buna bağlı ikincil düzenlemeler).\n3) Resmi kaynaklardan kontrol et:\n   - Resmi Gazete (yönetmelik metinleri ve değişiklikleri)\n   - Çevre/İlgili bakanlık resmi duyuruları ve rehberleri\n   - Konuyla ilgili e-Kılavuz/atık yönetim sistemi duyuruları\n4) Son olarak işletme içi uygulamayı bağla: ayrıştırma sistemi, eğitim-plan, kayıt/raporlama.\n\nİstersen işletmende hangi atık türleri var (tehlikeli/ambalaj/evsel-benzeri vb.) yaz, sana kontrol listesi şeklinde uygun adımları çıkarayım.",
+        },
+        {
+          keys: ["nasıl çalışır", "süreç", "eşleş", "ilan", "teklif"],
+          reply:
+            "Kısa akış: ilan → uygun firmalar → teklif → alım/satım. Detaylar süreç akışı anlatımlarında yer alır.",
+        },
+        {
+          keys: ["blog", "yorum", "topluluk", "paylaş"],
+          reply:
+            "**Blog/Topluluk** alanında istek ve yorum paylaşabilirsiniz; paylaşımlar tarayıcıda saklanır.",
+        },
+        {
+          keys: ["giriş", "kayıt", "hesap", "şifre", "üye"],
+          reply:
+            "Giriş ve kayıt ekranı prototiptir. Üretim ortamında kimlik doğrulama ve sunucu tarafı doğrulama eklenmelidir.",
+        },
+        {
+          keys: ["uygunluk", "puan", "skor", "karbon", "co2", "emisyon"],
+          reply:
+            "Blokzincir detayında **uygunluk puanı** ve **tahmini CO₂e** bilgilendirme amaçlı otomatik hesaplanır; resmi denetim veya rapor yerine geçmez.",
+        },
+        {
+          keys: ["hakkımızda", "kim", "amaç", "nedir"],
+          reply:
+            "Atık AI, atık üreten işletmeleri geri kazanım firmalarıyla buluşturmayı hedefleyen bir platform konseptidir.",
+        },
+        {
+          keys: ["iletişim", "mail", "telefon", "destek"],
+          reply:
+            "Bu sürümde iletişim formu yok; kurumsal talepler için ileride bir iletişim kanalı eklenebilir. Şimdilik blog veya giriş sayfası üzerinden akışı inceleyebilirsiniz.",
+        },
+        {
+          keys: ["yardım", "ne yapabilirim", "komut"],
+          reply:
+            "Örnek sorular: “Blokzincir nasıl açılır?”, “Sunucu modu”, “Atık türleri”, “Fabric nedir?”. Sağdaki hızlı düğmelere de tıklayabilirsiniz.",
+        },
+      ];
+
+      var DEFAULT_REPLY =
+        "Tam eşleşen bir yanıt bulamadım. Blokzincir aşamaları, sunucu modu, atık türleri ve topluluk alanındaki süreç akışı hakkında sorunu daha net yaz; örnek olarak atık türünü, miktarı, ilini ve hedef işlemi (kayıt/taşıma/bertaraf) belirtirsen daha iyi cevaplarım.";
+
+      var messagesEl = document.getElementById("chat-messages");
+      var form = document.getElementById("chat-form");
+      var input = document.getElementById("chat-input");
+      var submitBtn = document.getElementById("chat-submit");
+      var stopBtn = document.getElementById("chat-stop");
+      var statusBadge = document.getElementById("chat-status-badge");
+      var reconnectBtn = document.getElementById("chat-reconnect");
+      var charCountEl = document.getElementById("chat-char-count");
+      var toastEl = document.getElementById("chat-toast");
+      var modelSelect = document.getElementById("chat-model-select");
+      var modelWrap = document.getElementById("chat-model-wrap");
+      var connectionHint = document.getElementById("chat-connection-hint");
+      var connectionHintBody = document.getElementById("chat-connection-hint-body");
+
+      function escapeHtml(s) {
+        if (!s) return "";
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function sanitizeAssistantReply(s) {
+        if (s == null || typeof s !== "string") return s;
+        return s
+          .replace(/https?:\/\/www\.csiky\.gov\.tr[^\s)\]">]*/gi, "mevzuat.gov.tr ve ilgili kurumun güncel resmi sitesi (adresi doğrulayın)")
+          .replace(/\bwww\.csiky\.gov\.tr[^\s)\]">]*/gi, "ilgili kurumun güncel resmi sitesi")
+          .replace(/\[([^\]]*)\]\(https?:\/\/www\.csiky\.gov\.tr[^)]*\)/gi, "$1 — adresi ilgili kurumun güncel resmi sitesinden doğrulayın");
+      }
+
+      function formatTime(d) {
+        try {
+          return d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+        } catch (_e) {
+          return "";
+        }
+      }
+
+      function formatInlineMarkdown(escaped) {
+        var e = escaped;
+        e = e.replace(/\*\*(.+?)\*\*/g, '<strong class="text-ecoGray font-semibold">$1</strong>');
+        e = e.replace(/`([^`\n]+)`/g, '<code class="px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[0.85em] font-mono">$1</code>');
+        e = e.replace(/^[\-\u2022]\s+(.+)$/gm, '<div class="flex gap-2 my-1.5 pl-0.5"><span class="text-ecoBlue shrink-0 font-bold leading-snug">·</span><span class="leading-snug">$1</span></div>');
+        e = e.replace(/\n/g, "<br />");
+        return e;
+      }
+
+      function formatBotMarkdown(text) {
+        if (!text) return "";
+        var parts = String(text).split(/```/);
+        var html = "";
+        for (var i = 0; i < parts.length; i++) {
+          if (i % 2 === 1) {
+            var code = escapeHtml(parts[i].replace(/^\s*\w+\s*\n/, "").trim());
+            html +=
+              '<pre class="mt-3 mb-3 p-3 rounded-xl bg-slate-900 text-slate-100 text-xs overflow-x-auto font-mono leading-relaxed border border-slate-700/40 shadow-inner">' +
+              code +
+              "</pre>";
+          } else {
+            html += formatInlineMarkdown(escapeHtml(parts[i]));
+          }
+        }
+        return html;
+      }
+
+      function formatReply(text) {
+        return formatBotMarkdown(text);
+      }
+
+      function normalize(s) {
+        return s
+          .toLowerCase()
+          .replace(/ı/g, "i")
+          .replace(/ğ/g, "g")
+          .replace(/ü/g, "u")
+          .replace(/ş/g, "s")
+          .replace(/ö/g, "o")
+          .replace(/ç/g, "c")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      var CHAT_QA_CACHE_KEY = "atik_chatbot_qa_cache_v2";
+      var CHAT_QA_CACHE_MAX = 120;
+      var CHAT_QA_CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 saat
+      var QUICK_Q_SET = {};
+
+      function loadQaCache() {
+        try {
+          return JSON.parse(localStorage.getItem(CHAT_QA_CACHE_KEY) || "{}");
+        } catch (_e) {
+          return {};
+        }
+      }
+
+      function saveQaCache(cache) {
+        try {
+          localStorage.setItem(CHAT_QA_CACHE_KEY, JSON.stringify(cache));
+        } catch (_e) {}
+      }
+
+      function qaCacheKey(model, userText) {
+        var m = (model || "").trim();
+        var k = normalize(userText || "");
+        return (m ? m : "default") + "::" + k;
+      }
+
+      function getCachedQa(model, userText) {
+        if (!userText) return "";
+        var cache = loadQaCache();
+        var item = cache[qaCacheKey(model, userText)];
+        if (!item || !item.reply) return "";
+        if (item.at && Date.now() - item.at > CHAT_QA_CACHE_TTL_MS) return "";
+        // Çok genel/başarısız yanıtları tekrar servis etme
+        if (String(item.reply).indexOf("Tam eşleşen bir yanıt bulamadım") !== -1) return "";
+        return item.reply;
+      }
+
+      function putCachedQa(model, userText, reply) {
+        var r = String(reply || "").trim();
+        if (!r) return;
+        // Sadece hızlı soru butonları için cache al (diğer sohbet akışında yanlış tekrarları azaltır)
+        if (!QUICK_Q_SET[normalize(userText)]) return;
+        // Varsayılan/boş yanıtları cache'e yazma
+        if (r === DEFAULT_REPLY) return;
+        if (r.indexOf("(Boş yanıt)") !== -1) return;
+        var cache = loadQaCache();
+        var key = qaCacheKey(model, userText);
+        cache[key] = { reply: r, at: Date.now() };
+        var keys = Object.keys(cache);
+        if (keys.length > CHAT_QA_CACHE_MAX) {
+          keys.sort(function (a, b) {
+            return (cache[a] && cache[a].at ? cache[a].at : 0) - (cache[b] && cache[b].at ? cache[b].at : 0);
+          });
+          var removeCount = keys.length - CHAT_QA_CACHE_MAX;
+          for (var i = 0; i < removeCount; i++) delete cache[keys[i]];
+        }
+        saveQaCache(cache);
+      }
+
+      function replyFor(userText) {
+        var n = normalize(userText);
+        if (!n) return null;
+
+        // Excel’den “ara işlem + kaynak” önerisi (LLM/CACHED KB öncesi hızlı cevap)
+        try {
+          if (window.ARA_ISLEM_RECOMMENDATIONS) {
+            var wantOps =
+              n.indexOf("ara islem") !== -1 ||
+              n.indexOf("on islem") !== -1 ||
+              n.indexOf("ön islem") !== -1 ||
+              n.indexOf("r12") !== -1 ||
+              n.indexOf("d9") !== -1 ||
+              n.indexOf("kaynak") !== -1;
+            if (wantOps) {
+              var catKey = null;
+              if (n.indexOf("tehlikeli") !== -1 || n.indexOf("kimyasal") !== -1) catKey = "Tehlikeli atık";
+              else if (n.indexOf("plastik") !== -1 || n.indexOf("pet") !== -1 || n.indexOf("ambalaj") !== -1) catKey = "Plastik";
+              else if (n.indexOf("cam") !== -1) catKey = "Cam";
+              else if (n.indexOf("elektronik") !== -1 || n.indexOf("weee") !== -1) catKey = "Elektronik";
+              else if (n.indexOf("organik") !== -1) catKey = "Organik";
+              else if (n.indexOf("metal") !== -1 || n.indexOf("hurda") !== -1 || n.indexOf("kablo") !== -1) catKey = "Metal";
+              else if (n.indexOf("karton") !== -1 || n.indexOf("kagit") !== -1 || n.indexOf("kâğıt") !== -1) catKey = "Kağıt / karton";
+              else if (n.indexOf("karisik") !== -1) catKey = "Karışık";
+
+              var r =
+                catKey && window.getAraIslemRec
+                  ? window.getAraIslemRec(catKey)
+                  : catKey && window.ARA_ISLEM_RECOMMENDATIONS
+                    ? window.ARA_ISLEM_RECOMMENDATIONS[catKey]
+                    : null;
+              if (r && r.araIslem) {
+                var tipLabel =
+                  r.islemTipi === 1 || String(r.islemTipi) === "1.0"
+                    ? "Uygun"
+                    : r.islemTipi === 0 || String(r.islemTipi) === "0.0"
+                      ? "Uygun değil"
+                      : "";
+                var costLabel = r.maliyetPuan != null && r.maliyetPuan !== "" ? "Maliyet Puanı: " + r.maliyetPuan : "";
+                var srcLabel = r.kaynak ? "Kaynak: " + r.kaynak : "";
+                var op = r.araIslem || "";
+                if (op.length > 420) op = op.slice(0, 420) + "...";
+                var shouldRecommend = r.islemTipi === 1 || String(r.islemTipi) === "1.0" || String(r.islemTipi) === "1";
+                if (shouldRecommend) {
+                  return (
+                    "**Önerilen ara işlem:** " +
+                    op +
+                    (srcLabel ? "\n" + srcLabel : "") +
+                    (costLabel ? "\n" + costLabel : "") +
+                    (tipLabel ? "\nİşlem tipi: " + tipLabel : "")
+                  );
+                }
+                // islemTipi=0 ise: operasyonel öneri vermeden karar bilgisini dön
+                return (
+                  "**Sistem kararı:** Ara işlem adımı gerekli görünmüyor. " +
+                  (tipLabel ? "İşlem tipi: " + tipLabel : "") +
+                  (costLabel ? "\n" + costLabel : "") +
+                  (srcLabel ? "\n" + srcLabel : "")
+                );
+              }
+            }
+          }
+        } catch (_e) {}
+
+        for (var i = 0; i < KB.length; i++) {
+          var keys = KB[i].keys;
+          for (var j = 0; j < keys.length; j++) {
+            if (n.indexOf(normalize(keys[j])) !== -1) return KB[i].reply;
+          }
+        }
+        return DEFAULT_REPLY;
+      }
+
+      function showToast(msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg || "";
+        window.clearTimeout(showToast._t);
+        if (msg)
+          showToast._t = window.setTimeout(function () {
+            toastEl.textContent = "";
+          }, 2800);
+      }
+
+      function setFormAriaBusy(on) {
+        if (messagesEl) messagesEl.setAttribute("aria-busy", on ? "true" : "false");
+        if (form) form.setAttribute("aria-busy", on ? "true" : "false");
+      }
+
+      function buildChatPayload() {
+        if (uiTranscript.length === 0 && llmThread.length === 0) return null;
+        return JSON.stringify({
+          v: 4,
+          ui: uiTranscript.slice(),
+          llmThread: llmThread.slice(),
+          savedAt: Date.now(),
+        });
+      }
+
+      function persistChat() {
+        var payload = buildChatPayload();
+        try {
+          if (!payload) {
+            localStorage.removeItem(CHAT_STORAGE_KEY);
+            sessionStorage.removeItem(CHAT_STORAGE_KEY);
+            return;
+          }
+          localStorage.setItem(CHAT_STORAGE_KEY, payload);
+          sessionStorage.setItem(CHAT_STORAGE_KEY, payload);
+        } catch (_e) {
+          try {
+            sessionStorage.setItem(CHAT_STORAGE_KEY, payload);
+          } catch (_e2) {}
+        }
+      }
+
+      function loadStoredChatRaw() {
+        try {
+          var a = localStorage.getItem(CHAT_STORAGE_KEY);
+          if (a) return a;
+        } catch (_e) {}
+        try {
+          var b = sessionStorage.getItem(CHAT_STORAGE_KEY);
+          if (b) return b;
+        } catch (_e2) {}
+        return null;
+      }
+
+      /** Ardışık aynı kullanıcı metni (çift tıklama / iptal yarışı) depoda kaldıysa tekilleştir */
+      function collapseAdjacentDuplicateUserTurns(messages) {
+        if (!messages || messages.length <= 1) return messages;
+        var out = [messages[0]];
+        for (var i = 1; i < messages.length; i++) {
+          var m = messages[i];
+          var prev = out[out.length - 1];
+          if (m.role === "user" && prev.role === "user" && m.content === prev.content) continue;
+          out.push(m);
+        }
+        return out;
+      }
+
+      function replayUiFromStored() {
+        messagesEl.innerHTML = "";
+        for (var i = 0; i < uiTranscript.length; i++) {
+          var m = uiTranscript[i];
+          if (m.role === "user") bubble(m.content, "user", false, { restored: true, record: false });
+          else bubble(m.content, "bot", true, { restored: true, record: false });
+        }
+      }
+
+      function tryRestoreSession() {
+        try {
+          var raw = loadStoredChatRaw();
+          if (!raw) return false;
+          var o = JSON.parse(raw);
+
+          if (o && o.v === 1 && Array.isArray(o.thread) && o.thread.length > 0) {
+            uiTranscript = [];
+            for (var k = 0; k < o.thread.length; k++) {
+              var tm = o.thread[k];
+              if (tm.role === "user") uiTranscript.push({ role: "user", content: tm.content });
+              else if (tm.role === "assistant") uiTranscript.push({ role: "assistant", content: tm.content });
+            }
+            uiTranscript = collapseAdjacentDuplicateUserTurns(uiTranscript);
+            llmThread = llmEnabled ? collapseAdjacentDuplicateUserTurns(o.thread.slice()) : [];
+            replayUiFromStored();
+            persistChat();
+            return true;
+          }
+
+          if (!o || !Array.isArray(o.ui) || o.ui.length === 0) return false;
+
+          uiTranscript = collapseAdjacentDuplicateUserTurns(o.ui.slice());
+          llmThread =
+            llmEnabled && Array.isArray(o.llmThread)
+              ? collapseAdjacentDuplicateUserTurns(o.llmThread.slice())
+              : [];
+          replayUiFromStored();
+          return true;
+        } catch (_e) {
+          return false;
+        }
+      }
+
+      function bubble(text, role, rich, opts) {
+        opts = opts || {};
+        var restored = !!opts.restored;
+        var copyable = role === "bot" && opts.copyable !== false;
+
+        var wrap = document.createElement("div");
+        wrap.className = role === "user" ? "flex justify-end w-full" : "flex justify-start w-full gap-2";
+        wrap.setAttribute("role", "article");
+
+        if (role === "bot") {
+          var av = document.createElement("div");
+          av.className =
+            "shrink-0 w-9 h-9 rounded-2xl bg-white border border-gray-200/80 shadow-sm flex items-center justify-center text-[11px] font-bold text-ecoBlue";
+          av.textContent = "AI";
+          av.setAttribute("aria-hidden", "true");
+          wrap.appendChild(av);
+        }
+
+        var col = document.createElement("div");
+        col.className =
+          "min-w-0 flex flex-col gap-0.5 " +
+          (role === "user" ? "items-end max-w-[min(88%,28rem)]" : "items-start max-w-[min(92%,34rem)]");
+
+        var inner = document.createElement("div");
+        inner.className =
+          role === "user"
+            ? "rounded-2xl rounded-br-md bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-3 text-sm text-white shadow-md leading-relaxed"
+            : "rounded-2xl rounded-bl-md bg-white/95 border border-gray-100/90 px-4 py-3 text-sm text-gray-800 shadow-sm leading-relaxed";
+        if (role === "user") inner.textContent = text;
+        else inner.innerHTML = formatBotMarkdown(text);
+
+        var meta = document.createElement("div");
+        meta.className =
+          "flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] text-gray-400 px-1 " +
+          (role === "user" ? "justify-end" : "justify-start");
+
+        if (!restored) {
+          var ts = document.createElement("time");
+          ts.dateTime = new Date().toISOString();
+          ts.textContent = formatTime(new Date());
+          meta.appendChild(ts);
+        }
+
+        if (copyable) {
+          var copyBtn = document.createElement("button");
+          copyBtn.type = "button";
+          copyBtn.className =
+            "text-ecoBlue hover:text-ecoGreen font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/30 rounded px-1";
+          copyBtn.textContent = "Kopyala";
+          copyBtn.addEventListener("click", function () {
+            navigator.clipboard.writeText(text).then(
+              function () {
+                showToast("Panoya kopyalandı");
+              },
+              function () {
+                showToast("Kopyalanamadı");
+              }
+            );
+          });
+          meta.appendChild(copyBtn);
+        }
+
+        col.appendChild(inner);
+        if (meta.childNodes.length) col.appendChild(meta);
+        wrap.appendChild(col);
+        messagesEl.appendChild(wrap);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+
+        if (!opts.restored && opts.record !== false) {
+          if (role === "user") uiTranscript.push({ role: "user", content: text });
+          else if (role === "bot") uiTranscript.push({ role: "assistant", content: text });
+          persistChat();
+        }
+
+        return wrap;
+      }
+
+      function createStreamingBotShell() {
+        var wrap = document.createElement("div");
+        wrap.className = "flex justify-start w-full gap-2";
+        wrap.setAttribute("role", "article");
+        var av = document.createElement("div");
+        av.className =
+          "shrink-0 w-9 h-9 rounded-2xl bg-white border border-gray-200/80 shadow-sm flex items-center justify-center text-[11px] font-bold text-ecoBlue";
+        av.textContent = "AI";
+        av.setAttribute("aria-hidden", "true");
+        wrap.appendChild(av);
+        var col = document.createElement("div");
+        col.className = "min-w-0 flex flex-col gap-0.5 items-start max-w-[min(92%,34rem)]";
+        var inner = document.createElement("div");
+        inner.className =
+          "rounded-2xl rounded-bl-md bg-white/95 border border-gray-100/90 px-4 py-3 text-sm text-gray-800 shadow-sm leading-relaxed whitespace-pre-wrap";
+        inner.textContent = "";
+        var meta = document.createElement("div");
+        meta.className =
+          "flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] text-gray-400 px-1 justify-start";
+        var ts = document.createElement("time");
+        ts.dateTime = new Date().toISOString();
+        ts.textContent = formatTime(new Date());
+        meta.appendChild(ts);
+        col.appendChild(inner);
+        col.appendChild(meta);
+        wrap.appendChild(col);
+        messagesEl.appendChild(wrap);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        return {
+          wrap: wrap,
+          inner: inner,
+          meta: meta,
+          finalize: function (fullText) {
+            inner.classList.remove("whitespace-pre-wrap");
+            inner.innerHTML = formatBotMarkdown(fullText || "");
+            var copyBtn = document.createElement("button");
+            copyBtn.type = "button";
+            copyBtn.className =
+              "text-ecoBlue hover:text-ecoGreen font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/30 rounded px-1";
+            copyBtn.textContent = "Kopyala";
+            copyBtn.addEventListener("click", function () {
+              navigator.clipboard.writeText(fullText || "").then(
+                function () {
+                  showToast("Panoya kopyalandı");
+                },
+                function () {
+                  showToast("Kopyalanamadı");
+                }
+              );
+            });
+            meta.appendChild(copyBtn);
+            uiTranscript.push({ role: "assistant", content: fullText || "" });
+            persistChat();
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+          },
+        };
+      }
+
+      function readChatSse(response, reqId, getCurrentReqId, shell) {
+        return new Promise(function (resolve, reject) {
+          var reader = response.body && response.body.getReader();
+          if (!reader) {
+            resolve({ err: new Error("Akış okunamadı") });
+            return;
+          }
+          var dec = new TextDecoder();
+          var buf = "";
+          var acc = "";
+          function pump() {
+            if (getCurrentReqId() !== reqId) {
+              reader.cancel().catch(function () {});
+              resolve({ cancelled: true, acc: acc });
+              return;
+            }
+            reader
+              .read()
+              .then(function (result) {
+                if (getCurrentReqId() !== reqId) {
+                  reader.cancel().catch(function () {});
+                  resolve({ cancelled: true, acc: acc });
+                  return;
+                }
+                if (result.done) {
+                  resolve({ cancelled: false, acc: acc });
+                  return;
+                }
+                buf += dec.decode(result.value, { stream: true });
+                var parts = buf.split("\n");
+                buf = parts.pop() || "";
+                for (var i = 0; i < parts.length; i++) {
+                  var line = parts[i];
+                  if (line.indexOf("data: ") !== 0) continue;
+                  var payload = line.slice(6).trim();
+                  if (payload === "[DONE]") continue;
+                  try {
+                    var j = JSON.parse(payload);
+                    var piece =
+                      j.choices &&
+                      j.choices[0] &&
+                      j.choices[0].delta &&
+                      (j.choices[0].delta.content != null ? j.choices[0].delta.content : "");
+                    if (piece) {
+                      acc += piece;
+                      shell.inner.textContent = acc;
+                      messagesEl.scrollTop = messagesEl.scrollHeight;
+                    }
+                  } catch (_parse) {}
+                }
+                pump();
+              })
+              .catch(function (err) {
+                if (err && err.name === "AbortError") {
+                  if (getCurrentReqId() !== reqId) {
+                    resolve({ cancelled: true, acc: acc });
+                  } else {
+                    resolve({ userStop: true, acc: acc });
+                  }
+                  return;
+                }
+                reject(err);
+              });
+          }
+          pump();
+        });
+      }
+
+      function bubbleError(text) {
+        var wrap = document.createElement("div");
+        wrap.className = "flex justify-start gap-2 w-full";
+        wrap.setAttribute("role", "alert");
+        var av = document.createElement("div");
+        av.className =
+          "shrink-0 w-9 h-9 rounded-2xl bg-amber-100 border border-amber-200 flex items-center justify-center text-sm";
+        av.textContent = "!";
+        av.setAttribute("aria-hidden", "true");
+        wrap.appendChild(av);
+        var inner = document.createElement("div");
+        inner.className =
+          "max-w-[min(92%,34rem)] rounded-2xl rounded-bl-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950 shadow-sm";
+        inner.textContent = text;
+        wrap.appendChild(inner);
+        messagesEl.appendChild(wrap);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      var typingRow = null;
+      function showTyping() {
+        removeTyping();
+        typingRow = document.createElement("div");
+        typingRow.className = "typing-row flex justify-start gap-2 w-full";
+        typingRow.setAttribute("aria-hidden", "true");
+        typingRow.innerHTML =
+          '<div class="shrink-0 w-9 h-9 rounded-2xl bg-slate-100 border border-slate-200/80"></div>' +
+          '<div class="rounded-2xl rounded-bl-md bg-slate-100 border border-slate-200/60 px-4 py-3 flex items-center gap-1">' +
+          '<span class="sr-only">Yanıt bekleniyor</span>' +
+          '<span class="inline-block w-2 h-2 rounded-full bg-ecoBlue/70 chat-dot"></span>' +
+          '<span class="inline-block w-2 h-2 rounded-full bg-ecoBlue/70 chat-dot"></span>' +
+          '<span class="inline-block w-2 h-2 rounded-full bg-ecoBlue/70 chat-dot"></span>' +
+          "</div>";
+        messagesEl.appendChild(typingRow);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+      function removeTyping() {
+        if (typingRow && typingRow.parentNode) typingRow.remove();
+        typingRow = null;
+      }
+
+      function botThinkingThen(text, delay) {
+        showTyping();
+        window.setTimeout(function () {
+          removeTyping();
+          bubble(text, "bot", true, { copyable: true });
+        }, typeof delay === "number" ? delay : 450);
+      }
+
+      function setBusy(on) {
+        if (submitBtn) submitBtn.disabled = !!on;
+        if (input) input.disabled = !!on;
+        if (modelSelect) modelSelect.disabled = !!on;
+        document.querySelectorAll(".chat-quick").forEach(function (b) {
+          b.disabled = !!on;
+        });
+        setFormAriaBusy(!!on);
+        if (stopBtn) stopBtn.classList.toggle("hidden", !on || !llmEnabled);
+      }
+
+      /** Yeni gönderim önceki LLM isteğini kesince catch/finally eşleşmediği için DOM/iş parçacığını elle temizle */
+      function removeSupersededLlmTurn() {
+        removeTyping();
+        if (streamingBotWrap && streamingBotWrap.parentNode) streamingBotWrap.remove();
+        streamingBotWrap = null;
+        if (llmThread.length && llmThread[llmThread.length - 1].role === "user") llmThread.pop();
+        if (uiTranscript.length && uiTranscript[uiTranscript.length - 1].role === "user") uiTranscript.pop();
+        if (lastUserBubbleWrap && lastUserBubbleWrap.parentNode) lastUserBubbleWrap.remove();
+        lastUserBubbleWrap = null;
+        persistChat();
+      }
+
+      function sendUserMessage(text) {
+        var t = (text || "").trim();
+        if (!t) return;
+
+        // LLM modu açıksa bile “Excel ara işlem + kaynak” önerisini önce servis et.
+        try {
+          var quickOps = replyFor(t);
+          if (
+            quickOps &&
+            quickOps !== DEFAULT_REPLY &&
+            (String(quickOps).indexOf("Önerilen ara işlem") !== -1 ||
+              String(quickOps).indexOf("Sistem kararı") !== -1)
+          ) {
+            lastUserBubbleWrap = bubble(t, "user", false);
+            botThinkingThen(quickOps, 0);
+            return;
+          }
+        } catch (_e) {}
+
+        if (llmEnabled) {
+          if (chatAbort) {
+            chatAbort.abort();
+            chatAbort = null;
+            removeSupersededLlmTurn();
+          }
+          var reqId = ++chatRequestId;
+          chatAbort = new AbortController();
+          llmThread.push({ role: "user", content: t });
+          lastUserBubbleWrap = bubble(t, "user", false);
+          var selModel = getSelectedChatModel();
+          var canUseCache = !!QUICK_Q_SET[normalize(t)];
+          var cachedReply = canUseCache ? getCachedQa(selModel, t) : "";
+          if (cachedReply) {
+            llmThread.push({ role: "assistant", content: cachedReply });
+            bubble(cachedReply, "bot", true, { copyable: true });
+            chatAbort = null;
+            lastUserBubbleWrap = null;
+            return;
+          }
+          setBusy(true);
+          showTyping();
+          var chatPayload = { messages: llmThread, stream: true };
+          if (selModel) chatPayload.model = selModel;
+          fetch(apiUrl("/api/chat"), {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json, text/event-stream" },
+            body: JSON.stringify(chatPayload),
+            signal: chatAbort.signal,
+          })
+            .then(function (r) {
+              if (reqId !== chatRequestId) return { skip: true };
+              var ct = (r.headers.get("content-type") || "").toLowerCase();
+              if (!r.ok) {
+                return r.text().then(function (txt) {
+                  return { mode: "err", status: r.status, txt: txt };
+                });
+              }
+              if (ct.indexOf("text/event-stream") !== -1) {
+                return { mode: "sse", r: r };
+              }
+              return r.text().then(function (txt) {
+                return { mode: "json", txt: txt };
+              });
+            })
+            .then(function (result) {
+              if (!result || result.skip) return;
+              if (result.mode === "err") {
+                if (reqId !== chatRequestId) return;
+                removeTyping();
+                var errData = {};
+                try {
+                  errData = result.txt ? JSON.parse(result.txt) : {};
+                } catch (_e) {}
+                throw new Error(errData.error || result.txt || "Sunucu hatası " + result.status);
+              }
+              if (result.mode === "json") {
+                if (reqId !== chatRequestId) return;
+                removeTyping();
+                var data = {};
+                try {
+                  data = result.txt ? JSON.parse(result.txt) : {};
+                } catch (_e2) {}
+                var reply = sanitizeAssistantReply(data.reply || "");
+                llmThread.push({ role: "assistant", content: reply });
+                putCachedQa(selModel, t, reply);
+                bubble(reply, "bot", true);
+                return;
+              }
+              if (result.mode === "sse") {
+                if (reqId !== chatRequestId) return;
+                removeTyping();
+                var shell = createStreamingBotShell();
+                streamingBotWrap = shell.wrap;
+                return readChatSse(result.r, reqId, function () {
+                  return chatRequestId;
+                }, shell).then(function (out) {
+                  streamingBotWrap = null;
+                  if (reqId !== chatRequestId) return;
+                  if (out.err) {
+                    if (shell.wrap.parentNode) shell.wrap.remove();
+                    llmThread.pop();
+                    if (uiTranscript.length && uiTranscript[uiTranscript.length - 1].role === "user") uiTranscript.pop();
+                    persistChat();
+                    bubbleError(out.err.message || "Akış hatası");
+                    return;
+                  }
+                  if (out.cancelled) {
+                    if (shell.wrap.parentNode) shell.wrap.remove();
+                    return;
+                  }
+                  if (out.userStop) {
+                    if (shell.wrap.parentNode) shell.wrap.remove();
+                    llmThread.pop();
+                    if (uiTranscript.length && uiTranscript[uiTranscript.length - 1].role === "user") uiTranscript.pop();
+                    persistChat();
+                    showToast("Yanıt durduruldu");
+                    return;
+                  }
+                  var acc = sanitizeAssistantReply((out.acc || "").trim() || "(Boş yanıt)");
+                  shell.finalize(acc);
+                  llmThread.push({ role: "assistant", content: acc });
+                  putCachedQa(selModel, t, acc);
+                });
+              }
+            })
+            .catch(function (err) {
+              if (reqId !== chatRequestId) return;
+              removeTyping();
+              if (streamingBotWrap && streamingBotWrap.parentNode) streamingBotWrap.remove();
+              streamingBotWrap = null;
+              if (err.name === "AbortError") {
+                llmThread.pop();
+                if (uiTranscript.length && uiTranscript[uiTranscript.length - 1].role === "user") uiTranscript.pop();
+                persistChat();
+                if (lastUserBubbleWrap && lastUserBubbleWrap.parentNode) lastUserBubbleWrap.remove();
+                lastUserBubbleWrap = null;
+                showToast("Yanıt durduruldu");
+                return;
+              }
+              llmThread.pop();
+              if (uiTranscript.length && uiTranscript[uiTranscript.length - 1].role === "user") uiTranscript.pop();
+              persistChat();
+              bubbleError(err.message || "Bağlantı hatası");
+            })
+            .finally(function () {
+              if (reqId !== chatRequestId) return;
+              chatAbort = null;
+              setBusy(false);
+              if (stopBtn) stopBtn.classList.add("hidden");
+              lastUserBubbleWrap = null;
+            });
+          return;
+        }
+
+        lastUserBubbleWrap = bubble(t, "user", false);
+        var ans = replyFor(t);
+        botThinkingThen(ans || DEFAULT_REPLY);
+      }
+
+      function showWelcome() {
+        if (llmEnabled) {
+          if (chatProvider === "ollama") {
+            bubble(
+              "Merhaba, ben **Atık AI** asistanıyım.\n\n- Atık yönetimi, geri dönüşüm ve izlenebilirlik hakkında sorabilirsiniz.\n- Yanıtlar bilgisayarınızdaki **Ollama** modeli ile üretilir.\n- **Hukuki kesinlik** için resmi mevzuat ve uzman görüşüne başvurun.",
+              "bot",
+              true,
+              { copyable: false, record: false }
+            );
+          } else {
+            bubble(
+              "Merhaba, ben **Atık AI** asistanıyım.\n\n- Atık yönetimi ve platform kullanımı hakkında doğal dilde soru sorabilirsiniz.\n- **Hukuki kesinlik** için resmi mevzuat ve uzman görüşüne başvurun.",
+              "bot",
+              true,
+              { copyable: false, record: false }
+            );
+          }
+        } else {
+          bubble(
+            "Merhaba, ben **Atık AI** asistanıyım.\n\n- Sorunuzu yazın veya sağdaki önerilerden birini seçin.\n- Şu an **özet yanıtlar** kullanılıyor; tam yapay zeka için `atik-dlt` sunucusunu açıp **KURULUM.txt** adımlarını izleyin.",
+            "bot",
+            true,
+            { copyable: false, record: false }
+          );
+        }
+      }
+
+      function clearChat() {
+        if (chatAbort) {
+          chatAbort.abort();
+          chatAbort = null;
+          chatRequestId++;
+        }
+        if (streamingBotWrap && streamingBotWrap.parentNode) streamingBotWrap.remove();
+        streamingBotWrap = null;
+        setBusy(false);
+        messagesEl.innerHTML = "";
+        llmThread = [];
+        uiTranscript = [];
+        try {
+          localStorage.removeItem(CHAT_STORAGE_KEY);
+          sessionStorage.removeItem(CHAT_STORAGE_KEY);
+        } catch (_e) {}
+        showWelcome();
+        showToast("Sohbet sıfırlandı");
+        if (input) input.focus();
+      }
+
+      function updateCharCount() {
+        if (!charCountEl || !input) return;
+        charCountEl.textContent = String((input.value || "").length);
+      }
+
+      function autosizeInput() {
+        if (!input || input.tagName !== "TEXTAREA") return;
+        input.style.height = "auto";
+        var h = Math.min(160, Math.max(48, input.scrollHeight));
+        input.style.height = h + "px";
+      }
+
+      function getSelectedChatModel() {
+        if (!modelSelect || !modelWrap || modelWrap.classList.contains("hidden")) return "";
+        var v = (modelSelect.value || "").trim();
+        return v;
+      }
+
+      function hideConnectionHint() {
+        if (connectionHint) connectionHint.classList.add("hidden");
+      }
+
+      function showConnectionHint(kind) {
+        if (!connectionHint || !connectionHintBody) return;
+        var portHint = apiPort || "5055";
+        var api = apiEndpointLabel();
+        if (kind === "file") {
+          connectionHintBody.innerHTML =
+            "Sayfa <strong>dosyadan</strong> (file://) açılmış; tarayıcı çoğu zaman API isteklerine izin vermez. " +
+            "<code>atik-dlt</code> klasöründe <strong>npm start</strong> çalıştırıp tarayıcıda şunu açın: " +
+            "<strong>http://127.0.0.1:" +
+            escapeHtml(String(portHint)) +
+            "/chatbot.html</strong>";
+        } else {
+          var locHint = window.location;
+          var ppHint = String(locHint.port || (locHint.protocol === "https:" ? "443" : "80"));
+          var onPreview =
+            (locHint.protocol === "http:" || locHint.protocol === "https:") && PREVIEW_PORTS[ppHint];
+          if (onPreview) {
+            connectionHintBody.innerHTML =
+              "Sayfa önizleme sunucusunda (ör. port <strong>" +
+              escapeHtml(ppHint) +
+              "</strong>); bu doğru. Sohbet için API hedefi: <code>" +
+              escapeHtml(api) +
+              "</code>. <strong>atik-dlt</strong> klasöründe <strong>npm start</strong> çalıştırın (port <strong>" +
+              escapeHtml(String(portHint)) +
+              "</strong>); Ollama kullanıyorsanız uygulama açık olsun. " +
+              "İsterseniz sayfayı API ile aynı porttan da açabilirsiniz: <strong>http://127.0.0.1:" +
+              escapeHtml(String(portHint)) +
+              "/chatbot.html</strong>.";
+          } else {
+            connectionHintBody.innerHTML =
+              "API yanıt vermiyor (hedef: <code>" +
+              escapeHtml(api) +
+              "</code>). <strong>atik-dlt</strong> klasöründe terminalde <strong>npm start</strong> çalıştırın; Ollama uygulaması açık olsun. " +
+              "Aynı origin için: <strong>http://127.0.0.1:" +
+              escapeHtml(String(portHint)) +
+              "/chatbot.html</strong>. " +
+              "Live Server kullanıyorsanız sayfa <strong>5501</strong> vb. olabilir; API yine <strong>" +
+              escapeHtml(String(portHint)) +
+              "</strong> üzerinde çalışmalı.";
+          }
+        }
+        connectionHint.classList.remove("hidden");
+      }
+
+      function syncChatModelUi(h) {
+        if (!modelSelect || !modelWrap) return;
+        if (!llmEnabled || chatProvider !== "ollama") {
+          modelWrap.classList.add("hidden");
+          return;
+        }
+        var models = h && Array.isArray(h.chatModels) ? h.chatModels : [];
+        if (models.length < 2) {
+          modelWrap.classList.add("hidden");
+          return;
+        }
+        modelWrap.classList.remove("hidden");
+        var def = (h && h.chatModel) || models[0];
+        var saved = "";
+        try {
+          saved = (localStorage.getItem(CHAT_MODEL_STORAGE_KEY) || "").trim();
+        } catch (_e) {}
+        var pick = models.indexOf(saved) >= 0 ? saved : models.indexOf(def) >= 0 ? def : models[0];
+        modelSelect.innerHTML = "";
+        for (var i = 0; i < models.length; i++) {
+          var opt = document.createElement("option");
+          opt.value = models[i];
+          opt.textContent = models[i];
+          modelSelect.appendChild(opt);
+        }
+        modelSelect.value = pick;
+      }
+
+      function updateStatusBadge() {
+        if (!statusBadge) return;
+        if (forceLocalOnly) {
+          statusBadge.textContent = "Özet";
+          statusBadge.className =
+            "inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide bg-slate-100 text-slate-600";
+          return;
+        }
+        if (llmEnabled) {
+          statusBadge.textContent = "Çevrimiçi";
+          statusBadge.className =
+            "inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide bg-emerald-100 text-emerald-800";
+        } else {
+          statusBadge.textContent = "Özet mod";
+          statusBadge.className =
+            "inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide bg-amber-50 text-amber-900 border border-amber-200/60";
+        }
+      }
+
+      function applyHealth(h) {
+        hideConnectionHint();
+        llmEnabled = !!(h && h.chat);
+        chatModelLabel = (h && h.chatModel) || "";
+        chatProvider = (h && h.chatProvider) || "";
+        updateStatusBadge();
+        syncChatModelUi(h);
+        if (messagesEl.children.length > 0) return;
+        if (tryRestoreSession()) showToast("Önceki sohbet yüklendi");
+        else showWelcome();
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var t = (input.value || "").trim();
+        input.value = "";
+        autosizeInput();
+        updateCharCount();
+        sendUserMessage(t);
+      });
+
+      if (input) {
+        input.addEventListener("input", function () {
+          updateCharCount();
+          autosizeInput();
+        });
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            form.requestSubmit();
+          }
+        });
+      }
+
+      updateCharCount();
+      autosizeInput();
+
+      function flushChatBeforeLeave() {
+        persistChat();
+      }
+
+      window.addEventListener("pagehide", flushChatBeforeLeave);
+      window.addEventListener("beforeunload", flushChatBeforeLeave);
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") flushChatBeforeLeave();
+      });
+
+      document.addEventListener(
+        "click",
+        function (e) {
+          var t = e.target;
+          if (!t || !t.closest) return;
+          var a = t.closest("a[href]");
+          if (!a || !a.getAttribute("href")) return;
+          if (a.target === "_blank" || e.defaultPrevented) return;
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          var href = a.getAttribute("href") || "";
+          if (/^(javascript:|mailto:|tel:)/i.test(href)) return;
+          if (href === "#") return;
+          try {
+            var u = new URL(a.href, window.location.href);
+            if (u.origin !== window.location.origin) return;
+            if (u.pathname === window.location.pathname && u.search === window.location.search) return;
+            flushChatBeforeLeave();
+          } catch (_err) {}
+        },
+        true
+      );
+
+      document.querySelectorAll(".chat-quick").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var q = btn.getAttribute("data-q") || "";
+          sendUserMessage(q);
+          if (input) input.focus();
+        });
+      });
+
+      // Hızlı soru butonları için cache'i etkinleştir
+      try {
+        document.querySelectorAll(".chat-quick").forEach(function (btn) {
+          var q = btn.getAttribute("data-q") || "";
+          if (q) QUICK_Q_SET[normalize(q)] = true;
+        });
+      } catch (_e) {}
+
+      var resetBtn = document.getElementById("chat-reset");
+      if (resetBtn) resetBtn.addEventListener("click", clearChat);
+
+      if (stopBtn)
+        stopBtn.addEventListener("click", function () {
+          if (chatAbort) chatAbort.abort();
+        });
+
+      if (modelSelect) {
+        modelSelect.addEventListener("change", function () {
+          try {
+            localStorage.setItem(CHAT_MODEL_STORAGE_KEY, modelSelect.value);
+          } catch (_e) {}
+        });
+      }
+
+      if (reconnectBtn)
+        reconnectBtn.addEventListener("click", function () {
+          fetch(apiUrl("/health"))
+            .then(function (r) {
+              return r.json().then(function (h) {
+                if (!r.ok || !h || h.ok === false) throw new Error("no");
+                return h;
+              });
+            })
+            .then(function (h) {
+              hideConnectionHint();
+              var hadUi = messagesEl.children.length > 0;
+              llmEnabled = !!h.chat;
+              chatModelLabel = h.chatModel || "";
+              chatProvider = h.chatProvider || "";
+              updateStatusBadge();
+              syncChatModelUi(h);
+              showToast(hadUi ? "Bağlantı yenilendi" : llmEnabled ? "Akıllı sohbet hazır" : "Sunucu yanıt verdi");
+              if (!hadUi) {
+                if (!tryRestoreSession()) showWelcome();
+              }
+            })
+            .catch(function () {
+              showConnectionHint("network");
+              showToast("Sunucuya ulaşılamadı — kutudaki adımları deneyin");
+            });
+        });
+
+      if (forceLocalOnly) {
+        llmEnabled = false;
+        llmThread = [];
+        updateStatusBadge();
+        syncChatModelUi(null);
+        hideConnectionHint();
+        if (!tryRestoreSession()) showWelcome();
+      } else {
+        if (!isHttp0) {
+          showConnectionHint("file");
+        }
+        fetch(apiUrl("/health"))
+          .then(function (r) {
+            return r.json().then(function (h) {
+              if (!r.ok || !h || h.ok === false) throw new Error("no");
+              return h;
+            });
+          })
+          .then(applyHealth)
+          .catch(function () {
+            llmEnabled = false;
+            chatModelLabel = "";
+            chatProvider = "";
+            updateStatusBadge();
+            syncChatModelUi(null);
+            showConnectionHint("network");
+            if (messagesEl.children.length === 0) {
+              if (!tryRestoreSession()) showWelcome();
+            }
+          });
+      }
+    })();
+  </script>
+</body>
+</html>

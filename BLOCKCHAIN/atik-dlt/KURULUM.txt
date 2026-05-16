@@ -1,0 +1,96 @@
+NE YAPILACAK — sırayla bunları yap
+==================================
+
+1) Ollama uygulamasını bilgisayarda aç (yerel sohbet için şart).
+
+2) PowerShell veya Terminal aç. Şu klasöre gir — proje kökündeki BLOCKCHAIN altındaki atik-dlt:
+
+   cd "C:\Users\busra\Desktop\projeler\atık\BLOCKCHAIN\atik-dlt"
+
+   (Kendi proje yolun farklıysa, içinde package.json ve server.js olan atik-dlt klasörünü seç.)
+
+3) Bir kez kurulum (daha önce yaptıysan atla):
+
+   npm install
+
+4) Sunucuyu başlat — yeni satırda yalnızca şunu yazın (cd veya başka komutla bitiştirmeyin):
+
+   npm start
+
+5) Tarayıcıda adres çubuğuna yaz:
+
+   http://127.0.0.1:5055/chatbot.html
+
+6) "Port 5055 dolu" yazıyorsa:
+   • Ya zaten çalışıyordur — yine de 5. adımdaki adresi aç.
+   • Ya da eski süreci kapat (aşağıdaki "Port dolu" bölümüne bak) ve tekrar npm start.
+
+7) Sohbet açılmıyorsa .env içinde USE_OLLAMA=1 ve OLLAMA_MODEL=... olduğundan emin ol; değiştirdiysen sunucuyu kapatıp tekrar npm start.
+
+
+--- Ayrıntılı notlar (referans) ---
+
+Atık DLT — hızlı başlangıç
+=========================
+
+ÖNEMLİ: npm komutlarını yalnızca atik-dlt klasöründe çalıştırın (proje kökünde değil).
+
+   cd BLOCKCHAIN\atik-dlt
+   npm install
+   npm start
+
+Tam yol örneği (PowerShell):
+   cd "C:\Users\busra\Desktop\projeler\atık\BLOCKCHAIN\atik-dlt"
+
+   Varsayılan port .env içindeki PORT’tur (çoğu kurulumda 5055).
+   Windows’ta 5040 bazen başka programla çakışır; boş yanıt alırsanız PORT=5055 kullanın.
+
+--- Sık görülen terminal hataları ---
+
+• "Unknown command: startcd"
+  İki komutu yanlışlıkla bitişik yazmışsınız (npm start + cd). Ayrı satırlarda çalıştırın:
+    npm start
+  veya önce cd, sonra npm start.
+
+• "Port 5055 dolu" / EADDRINUSE
+  Zaten bir sunucu 5055’i kullanıyor (önceki npm start veya başka program).
+  Seçenek A — Yeni başlatmaya gerek yok: tarayıcıda http://127.0.0.1:5055/chatbot.html açın.
+  Seçenek B — Eski süreci kapatıp yeniden başlatın (PowerShell, yönetici gerekmez):
+    Get-NetTCPConnection -LocalPort 5055 -State Listen | Select-Object -ExpandProperty OwningProcess -Unique
+    Stop-Process -Id <PID> -Force
+  veya tek satır:
+    Get-NetTCPConnection -LocalPort 5055 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
+  Seçenek C — Geçici başka port:
+    $env:PORT="5041"; npm start
+  (Bu durumda chatbot’ta ?port=5041 veya CHATBOT_API_PORT kullanın.)
+
+2) AI sohbet (chatbot) — önerilen kullanım
+   Tarayıcıda açın:
+   http://127.0.0.1:<PORT>/chatbot.html
+   Örnek: http://127.0.0.1:5055/chatbot.html
+
+   Böylece sayfa ve API aynı sunucudan gelir; CORS ve adres karışıklığı olmaz.
+
+   Live Server (VS Code, 5501 vb.) kullanıyorsanız:
+   - chatbot, önizleme portundan farklı porttaki API’ye (5055) bağlanır; npm start çalışıyor olmalı.
+   - Statik sayfalar: ...\WEB\chatbot.html (npm start ile aynı portta sunulur)
+     Live Server kullanırsanız API portu (ör. 5055) ile eşleştirmeniz gerekir.
+
+   HTML dosyasını çift tıklayıp file:// ile açmayın; API istekleri genelde engellenir.
+
+3) Yerel dil modeli (Ollama)
+   Ollama’yı kurun, model çekin (ör. ollama pull gemma3:4b).
+   atik-dlt/.env içinde USE_OLLAMA=1 ve OLLAMA_MODEL=... ayarlayıp sunucuyu yeniden başlatın.
+
+4) Blokzincir arayüzünü API’ye bağlamak
+   Statik siteyi http ile sunun; blokzincir.html adres çubuğuna ?server=1 ekleyin.
+   Örnek: http://127.0.0.1:5055/blokzincir.html?server=1
+
+5) API kontrolü
+   http://127.0.0.1:<PORT>/health
+   http://127.0.0.1:<PORT>/api/waste
+   http://127.0.0.1:<PORT>/api/blocks
+
+6) Veri dosyası: data/chain.json (bloklar burada saklanır)
+
+7) Hyperledger Fabric: FABRIC-Gercek-Sistem.txt — chaincode: chaincode/atik-waste-javascript

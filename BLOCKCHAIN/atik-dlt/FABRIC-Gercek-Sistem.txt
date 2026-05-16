@@ -1,0 +1,118 @@
+================================================================================
+GERÇEK BLOCKCHAIN MİMARİSİ (Hyperledger Fabric) — NE FARK VAR?
+================================================================================
+
+Şu anki "atik-dlt" (Node + chain.json):
+  • Tek bilgisayar, tek süreç
+  • Hash zinciri dosyada — iyi demo ama "dağıtık mutabakat" yok
+  • Kurumlar ayrı doğrulayıcı düğüm olarak yer almıyor
+
+Gerçek Fabric ortamı:
+  • Orderer(lar) + birden fazla Org + Peer düğümleri
+  • Her işlem chaincode ile doğrulanır, bloklar peer'lar arasında mutabakatla yazılır
+  • Kimlik: MSP / X.509 sertifikaları (hangi kurum hangi işlemi çağırabilir)
+  • Bu proje klasöründeki "chaincode/atik-waste-javascript" buraya deploy edilir
+
+================================================================================
+ÖN KOŞULLAR (Windows)
+================================================================================
+
+1) Windows 11/10: WSL2 kurulu olsun (Ubuntu önerilir).
+2) Docker Desktop — WSL2 entegrasyonu açık.
+3) Git.
+
+Fabric resmi örnek ağı "test-network" Linux/WSL üzerinde çalıştırılır.
+PowerShell'den doğrudan Fabric peer binary'leri ile uğraşmak yerine WSL kullanın.
+
+================================================================================
+ADIM 1 — fabric-samples İndir
+================================================================================
+
+WSL (Ubuntu) terminalinde:
+
+  cd ~
+  curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh
+  chmod +x install-fabric.sh
+  ./install-fabric.sh docker samples
+
+VEYA el ile:
+  git clone https://github.com/hyperledger/fabric-samples.git
+  cd fabric-samples
+  (Fabric dokümantasyonundaki sürümünüze uygun binary ve docker image komutlarını çalıştırın)
+
+Güncel komutlar her zaman şu adreste:
+  https://hyperledger-fabric.readthedocs.io/en/latest/install.html
+
+================================================================================
+ADIM 2 — Test Ağını Kaldır
+================================================================================
+
+  cd ~/fabric-samples/test-network
+  ./network.sh down
+  ./network.sh up createChannel -c mychannel
+
+Kanal adı ve org sayısı ihtiyacınıza göre değişir; önce varsayılan ile gidin.
+
+================================================================================
+ADIM 3 — Bu Repodaki Chaincode'u Paketle ve Deploy Et
+================================================================================
+
+Chaincode yolu (Windows'tan WSL'e erişim):
+  /mnt/c/Users/.../atık/BLOCKCHAIN/atik-dlt/chaincode/atik-waste-javascript
+
+WSL içinde:
+
+  cd "/mnt/c/Users/.../atık/BLOCKCHAIN/atik-dlt/chaincode/atik-waste-javascript"
+  npm install
+
+Sonra test-network klasöründen (Fabric sürümünüze göre komutlar değişebilir):
+
+  cd ~/fabric-samples/test-network
+  ./network.sh deployCC -ccn atikwaste -ccp /mnt/c/.../atik-waste-javascript -ccl javascript -c mychannel
+
+Not: "deployCC" parametreleri Fabric 2.5 dokümantasyonu ile aynı olmalıdır.
+Güncel tam satır için:
+  fabric-samples/test-network/README veya scripts içindeki örneklere bakın.
+
+Chaincode adı (atikwaste) ve fonksiyon adları:
+  CreateWaste(id, jsonStr)
+  ReadWaste(id)
+  SaveWaste(id, jsonStr)
+  QueryAllWastes()
+  DeleteWaste(id)
+
+================================================================================
+ADIM 4 — Node API'yi Fabric'e Bağla (atik-dlt sunucusu)
+================================================================================
+
+Şu an server.js "ledger.js" (dosya) kullanıyor. Gerçek sistemde:
+
+  npm install @hyperledger/fabric-gateway @grpc/grpc-js
+
+Wallet + connection profile (test-network oluştururken üretilen dosyalar) ile
+gateway.getNetwork("mychannel").getContract("atikwaste") üzerinden:
+
+  await contract.submitTransaction("SaveWaste", id, JSON.stringify(kayit));
+  await contract.evaluateTransaction("QueryAllWastes");
+
+Referans: Hyperledger "fabric-gateway" Node örnekleri ve sizin GitHub'daki
+Waste-Management-dApp içindeki server/routes yapısı.
+
+================================================================================
+ADIM 5 — Üretim
+================================================================================
+
+  • Test-network üretim DEĞİLDİR — yalnızca geliştirme.
+  • Üretim: kendi CA'nız, TLS, yedek orderer, CouchDB indeksleri, PDC (private data).
+  • Kurumsal SLA ve hukuk için danışmanlık + güvenlik denetimi şart.
+
+================================================================================
+ÖZET
+================================================================================
+
+Evet: Şu anki sistem "gerçek Fabric blockchain" değil; hızlı prototip.
+Gerçek sistem için: Docker + WSL + test-network + bu klasördeki chaincode deploy
++ Express'i Fabric Gateway ile değiştirmeniz gerekiyor.
+
+Sorularınız olursa hangi Fabric sürümünü (2.5.x vb.) kurduğunuzu yazın; deploy
+komutunu o sürüme göre tek satır netleştirebiliriz.

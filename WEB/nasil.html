@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atık AI ile ilan, eşleşme, teklif ve alım sürecinin adımları." />
+  <title>Atık AI | Nasıl Çalışır?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoOrange: "#F2994A",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="nasil">
+  <div class="min-h-screen relative overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-ecoBlue focus:text-white focus:font-semibold focus:shadow-lg focus:outline-none">İçeriğe atla</a>
+      <header class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm shadow-slate-900/[0.04]">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm transition group-hover:shadow-md">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">AI Asistan</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="giris.html" data-nav="giris" class="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 transition hover:opacity-[0.96] hover:shadow-lg">Giriş yap</a>
+            <button type="button" data-site-menu-btn class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden md:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a data-nav="home" href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">AI Asistan</a>
+            <a data-nav="giris" href="giris.html" class="rounded-xl px-3 py-3 text-ecoBlue font-semibold hover:bg-ecoBlue/5">Giriş yap</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content" class="glass-panel rounded-[2rem] border border-white/60 p-8 md:p-10 shadow-soft mt-6 md:mt-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-ecoGreen">Süreç Şeması</p>
+        <h1 class="mt-3 text-3xl md:text-4xl font-bold text-ecoGray">Şirketler Atık AI üzerinden nasıl eşleşir?</h1>
+        <p class="mt-5 max-w-3xl text-gray-700 leading-7">
+          Atık AI, atık üreten şirketler ile lisanslı alıcı firmaları aynı süreçte buluşturur. Amaç, atığın doğru kategoride ilan edilmesi, uygun şirketlerin bunu görmesi ve alım satım sürecinin düzenli ilerlemesidir.
+        </p>
+
+        <section class="mt-10 grid gap-6 lg:grid-cols-4">
+          <div class="rounded-3xl bg-white p-6 shadow-soft">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ecoBlue/10 text-lg font-bold text-ecoBlue">1</div>
+            <h2 class="mt-5 text-xl font-semibold text-ecoGray">İlan oluşturma</h2>
+            <p class="mt-3 text-sm leading-7 text-gray-600">Atık sahibi şirket; tür, miktar, lokasyon ve teslim tarihi bilgilerini girer. Sistem, ilanı uygun kategoriye yerleştirerek görünürlüğünü artırır.</p>
+          </div>
+          <div class="rounded-3xl bg-white p-6 shadow-soft">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ecoGreen/10 text-lg font-bold text-ecoGreen">2</div>
+            <h2 class="mt-5 text-xl font-semibold text-ecoGray">Eşleşen firmalar</h2>
+            <p class="mt-3 text-sm leading-7 text-gray-600">Geri kazanım şirketleri kendi uzmanlık alanlarına göre ilanları görür. Bölge, lisans kapsamı ve kapasite bilgisi eşleşmenin temelini oluşturur.</p>
+          </div>
+          <div class="rounded-3xl bg-white p-6 shadow-soft">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ecoOrange/10 text-lg font-bold text-ecoOrange">3</div>
+            <h2 class="mt-5 text-xl font-semibold text-ecoGray">Teklif ve görüşme</h2>
+            <p class="mt-3 text-sm leading-7 text-gray-600">Alıcı şirketler fiyat, toplama günü ve lojistik detaylarını teklif olarak iletir. Atık sahibi bu teklifleri tek ekranda karşılaştırır.</p>
+          </div>
+          <div class="rounded-3xl bg-white p-6 shadow-soft">
+            <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ecoBlue/10 text-lg font-bold text-ecoBlue">4</div>
+            <h2 class="mt-5 text-xl font-semibold text-ecoGray">Alım satım ve kayıt</h2>
+            <p class="mt-3 text-sm leading-7 text-gray-600">Onaylanan teklif sonrası toplama süreci başlar. Şirketler işlem notlarını, teslim bilgilerini ve sürdürülebilirlik kayıtlarını platformda tutabilir.</p>
+          </div>
+        </section>
+
+        <section class="mt-12 rounded-[2rem] bg-gradient-to-r from-ecoBlue to-ecoGreen p-8 text-white shadow-soft">
+          <h2 class="text-2xl font-semibold">Kısa akış</h2>
+          <div class="mt-6 grid gap-4 md:grid-cols-4">
+            <div class="rounded-2xl bg-white/15 p-4 text-sm font-medium">Atık ilanı açılır</div>
+            <div class="rounded-2xl bg-white/15 p-4 text-sm font-medium">Uygun firmalar bildirim alır</div>
+            <div class="rounded-2xl bg-white/15 p-4 text-sm font-medium">Teklifler karşılaştırılır</div>
+            <div class="rounded-2xl bg-white/15 p-4 text-sm font-medium">Alım satım süreci tamamlanır</div>
+          </div>
+        </section>
+
+        <div class="mt-8">
+          <a href="Atik.html" class="inline-flex items-center gap-2 rounded-full bg-ecoGreen/10 px-4 py-2 text-sm font-semibold text-ecoGreen shadow-sm hover:bg-ecoGreen/15 transition">
+            ← Ana Sayfaya Dön
+          </a>
+        </div>
+      </main>
+
+      <footer class="mt-16 md:mt-20 border-t border-slate-200/80 bg-gradient-to-b from-transparent to-white/70">
+        <div class="py-12 md:py-14">
+          <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p class="flex items-center gap-2 font-bold text-ecoGray"><span class="text-xl" aria-hidden="true">♻</span> Atık AI</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Atık üreticileri ile geri kazanım firmalarını buluşturan sade, modern bir eşleştirme ve takip deneyimi.</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="nasil.html">Nasıl çalışır?</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="turler.html">Atık türleri</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blokzincir.html">Takip ve blokzincir</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blog.html">Blog ve topluluk</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="kutuphane.html">Mevzuat kütüphanesi</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="chatbot.html">AI Asistan (sohbet)</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kurumsal</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="giris.html">Giriş ve kayıt</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Not</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Tanıtım ve prototip arayüz. Blokzincir özelliği isteğe bağlı sunucu ile çalışır.</p>
+            </div>
+          </div>
+          <p class="mt-12 pt-8 border-t border-slate-200/70 text-center text-xs text-slate-500">© <span id="site-year"></span> Atık AI · Sürdürülebilir atık yönetimi</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="assets/site-nav.js" defer></script>
+</body>
+</html>

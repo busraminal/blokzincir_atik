@@ -1,0 +1,133 @@
+================================================================================
+ATIK — RAPOR / TEZ İÇİN BİRLEŞİK TASLAK (Kopyala–yapıştır)
+Oluşturma: metin şablonu; deney sayıları ve ekran görüntüleri tarafınızca doldurulacaktır.
+================================================================================
+
+--- ÖZET (150–250 kelimeye indirgenebilir) ---
+Bu çalışmada endüstriyel atık izlenebilirliği için web tabanlı bir arayüz, Node.js ile
+sunulan birleşik REST API ve isteğe bağlı dağıtık defter (Hyperledger Fabric veya
+dosya tabanlı demo zincir) bileşenleri bir araya getirilmiştir. NACE faaliyet koduna
+dayalı Avrupa Atık Kodu (EWC) önerisi, tesis ve mesafe temelli eşleştirme ile doğal
+dil destekli tavsiye katmanı, FastAPI ve PostgreSQL üzerinde servisleştirilmiş;
+Docker Compose ile tekrarlanabilir kurulum sağlanmıştır. Yerel büyük dil modeli
+(Ollama) ile gizlilik ve maliyet açısından esnek bir LLM kullanım yolu gösterilmiştir.
+Sonuç olarak, pilot ölçekte uçtan uca iş akışı doğrulanmış; üretim ortamı için
+güvenlik, ölçeklenebilirlik ve mevzuat uyumu gelecek çalışmalar olarak önerilmiştir.
+
+
+--- 1. GİRİŞ VE PROBLEM ---
+Endüstriyel atıkların sınıflandırılması, uygun geri dönüşüm veya bertaraf tesislerine
+eşlenmesi ve süreç boyunca kayıtların izlenebilir olması operasyonel ve düzenleyici
+açıdan önemlidir. Geleneksel yalnızca merkezi veritabanı tabanlı sistemlerde kayıtların
+değiştirilebilirliği ve paydaşlar arası güven sorunu tartışılabilir. Bu projede önce
+hızlı prototipleme için dosya tabanlı bir işlem zinciri, ileri aşamada ise izinli
+blokzincir (Fabric) ile güçlendirilmiş bir mimari sunulmaktadır.
+
+
+--- 2. İLGİLİ ÇALIŞMALAR (siz doldurun) ---
+[Atık yönetimi mevzuatı, EWC/NACE, DLT atık izleme, FastAPI mikro servis örnekleri,
+Hyperledger Fabric vaka çalışmaları — en az 5–8 kaynak önerilir.]
+
+
+--- 3. SİSTEM MİMARİSİ (metin paragrafı) ---
+İstemci katmanında HTML/CSS/JavaScript ile geliştirilmiş statik web sayfaları
+kullanılmaktadır. Sunucu katmanında Node.js ve Express ile aynı kök adresten statik
+içerik ve REST uçları sunulmakta; /api/atik-ai/* yolu üzerinden ATIK AI (FastAPI)
+servisine ters vekil uygulanarak tarayıcıda tek origin politikası korunmaktadır.
+USE_FABRIC ortam değişkenine göre atık kayıtları ya dosya tabanlı demo zincirde
+(chain.json) ya da Hyperledger Fabric chaincode üzerinde tutulmaktadır. ATIK AI
+katmanında Python, FastAPI, Uvicorn, SQLAlchemy ve PostgreSQL kullanılmakta; Docker
+ile postgres ve atik-api servisleri birlikte çalıştırılabilmektedir. Doğal dil
+özellikleri için Ollama (yerel) veya yapılandırmaya bağlı bulut API’leri
+kullanılabilmektedir.
+
+
+--- 4. KULLANILAN TEKNOLOJİLER (madde listesi) ---
+• Ön uç: HTML5, CSS3, JavaScript (WEB)
+• Sunucu: Node.js, Express, dotenv, cors, ws
+• Fabric (opsiyonel): @hyperledger/fabric-gateway, gRPC; chaincode: Go
+• ML API: Python 3.12, FastAPI, Uvicorn, Pydantic, SQLAlchemy, psycopg2, httpx
+• Veri: PostgreSQL 16
+• Dağıtım: Docker, Docker Compose
+• LLM: Ollama; chatbot için isteğe bağlı OpenAI uyumlu uç
+• Araçlar: PowerShell, npm, pip, Git; API dokümantasyonu: OpenAPI/Swagger
+
+
+--- 5. DENEYLER — YÖNTEM ---
+Deneyler aşağıdaki gruplarda yürütülmüştür (veya yürütülecektir):
+(1) Kurulum ve sağlık: Docker Compose sonrası GET /api/v1/health/ ve veritabanı durumu.
+(2) İşlevsel: Swagger üzerinden NACE→EWC ve matching/search uçları; örnek kodlar.
+(3) Entegrasyon: Tarayıcıdan Node üzerinden /api/atik-ai ile vekil doğrulaması.
+(4) Defter: Demo modda kayıt oluşturma ve blok listesi; zincir tutarlılığı gözlemi.
+(5) İsteğe bağlı: Fabric açıkken aynı uçların davranışı; basit yanıt süresi ölçümü.
+
+
+--- 6. DENEYLER — ÖRNEK SONUÇ TABLOSU (sayıları siz doldurun) ---
+
+Tablo A — Sağlık ve erişilebilirlik
++---------------------------+----------+----------------------------------+
+| Deney                     | Beklenti | Gözlem (Başarılı / Hata notu)   |
++---------------------------+----------+----------------------------------+
+| GET /api/v1/health/       | healthy  |                                  |
+| GET Node /health          | ok       | mode: file-ledger veya fabric   |
+| Swagger /docs açılımı     | 200      |                                  |
++---------------------------+----------+----------------------------------+
+
+Tablo B — ATIK AI işlev (örnek girdileri kendiniz seçin)
++---------------------------+------------------+-------------+------------------+
+| Uç / senaryo              | Girdi            | HTTP kodu   | Kısa sonuç       |
++---------------------------+------------------+-------------+------------------+
+| NACE → EWC önerisi        | nace = ______    |             |                  |
+| Eşleştirme                | ewc = ______     |             |                  |
+| LLM tavsiye               | nace = ______    |             |                  |
++---------------------------+------------------+-------------+------------------+
+
+Tablo C — Basit gecikme (isteğe bağlı; tek makine, yerel ağ)
++---------------------------+----------+----------+----------+
+| Uç                        | n=10 ms | n=50 ms | Not     |
++---------------------------+----------+----------+----------+
+| /api/v1/health/           |          |          | Donanım: ____________ |
+| matching/search (örnek)   |          |          |                      |
++---------------------------+----------+----------+----------+
+
+
+--- 7. BULGULAR VE YORUM ---
+[Kısa: Demo zincir ile hızlı doğrulama; Fabric ile güven modeli farkı; ML uçlarının
+kural+veri ile desteklenmesinin anlamlı öneri ürettiği; LLM’nin açıklayıcı katman
+olduğu. Kendi gözlemlerinizi 1–2 paragrafa yazın.]
+
+
+--- 8. SINIRLAMALAR ---
+• Ölçüm tek makine ve pilot veri ile sınırlıdır.
+• NACE–EWC önerileri resmi mevzuat yerine geçmez; operatör doğrulaması gerekir.
+• Üretim güvenliği (kimlik, yetki, denetim günlüğü) bu prototip kapsamında
+  tam uygulanmamış olabilir.
+
+
+--- 9. SONUÇ VE GELECEK ÇALIŞMALAR ---
+Sonuç: [bir paragraf özet]
+Gelecek çalışmalar: üretim güvenliği; Fabric operasyon rehberi; gerçek tesis
+entegrasyonları; veri seti ile eşleştirme değerlendirme metrikleri; ölçek testi.
+
+
+--- 10. KAYNAKÇA ---
+[Siz ekleyin — APA veya tez yönergenize uygun.]
+
+
+--- EK: Demo akışı (tek cümle, sunumla uyumlu) ---
+"Kullanıcı arayüzünden atık kaydı oluşturuluyor; kayıt Node API ile demo deftere
+yazılıyor; aynı origin üzerinden ATIK AI (Docker’daki FastAPI) ile NACE–EWC önerisi
+ve eşleşme uçları kullanılabiliyor; isteğe Fabric ile gerçek dağıtık deftere geçiş
+scriptleri mevcut."  (Kaynak: RESULT/DEMO-AKIS.txt)
+
+
+--- EK: Mimari diyagram ---
+Mermaid diyagramları önceki mesajlarda verilmiştir; rapora PNG olarak
+https://mermaid.live adresinden aktarabilirsiniz.
+
+--- EK: Blockchain deneyleri ve teknik karşılaştırma ---
+Ayrıntılı metin ve tablo iskeletleri: RESULT/BLOCKCHAIN-DENEYLER-VE-KARSILASTIRMA.txt
+
+================================================================================
+Dosya sonu
+================================================================================

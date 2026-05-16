@@ -1,0 +1,63 @@
+================================================================================
+TAM SİSTEMİ AYAĞA KALDIRMA (Windows + Docker + WSL + Hyperledger Fabric)
+================================================================================
+
+ÖN KOŞUL
+  • Docker Desktop açık, WSL2 + Ubuntu kurulu (sizde var).
+  • İlk kurulum 10–30 dk sürebilir (imaj + binary indirme).
+
+--------------------------------------------------------------------------------
+SEÇENEK A — Tek komut (PowerShell)
+--------------------------------------------------------------------------------
+
+  cd "...\atık\BLOCKCHAIN\atik-dlt\scripts"
+  .\Calistir-TamStack.ps1
+
+Bu betik:
+  1) WSL içinde bootstrap-fabric.sh (ağ + chaincode deploy)
+  2) Windows’ta Node API’yi USE_FABRIC=1 ile 5040 portunda başlatır
+
+Sonra tarayıcıda:
+  ...\WEB\blokzincir.html?server=1
+
+--------------------------------------------------------------------------------
+SEÇENEK B — Adım adım
+--------------------------------------------------------------------------------
+
+1) WSL terminal:
+
+   bash /mnt/c/Users/.../Atık\ web/atik-dlt/scripts/bootstrap-fabric.sh
+
+2) API (WSL içinden — önerilen):
+
+   cd /mnt/c/Users/.../Atık\ web/atik-dlt
+   npm install
+   export USE_FABRIC=1
+   npm run start:fabric
+
+3) Veya API Windows’ta:
+
+   $env:USE_FABRIC='1'
+   $env:CRYPTO_PATH = (wsl bash -lc 'wslpath -w $HOME/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com').Trim()
+   cd atik-dlt
+   npm run start:fabric
+
+--------------------------------------------------------------------------------
+DEMO (Fabric OLMADAN)
+--------------------------------------------------------------------------------
+
+  cd atik-dlt
+  npm start
+
+  → chain.json ile dosya tabanlı hash zinciri (tek makine demosu).
+
+--------------------------------------------------------------------------------
+SAĞLIK KONTROLÜ
+--------------------------------------------------------------------------------
+
+  http://localhost:5040/health
+
+  Fabric modunda: mode: hyperledger-fabric
+  Demo modunda:   mode: file-ledger
+
+================================================================================

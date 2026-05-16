@@ -1,0 +1,65 @@
+# Kullanım (proje kökünden):
+#   cd MLOPS && docker compose up --build -d
+# veya:  .\MLOPS\up.ps1
+#
+# API: http://127.0.0.1:8000/docs  |  Sağlık: GET /api/v1/health/
+# PostgreSQL: localhost:5432  kullanıcı postgres / şifre admin / DB postgre_database
+#
+# İlk kurulumda init-db.sql otomatik çalışır. Yeniden seed için:
+#   docker compose down -v   (volume siler) sonra tekrar up
+#
+# LLM (Ollama bilgisayarda çalışıyorsa): atik-api içinden host.docker.internal:11434
+# Tamamen konteyner içi Ollama için:  docker compose --profile ollama up --build -d
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: atik-mlops-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgre_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - atik_pg_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/01_atik_init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgre_database"]
+      interval: 4s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  ollama:
+    profiles: ["ollama"]
+    image: ollama/ollama:latest
+    container_name: atik-mlops-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - atik_ollama_data:/root/.ollama
+
+  atik-api:
+    build:
+      context: ..
+      dockerfile: MLOPS/Dockerfile.api
+    container_name: atik-mlops-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:admin@postgres:5432/postgre_database
+      DB_ECHO: "false"
+      DEBUG: "false"
+      # Windows/macOS Docker Desktop: host’taki Ollama
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      OLLAMA_MODEL: gemma3:4b
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  atik_pg_data:
+  atik_ollama_data:

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atık AI hesap girişi ve kayıt — ilan ve eşleşmelerinizi yönetin." />
+  <title>Atık AI | Giriş Yap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <style>
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+    }
+    .gradient-btn--green {
+      background: linear-gradient(130deg, #2d9cdb 0%, #27ae60 100%);
+    }
+  </style>
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="giris">
+  <div class="min-h-screen flex flex-col">
+    <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-ecoBlue focus:text-white focus:font-semibold focus:shadow-lg focus:outline-none">İçeriğe atla</a>
+      <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm shadow-slate-900/[0.04] -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 rounded-b-2xl">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm transition group-hover:shadow-md">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">AI Asistan</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="giris.html" data-nav="giris" class="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 transition hover:opacity-[0.96] hover:shadow-lg">Giriş yap</a>
+            <button type="button" data-site-menu-btn class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden md:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2 rounded-b-2xl">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a data-nav="home" href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">AI Asistan</a>
+            <a data-nav="giris" href="giris.html" class="rounded-xl px-3 py-3 text-ecoBlue font-semibold hover:bg-ecoBlue/5">Giriş yap</a>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+    <div id="main-content" class="flex-1 flex items-center justify-center px-4 sm:px-6 py-10">
+    <div class="w-full max-w-5xl grid gap-8 lg:grid-cols-[1fr,460px] items-center">
+      <section class="hidden lg:block">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-ecoGreen">Atık AI Paneli</p>
+        <h1 class="mt-4 text-5xl font-extrabold leading-tight text-ecoBlue">
+          Giriş yapın, ilanlarınızı ve eşleşmelerinizi tek yerden yönetin.
+        </h1>
+        <p class="mt-6 max-w-xl text-base leading-7 text-gray-700">
+          Bu ekran kullanıcı giriş alanı olarak ana sayfadan ayrıldı. Şirket hesabınızla giriş yapabilir, yeni kayıt oluşturabilir ve teklif sürecinizi yönetebilirsiniz.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="Atik.html" class="inline-flex items-center justify-center rounded-full border border-ecoBlue/20 bg-white px-6 py-3 text-sm font-semibold text-ecoBlue shadow-sm transition hover:bg-ecoBlue/5">
+            Ana Sayfaya Dön
+          </a>
+          <a href="blog.html" class="inline-flex items-center justify-center rounded-full bg-ecoGreen/10 px-6 py-3 text-sm font-semibold text-ecoGreen transition hover:bg-ecoGreen/15">
+            Topluluk Alanı
+          </a>
+          <a href="blokzincir.html" class="inline-flex items-center justify-center rounded-full bg-ecoBlue/10 px-6 py-3 text-sm font-semibold text-ecoBlue transition hover:bg-ecoBlue/15">
+            Blokzincir / dApp
+          </a>
+          <a href="chatbot.html" class="inline-flex items-center justify-center rounded-full bg-violet-100 px-6 py-3 text-sm font-semibold text-violet-800 transition hover:bg-violet-200/80">
+            AI Asistan
+          </a>
+        </div>
+      </section>
+
+      <section class="glass-panel rounded-[2rem] border border-white/70 p-7 sm:p-8 shadow-soft">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.22em] text-ecoBlue">Hesap erişimi</p>
+            <h2 class="mt-2 text-3xl font-bold text-ecoGray">Kayıt ve Giriş</h2>
+          </div>
+          <a href="Atik.html" class="text-3xl leading-none text-gray-400 transition hover:text-gray-600">&times;</a>
+        </div>
+
+        <div class="mt-6 flex border border-gray-200 rounded-full overflow-hidden bg-gray-100">
+          <button id="auth-tab-login" type="button" class="flex-1 px-5 py-3 text-sm font-semibold text-ecoGray bg-white" aria-selected="true">Giriş Yap</button>
+          <button id="auth-tab-register" type="button" class="flex-1 px-5 py-3 text-sm font-semibold text-gray-500" aria-selected="false">Kaydol</button>
+        </div>
+
+        <div id="auth-message" class="mt-4 hidden rounded-2xl border border-gray-200 px-4 py-3 text-sm"></div>
+
+        <form id="auth-form-login" class="mt-7 space-y-4">
+          <p class="text-[11px] text-gray-500 leading-snug -mt-1 mb-1">Girişte rol seçmezsiniz; rol, kayıt sırasında hesabınıza atanır.</p>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M4 6L12 13L20 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input id="login-email" name="email" type="email" placeholder="E-posta Adresi" autocomplete="email" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+          </div>
+
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M17 11V8C17 5.79086 15.2091 4 13 4C10.7909 4 9 5.79086 9 8V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M7 11H17V18C17 19.1046 16.1046 20 15 20H9C7.89543 20 7 19.1046 7 18V11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input id="login-password" name="password" type="password" placeholder="Şifre" autocomplete="current-password" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+          </div>
+
+          <button type="submit" class="gradient-btn--green w-full rounded-full px-5 py-4 text-sm font-semibold text-white shadow-md shadow-ecoGreen/30 transition hover:shadow-lg">
+            Giriş Yap
+          </button>
+
+          <p class="text-center text-sm text-gray-500">
+            Hesabın yok mu?
+            <a href="javascript:void(0)" id="auth-switch-to-register" class="font-semibold text-ecoBlue hover:text-ecoGreen">Kaydol</a>
+          </p>
+        </form>
+
+        <form id="auth-form-register" class="mt-7 space-y-4 hidden">
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input id="register-name" name="name" type="text" placeholder="Ad Soyad" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+          </div>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="1.8" />
+                <path d="M4 6L12 13L20 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input id="register-email" name="email" type="email" placeholder="E-posta Adresi" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+          </div>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M8 21h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input id="register-company" name="companyName" type="text" placeholder="İşletme Adı" autocomplete="organization" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+          </div>
+          <fieldset class="rounded-2xl border border-gray-200 bg-white/90 p-4 space-y-2.5">
+            <legend class="text-xs font-semibold text-gray-500 px-1">Hesap rolleri (en az birini seçin)</legend>
+            <label class="flex items-center gap-3 text-sm text-gray-700 cursor-pointer">
+              <input id="reg-role-producer" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-ecoGreen focus:ring-ecoGreen" />
+              <span>Atık üreten</span>
+            </label>
+            <label class="flex items-center gap-3 text-sm text-gray-700 cursor-pointer">
+              <input id="reg-role-carrier" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-ecoGreen focus:ring-ecoGreen" />
+              <span>Taşıyıcı</span>
+            </label>
+            <label class="flex items-center gap-3 text-sm text-gray-700 cursor-pointer">
+              <input id="reg-role-receiver" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-ecoGreen focus:ring-ecoGreen" />
+              <span>Alan firma</span>
+            </label>
+            <label class="flex items-center gap-3 text-sm text-gray-700 cursor-pointer">
+              <input id="reg-role-disposer" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-ecoGreen focus:ring-ecoGreen" />
+              <span>Bertaraf eden</span>
+            </label>
+            <p class="text-[11px] text-gray-500 leading-snug pt-1">Aynı işletme hem üretici hem alıcı olabildiği için birden fazla rol işaretleyebilirsiniz. Yönetici bu ekrandan atanmaz.</p>
+          </fieldset>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 10a2 2 0 1 0 0.001 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <select id="register-location" name="location" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20">
+              <option value="">İl seçin</option>
+              <option value="Adana">Adana</option>
+              <option value="Adıyaman">Adıyaman</option>
+              <option value="Afyonkarahisar">Afyonkarahisar</option>
+              <option value="Ağrı">Ağrı</option>
+              <option value="Aksaray">Aksaray</option>
+              <option value="Amasya">Amasya</option>
+              <option value="Ankara">Ankara</option>
+              <option value="Antalya">Antalya</option>
+              <option value="Artvin">Artvin</option>
+              <option value="Ardahan">Ardahan</option>
+              <option value="Aydın">Aydın</option>
+              <option value="Balıkesir">Balıkesir</option>
+              <option value="Bartın">Bartın</option>
+              <option value="Batman">Batman</option>
+              <option value="Bayburt">Bayburt</option>
+              <option value="Bilecik">Bilecik</option>
+              <option value="Bingöl">Bingöl</option>
+              <option value="Bitlis">Bitlis</option>
+              <option value="Bolu">Bolu</option>
+              <option value="Burdur">Burdur</option>
+              <option value="Bursa">Bursa</option>
+              <option value="Çanakkale">Çanakkale</option>
+              <option value="Çankırı">Çankırı</option>
+              <option value="Çorum">Çorum</option>
+              <option value="Denizli">Denizli</option>
+              <option value="Diyarbakır">Diyarbakır</option>
+              <option value="Düzce">Düzce</option>
+              <option value="Edirne">Edirne</option>
+              <option value="Elazığ">Elazığ</option>
+              <option value="Erzincan">Erzincan</option>
+              <option value="Erzurum">Erzurum</option>
+              <option value="Eskişehir">Eskişehir</option>
+              <option value="Gaziantep">Gaziantep</option>
+              <option value="Giresun">Giresun</option>
+              <option value="Gümüşhane">Gümüşhane</option>
+              <option value="Hakkari">Hakkari</option>
+              <option value="Hatay">Hatay</option>
+              <option value="Iğdır">Iğdır</option>
+              <option value="Isparta">Isparta</option>
+              <option value="İstanbul">İstanbul</option>
+              <option value="İzmir">İzmir</option>
+              <option value="Kahramanmaraş">Kahramanmaraş</option>
+              <option value="Karabük">Karabük</option>
+              <option value="Karaman">Karaman</option>
+              <option value="Kars">Kars</option>
+              <option value="Kastamonu">Kastamonu</option>
+              <option value="Kayseri">Kayseri</option>
+              <option value="Kilis">Kilis</option>
+              <option value="Kırıkkale">Kırıkkale</option>
+              <option value="Kırklareli">Kırklareli</option>
+              <option value="Kırşehir">Kırşehir</option>
+              <option value="Kocaeli">Kocaeli</option>
+              <option value="Konya">Konya</option>
+              <option value="Kütahya">Kütahya</option>
+              <option value="Malatya">Malatya</option>
+              <option value="Manisa">Manisa</option>
+              <option value="Mardin">Mardin</option>
+              <option value="Mersin">Mersin</option>
+              <option value="Muğla">Muğla</option>
+              <option value="Muş">Muş</option>
+              <option value="Nevşehir">Nevşehir</option>
+              <option value="Niğde">Niğde</option>
+              <option value="Ordu">Ordu</option>
+              <option value="Osmaniye">Osmaniye</option>
+              <option value="Rize">Rize</option>
+              <option value="Sakarya">Sakarya</option>
+              <option value="Samsun">Samsun</option>
+              <option value="Şanlıurfa">Şanlıurfa</option>
+              <option value="Siirt">Siirt</option>
+              <option value="Sinop">Sinop</option>
+              <option value="Sivas">Sivas</option>
+              <option value="Şırnak">Şırnak</option>
+              <option value="Tekirdağ">Tekirdağ</option>
+              <option value="Tokat">Tokat</option>
+              <option value="Trabzon">Trabzon</option>
+              <option value="Tunceli">Tunceli</option>
+              <option value="Uşak">Uşak</option>
+              <option value="Van">Van</option>
+              <option value="Yalova">Yalova</option>
+              <option value="Yozgat">Yozgat</option>
+              <option value="Zonguldak">Zonguldak</option>
+            </select>
+          </div>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M17 11V8C17 5.79086 15.2091 4 13 4C10.7909 4 9 5.79086 9 8V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M7 11H17V18C17 19.1046 16.1046 20 15 20H9C7.89543 20 7 19.1046 7 18V11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input id="register-password" name="password" type="password" placeholder="Şifre" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+          </div>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-4 flex items-center text-gray-400">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M17 11V8C17 5.79086 15.2091 4 13 4C10.7909 4 9 5.79086 9 8V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M7 11H17V18C17 19.1046 16.1046 20 15 20H9C7.89543 20 7 19.1046 7 18V11Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <input id="register-password-confirm" name="passwordConfirm" type="password" placeholder="Şifre Tekrar" class="w-full rounded-2xl border border-gray-200 bg-white py-4 pl-12 pr-4 text-sm text-gray-700 outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+          </div>
+          <label class="flex items-center gap-3 text-sm text-gray-700">
+            <input id="register-terms" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-ecoGreen focus:ring-ecoGreen" />
+            Platform kurallarını kabul ediyorum
+          </label>
+          <button type="submit" class="gradient-btn--green w-full rounded-full px-5 py-4 text-sm font-semibold text-white shadow-md shadow-ecoGreen/30 transition hover:shadow-lg">
+            Kayıt Ol
+          </button>
+          <p class="text-center text-sm text-gray-500">
+            Giriş kullanıcım
+            <a href="javascript:void(0)" id="auth-switch-to-login" class="font-semibold text-ecoBlue hover:text-ecoGreen">Giriş Yap</a>
+          </p>
+        </form>
+      </section>
+    </div>
+    </div>
+
+    <footer class="mt-auto border-t border-slate-200/80 bg-gradient-to-b from-transparent to-white/70">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+          <div>
+            <p class="flex items-center gap-2 font-bold text-ecoGray"><span class="text-lg" aria-hidden="true">♻</span> Atık AI</p>
+            <p class="mt-3 text-gray-600 leading-relaxed">Atık eşleştirme ve takip için sade dijital deneyim.</p>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
+            <ul class="mt-3 space-y-2 text-gray-600">
+              <li><a class="hover:text-ecoBlue transition" href="blokzincir.html">Takip paneli</a></li>
+              <li><a class="hover:text-ecoBlue transition" href="nasil.html">Nasıl çalışır?</a></li>
+              <li><a class="hover:text-ecoBlue transition" href="kutuphane.html">Mevzuat kütüphanesi</a></li>
+              <li><a class="hover:text-ecoBlue transition" href="chatbot.html">AI Asistan</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kurumsal</p>
+            <ul class="mt-3 space-y-2 text-gray-600">
+              <li><a class="hover:text-ecoBlue transition" href="hakkimizda.html">Hakkımızda</a></li>
+              <li><a class="hover:text-ecoBlue transition" href="Atik.html">Ana sayfa</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Bilgi</p>
+            <p class="mt-3 text-gray-600 leading-relaxed">Hesabın varsa giriş yapabilir, yeni hesap oluşturabilirsin.</p>
+          </div>
+        </div>
+        <p class="mt-8 pt-6 border-t border-slate-200/70 text-center text-xs text-slate-500">© <span id="site-year"></span> Atık AI</p>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/auth.js" defer></script>
+</body>
+</html>

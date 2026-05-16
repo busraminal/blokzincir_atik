@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tehlikesiz ve tehlikeli atıklar, ambalaj, e-atık, tıbbi atık, yağlar ve özel gruplar — özet sınıflar ve mevzuat kaynakları." />
+  <title>Atık AI | Atık Türleri</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoOrange: "#F2994A",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="turler">
+  <div class="min-h-screen relative overflow-x-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-ecoBlue focus:text-white focus:font-semibold focus:shadow-lg focus:outline-none">İçeriğe atla</a>
+      <header class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm shadow-slate-900/[0.04]">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm transition group-hover:shadow-md">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">AI Asistan</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="giris.html" data-nav="giris" class="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 transition hover:opacity-[0.96] hover:shadow-lg">Giriş yap</a>
+            <button type="button" data-site-menu-btn class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden md:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a data-nav="home" href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">AI Asistan</a>
+            <a data-nav="giris" href="giris.html" class="rounded-xl px-3 py-3 text-ecoBlue font-semibold hover:bg-ecoBlue/5">Giriş yap</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content" class="glass-panel rounded-[2rem] border border-white/60 p-8 md:p-10 shadow-soft mt-6 md:mt-8">
+        <h1 class="text-3xl font-bold text-ecoGray">Atık Türleri</h1>
+        <p class="mt-4 max-w-4xl text-gray-700 leading-relaxed">
+          Bu tabloda, elinizdeki kaynak setlerinden derlenen <strong>6 haneli EWC kodları</strong> listelenir.
+        </p>
+
+        <div class="mt-6 grid gap-3 md:grid-cols-3">
+          <input id="ewc-search" type="text" placeholder="Kod veya açıklama ara (örn. 150110, ambalaj)" class="md:col-span-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-ecoBlue/40" />
+          <select id="ewc-chapter" class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-ecoBlue/40">
+            <option value="">Tüm bölümler</option>
+          </select>
+        </div>
+        <p id="ewc-count" class="mt-3 text-sm text-gray-600"></p>
+
+        <div class="mt-4 overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-soft">
+          <table class="min-w-full text-sm">
+            <thead class="bg-slate-50 text-left">
+              <tr>
+                <th class="px-4 py-3 font-semibold text-ecoGray">EWC Kodu</th>
+                <th class="px-4 py-3 font-semibold text-ecoGray">Açıklama</th>
+                <th class="px-4 py-3 font-semibold text-ecoGray">Bölüm</th>
+              </tr>
+            </thead>
+            <tbody id="ewc-table-body" class="divide-y divide-slate-100 text-gray-700"></tbody>
+          </table>
+        </div>
+
+        <div class="mt-6 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          Not: Tehlikeli atıklar katalogda yıldız (*) ile işaretlenir. Nihai sınıflandırma için 6 haneli EWC kodu ve güncel mevzuat birlikte değerlendirilmelidir.
+        </div>
+      </main>
+
+      <footer class="mt-16 md:mt-20 border-t border-slate-200/80 bg-gradient-to-b from-transparent to-white/70">
+        <div class="py-12 md:py-14">
+          <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <p class="flex items-center gap-2 font-bold text-ecoGray"><span class="text-xl" aria-hidden="true">♻</span> Atık AI</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Atık üreticileri ile geri kazanım firmalarını buluşturan sade, modern bir eşleştirme ve takip deneyimi.</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="nasil.html">Nasıl çalışır?</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="turler.html">Atık türleri</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blokzincir.html">Takip ve blokzincir</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="blog.html">Blog ve topluluk</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="kutuphane.html">Mevzuat kütüphanesi</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="chatbot.html">AI Asistan (sohbet)</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kurumsal</p>
+              <ul class="mt-4 space-y-2.5 text-sm">
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a class="text-gray-600 hover:text-ecoBlue transition" href="giris.html">Giriş ve kayıt</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Not</p>
+              <p class="mt-4 text-sm text-gray-600 leading-relaxed">Tanıtım ve prototip arayüz. Blokzincir özelliği isteğe bağlı sunucu ile çalışır.</p>
+            </div>
+          </div>
+          <p class="mt-12 pt-8 border-t border-slate-200/70 text-center text-xs text-slate-500">© <span id="site-year"></span> Atık AI · Sürdürülebilir atık yönetimi</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <script src="assets/site-nav.js" defer></script>
+  <script>
+    (function () {
+      const DEFAULT_EWC_CODES = [
+        { code: "030104", description: "Tehlikeli talaş ve yongalar" },
+        { code: "030105", description: "Tehlikesiz talaş ve yonga" },
+        { code: "070213", description: "Atık plastik (plastik üretimi)" },
+        { code: "070215", description: "Atık katkı maddeleri (plastik/kauçuk)" },
+        { code: "080111", description: "Atık boya ve vernikler" },
+        { code: "080113", description: "Boya/vernik içeren sulu çamurlar" },
+        { code: "080117", description: "Boya/vernik sökme atıkları" },
+        { code: "080409", description: "Atık yapıştırıcı ve macunlar" },
+        { code: "100101", description: "Dip külü, cüruf ve kazan tozu" },
+        { code: "100201", description: "Cüruf işleme atıkları" },
+        { code: "100308", description: "İkincil üretim tuz cürufları" },
+        { code: "100309", description: "İkincil üretim siyah cüruflar" },
+        { code: "100319", description: "Tehlikeli baca gazı tozları" },
+        { code: "100321", description: "Alüminyum üretiminden tozlar" },
+        { code: "100401", description: "Kurşun üretiminden kaynaklanan cüruflar" },
+        { code: "100809", description: "Diğer cüruflar (demir dışı metalürji)" },
+        { code: "100903", description: "Ergitme cürufları" },
+        { code: "100908", description: "Tehlikeli madde içeren döküm kalıpları" },
+        { code: "100910", description: "Tehlikesiz döküm kalıp/maça" },
+        { code: "100915", description: "Tehlikeli baca gazı tozu" },
+        { code: "101006", description: "Tehlikeli döküm kalıpları" },
+        { code: "110108", description: "Fosfatlama çamurları" },
+        { code: "110109", description: "Tehlikeli madde içeren çamur" },
+        { code: "110111", description: "Tehlikeli durulama suları" },
+        { code: "120109", description: "Halojen içermeyen emülsiyonlar" },
+        { code: "120112", description: "Atık mum ve yağlar" },
+        { code: "120116", description: "Aşındırma (kumlama) atıkları" },
+        { code: "150106", description: "Karışık ambalajlar" },
+        { code: "150110", description: "Tehlikeli madde kalıntılı ambalaj" },
+        { code: "150202", description: "Tehlikeli kirlenmiş emiciler/bezler" },
+        { code: "160107", description: "Yağ filtreleri" },
+        { code: "160305", description: "Tehlikeli organik atıklar" },
+        { code: "160602", description: "Ni-Cd piller" },
+        { code: "160604", description: "Alkalin piller" },
+        { code: "170603", description: "Asbest içeren yalıtım" },
+        { code: "170604", description: "Yalıtım malzemeleri" },
+        { code: "190205", description: "Fiziksel/kimyasal işlem çamurları" },
+        { code: "190801", description: "Izgara atıkları" },
+        { code: "190802", description: "Kum tutuculardan çıkan atıklar" },
+        { code: "190805", description: "Kentsel atıksu arıtma çamurları" },
+        { code: "191212", description: "Mekanik işleme diğer atıklar" },
+        { code: "200111", description: "Tekstil ürünleri (ayrı toplanmış)" },
+        { code: "200133", description: "Piller ve aküler" },
+        { code: "200134", description: "Diğer pil ve aküler" },
+        { code: "200139", description: "Plastikler (belediye atığı)" },
+        { code: "200301", description: "Karışık belediye atıkları" }
+      ];
+
+      let EWC_CODES = DEFAULT_EWC_CODES;
+
+      const searchEl = document.getElementById("ewc-search");
+      const chapterEl = document.getElementById("ewc-chapter");
+      const bodyEl = document.getElementById("ewc-table-body");
+      const countEl = document.getElementById("ewc-count");
+      if (!searchEl || !chapterEl || !bodyEl || !countEl) return;
+
+      function fillChapters() {
+        chapterEl.innerHTML = '<option value="">Tüm bölümler</option>';
+        const chapters = Array.from(new Set(EWC_CODES.map((x) => String(x.code6 || x.code).slice(0, 2)))).sort();
+        chapters.forEach((ch) => {
+          const opt = document.createElement("option");
+          opt.value = ch;
+          opt.textContent = ch;
+          chapterEl.appendChild(opt);
+        });
+      }
+
+      function escapeHtml(s) {
+        return String(s || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function render() {
+        const q = (searchEl.value || "").toLowerCase().trim();
+        const ch = chapterEl.value || "";
+        const rows = EWC_CODES.filter((x) => {
+          const code6 = String(x.code6 || x.code || "").replace(/\\*/g, "");
+          const okCh = !ch || code6.startsWith(ch);
+          const hay = (code6 + " " + (x.description || "")).toLowerCase();
+          const okQ = !q || hay.includes(q);
+          return okCh && okQ;
+        });
+
+        bodyEl.innerHTML = "";
+        rows.forEach((x) => {
+          const code6 = String(x.code6 || x.code || "").replace(/\\*/g, "");
+          bodyEl.insertAdjacentHTML(
+            "beforeend",
+            `<tr>
+              <td class="px-4 py-3 font-semibold">${escapeHtml(x.code)}</td>
+              <td class="px-4 py-3">${escapeHtml(x.description || "")}</td>
+              <td class="px-4 py-3">${escapeHtml(code6.slice(0, 2))}</td>
+            </tr>`
+          );
+        });
+        countEl.textContent = `${rows.length} kod listeleniyor (toplam ${EWC_CODES.length})`;
+      }
+
+      // Default tabloyu önce bas (json gelmezse yine görünür kalır).
+      fillChapters();
+      render();
+
+      // Optional: load parsed JSON from text/PDF export (preferred).
+      // If it doesn't exist, fallback to DEFAULT_EWC_CODES.
+      fetch("assets/ewc_codes_from_text.json")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (Array.isArray(data) && data.length) {
+            EWC_CODES = data;
+          }
+          fillChapters();
+          render();
+        })
+        .catch(() => {
+          fillChapters();
+          render();
+        });
+
+      searchEl.addEventListener("input", render);
+      chapterEl.addEventListener("change", render);
+    })();
+  </script>
+</body>
+</html>

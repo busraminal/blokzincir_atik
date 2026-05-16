@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atık AI yönetici paneli — rol bazlı takip özetleri." />
+  <title>Atık AI | Yönetici</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <style>
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+    }
+  </style>
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="admin" data-required-role="admin">
+  <div class="min-h-screen flex flex-col">
+    <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 rounded-b-2xl">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="admin" href="admin.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 text-violet-700 font-semibold bg-violet-100/80">Yönetici</a>
+            <a href="profil.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Profilim</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="profil.html" class="hidden sm:inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-ecoGray shadow-sm transition hover:bg-slate-50">Profil</a>
+            <button type="button" data-site-menu-btn class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden md:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2 rounded-b-2xl">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a href="admin.html" class="rounded-xl px-3 py-3 text-violet-800 font-semibold hover:bg-violet-50">Yönetici</a>
+            <a href="profil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Profilim</a>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+    <main id="main-content" class="flex-1 px-4 sm:px-6 lg:px-8 py-10">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-violet-600">Yönetici modülü</p>
+            <h1 class="mt-2 text-3xl font-bold text-ecoGray">Takip özetleri</h1>
+            <p class="mt-2 text-sm text-gray-600 max-w-xl">
+              Oturum: <span id="admin-session-email" class="font-semibold text-ecoGray">—</span>
+              · Rol: <span id="admin-session-role" class="font-semibold text-ecoGray">—</span>
+            </p>
+          </div>
+          <a href="blokzincir.html" class="inline-flex items-center justify-center rounded-full bg-ecoBlue px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 hover:opacity-95 transition">Blokzincir / kayıtlar</a>
+        </div>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <a href="panel-uretici.html" class="glass-panel rounded-2xl border border-white/70 p-6 shadow-soft hover:shadow-md transition group">
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">1</p>
+            <h2 class="mt-2 text-lg font-bold text-ecoGray group-hover:text-ecoBlue transition">Atık üretici</h2>
+            <p class="mt-2 text-sm text-gray-600">Kaynakta oluşturma ve erken aşama özeti.</p>
+          </a>
+          <a href="panel-tasiyici.html" class="glass-panel rounded-2xl border border-white/70 p-6 shadow-soft hover:shadow-md transition group">
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">2</p>
+            <h2 class="mt-2 text-lg font-bold text-ecoGray group-hover:text-ecoBlue transition">Taşıyıcı</h2>
+            <p class="mt-2 text-sm text-gray-600">Sevkiyat ve nakliye adımları.</p>
+          </a>
+          <a href="panel-alan-firma.html" class="glass-panel rounded-2xl border border-white/70 p-6 shadow-soft hover:shadow-md transition group">
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">3</p>
+            <h2 class="mt-2 text-lg font-bold text-ecoGray group-hover:text-ecoBlue transition">Alan firma</h2>
+            <p class="mt-2 text-sm text-gray-600">Kabul, tartım ve ara işlem.</p>
+          </a>
+          <a href="panel-bertaraf.html" class="glass-panel rounded-2xl border border-white/70 p-6 shadow-soft hover:shadow-md transition group">
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">4</p>
+            <h2 class="mt-2 text-lg font-bold text-ecoGray group-hover:text-ecoBlue transition">Bertaraf eden</h2>
+            <p class="mt-2 text-sm text-gray-600">Nihai bertaraf ve kapanış.</p>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="mt-auto border-t border-slate-200/80 py-8 text-center text-xs text-slate-500">
+      © <span id="site-year"></span> Atık AI
+    </footer>
+  </div>
+  <script src="assets/site-nav.js" defer></script>
+  <script src="assets/auth.js" defer></script>
+</body>
+</html>

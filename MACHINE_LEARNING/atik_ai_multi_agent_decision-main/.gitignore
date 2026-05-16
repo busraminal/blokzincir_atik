@@ -1,0 +1,241 @@
+# =============================================================================
+# ATIK AI - Multi-Agent Decision System
+# .gitignore for Python/FastAPI/AI project
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# -----------------------------------------------------------------------------
+# Virtual Environments
+# -----------------------------------------------------------------------------
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+conda-env/
+
+# -----------------------------------------------------------------------------
+# IDEs & Editors
+# -----------------------------------------------------------------------------
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+*.iml
+.spyderproject
+.spyproject
+
+# -----------------------------------------------------------------------------
+# Environment Variables & Secrets
+# -----------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+config.local.py
+secrets/
+*.pem
+*.key
+
+# -----------------------------------------------------------------------------
+# Jupyter Notebook
+# -----------------------------------------------------------------------------
+.ipynb_checkpoints/
+*.ipynb
+!examples/*.ipynb
+
+# IPython
+profile_default/
+ipython_config.py
+
+# -----------------------------------------------------------------------------
+# Testing & Coverage
+# -----------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+nosetests.xml
+
+# -----------------------------------------------------------------------------
+# Database
+# -----------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+
+# PostgreSQL
+postgres_data/
+postgresql.conf
+pg_hba.conf
+pgdata/
+
+# Redis
+dump.rdb
+*.aof
+redis_data/
+
+# -----------------------------------------------------------------------------
+# Cache & Temporary Files
+# -----------------------------------------------------------------------------
+*.cache
+.cache/
+*.tmp
+tmp/
+temp/
+*.bak
+*.backup
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# -----------------------------------------------------------------------------
+# Logs
+# -----------------------------------------------------------------------------
+*.log
+logs/
+*.out
+debug.log
+error.log
+
+# -----------------------------------------------------------------------------
+# Data Files (Large files - use Git LFS or exclude)
+# -----------------------------------------------------------------------------
+data/*.csv
+data/*.json
+data/*.xlsx
+data/*.parquet
+!data/.gitkeep
+
+# Created data outputs
+created_datas/*.csv
+created_datas/*.json
+!created_datas/.gitkeep
+
+# Data processing outputs
+data_ostim_sincan/*.csv
+data_ostim_sincan/*.json
+!data_ostim_sincan/.gitkeep
+
+# Model files
+*.pkl
+*.pickle
+*.h5
+*.pt
+*.pth
+*.onnx
+models/
+!models/.gitkeep
+
+# Embedding cache
+embeddings_cache/
+*.npy
+*.npz
+
+# -----------------------------------------------------------------------------
+# API & Server
+# -----------------------------------------------------------------------------
+*.pid
+celerybeat-schedule
+celerybeat.pid
+
+# -----------------------------------------------------------------------------
+# Docker
+# -----------------------------------------------------------------------------
+docker-compose.override.yml
+.docker/
+
+# -----------------------------------------------------------------------------
+# Documentation Build
+# -----------------------------------------------------------------------------
+docs/_build/
+site/
+
+# -----------------------------------------------------------------------------
+# OS Generated
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# -----------------------------------------------------------------------------
+# Project Specific
+# -----------------------------------------------------------------------------
+# Distance matrix cache
+distance_cache/
+*.distance_cache
+
+# LLM response cache
+llm_cache/
+response_cache/
+
+# Output files
+output/
+results/
+exports/
+
+# Temporary SQL files
+*.sql
+!migrations/*.sql
+!scripts/*.sql
+
+# Large JSON outputs
+*_output.json
+circular_economy_matches.json
+predictions_output.json
+
+# Geocoding cache
+geocode_cache/

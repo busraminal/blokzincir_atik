@@ -1,0 +1,15 @@
+{
+  "name": "atik-waste-chaincode",
+  "version": "1.0.0",
+  "description": "Hyperledger Fabric chaincode - atik waste ledger",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "echo \"Run test-network to deploy chaincode\""
+  },
+  "dependencies": {
+    "fabric-shim": "2.5.15"
+  }
+}

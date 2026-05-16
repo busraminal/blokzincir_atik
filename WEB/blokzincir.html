@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Atık kayıt ve taşıma takibi: aşamalar, uygunluk özeti ve isteğe bağlı blokzincir sunucu modu." />
+  <title>Atık AI | Atık kayıt ve taşıma paneli</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ecoBlue: "#2D9CDB",
+            ecoGreen: "#27AE60",
+            ecoOrange: "#F2994A",
+            ecoGray: "#333333",
+          },
+          fontFamily: {
+            sans: ["Poppins", "Inter", "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 20px 60px rgba(15, 23, 42, .12)",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/site.css" />
+  <style>
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+    }
+    .timeline-line::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 28px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #2d9cdb55, #27ae6055);
+    }
+    .hover-tip-card {
+      position: relative;
+      cursor: help;
+    }
+    .hover-tip-card:focus {
+      outline: 2px solid rgba(45, 156, 219, 0.45);
+      outline-offset: 2px;
+    }
+    .hover-tip-popup {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 8px);
+      z-index: 80;
+      padding: 10px 12px;
+      background: #0f172a;
+      color: #f1f5f9;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
+      border-radius: 10px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.28);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.16s ease, visibility 0.16s ease;
+    }
+    .hover-tip-popup::before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -7px;
+      border: 7px solid transparent;
+      border-bottom-color: #0f172a;
+    }
+    .hover-tip-card:hover .hover-tip-popup,
+    .hover-tip-card:focus .hover-tip-popup,
+    .hover-tip-card:focus-within .hover-tip-popup {
+      opacity: 1;
+      visibility: visible;
+    }
+    .hover-tip-hint {
+      font-size: 10px;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body class="site-bg min-h-screen font-sans text-ecoGray antialiased" data-page="blokzincir">
+  <div class="min-h-screen relative overflow-x-hidden pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[110] focus:px-4 focus:py-2.5 focus:rounded-xl focus:bg-ecoBlue focus:text-white focus:font-semibold focus:shadow-lg focus:outline-none">İçeriğe atla</a>
+      <header class="sticky top-0 z-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 shadow-sm shadow-slate-900/[0.04] mb-2">
+        <div class="flex items-center justify-between gap-3 py-3 md:py-4">
+          <a href="Atik.html" class="flex items-center gap-3 min-w-0 group shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ecoBlue/40">
+            <span class="flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-gradient-to-br from-ecoGreen/25 to-ecoBlue/15 text-xl md:text-2xl ring-2 ring-white shadow-sm transition group-hover:shadow-md">♻</span>
+            <span class="text-lg md:text-xl font-bold tracking-tight text-ecoGray truncate">Atık AI</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-0.5 lg:gap-1 text-sm font-medium text-gray-600" aria-label="Ana menü">
+            <a data-nav="home" href="Atik.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-full px-3 py-2 transition hover:bg-white/90 hover:text-ecoGray">AI Asistan</a>
+          </nav>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="giris.html" data-nav="giris" class="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-ecoBlue/25 transition hover:opacity-[0.96] hover:shadow-lg">Giriş yap</a>
+            <button type="button" data-site-menu-btn class="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm" aria-expanded="false" aria-controls="site-mobile-menu">
+              <span class="sr-only">Menüyü aç</span>
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+        </div>
+        <div id="site-mobile-menu" class="hidden md:hidden border-t border-slate-200/70 bg-white/95 pb-4 pt-2 px-2">
+          <nav class="flex flex-col gap-0.5 text-sm font-medium" aria-label="Mobil menü">
+            <a data-nav="home" href="Atik.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Ana sayfa</a>
+            <a data-nav="hakkimizda" href="hakkimizda.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Hakkımızda</a>
+            <a data-nav="nasil" href="nasil.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Nasıl çalışır?</a>
+            <a data-nav="turler" href="turler.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Atık türleri</a>
+            <a data-nav="blokzincir" href="blokzincir.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blokzincir</a>
+            <a data-nav="blog" href="blog.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Blog</a>
+            <a data-nav="kutuphane" href="kutuphane.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">Kütüphane</a>
+            <a data-nav="chatbot" href="chatbot.html" class="rounded-xl px-3 py-3 text-gray-700 hover:bg-ecoBlue/5">AI Asistan</a>
+            <a data-nav="giris" href="giris.html" class="rounded-xl px-3 py-3 text-ecoBlue font-semibold hover:bg-ecoBlue/5">Giriş yap</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main-content" class="space-y-6 pt-4 md:pt-6">
+        <div id="conn-status-bar" class="hidden rounded-2xl border px-4 py-3 text-sm text-gray-800 bg-white/90 border-gray-200 shadow-sm">
+          <div>
+            <span class="inline-block h-2 w-2 rounded-full bg-gray-300 mr-2 align-middle animate-pulse"></span>
+            <span id="conn-status-text">Bağlantı kontrol ediliyor…</span>
+          </div>
+          <p id="hub-ws-status" class="mt-2 text-xs text-slate-500 hidden" aria-live="polite"></p>
+        </div>
+
+        <section class="glass-panel rounded-[2rem] border border-white/70 p-6 md:p-8 shadow-soft">
+          <div class="max-w-2xl">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-ecoBlue">Atık takibi</p>
+              <h1 class="mt-2 text-2xl md:text-3xl font-bold text-ecoGray leading-tight">Atığınızın yolculuğunu tek ekrandan izleyin</h1>
+              <p class="mt-3 text-gray-600 leading-relaxed">
+                Toplama, taşıma, geri dönüşüm ve kapanış aşamalarını adım adım görün. İsterseniz uygunluk puanı, bertaraf ve tahmini karbon etkisini de kayıt altına alın.
+              </p>
+            </div>
+
+          <div class="mt-6 grid md:grid-cols-3 gap-3 text-sm">
+            <div class="rounded-xl bg-gradient-to-br from-ecoBlue/10 to-white border border-ecoBlue/15 p-4">
+              <p class="font-bold text-ecoBlue">1. Sunucuyu açın</p>
+              <p class="mt-1 text-gray-600">Bilgisayarınızda <code class="text-xs bg-white px-1 rounded">atik-dlt</code> klasöründe terminalde <code class="text-xs bg-white px-1 rounded">npm start</code> yazın.</p>
+            </div>
+            <div class="rounded-xl bg-gradient-to-br from-ecoGreen/10 to-white border border-ecoGreen/15 p-4">
+              <p class="font-bold text-ecoGreen">2. Sunucu bağlantısı</p>
+              <p class="mt-1 text-gray-600">Sunucu açıkken bu sayfa otomatik olarak bağlanır; kayıtlar paylaşımlı deftere yazılır.</p>
+            </div>
+            <div class="rounded-xl bg-gradient-to-br from-ecoOrange/15 to-white border border-ecoOrange/20 p-4">
+              <p class="font-bold text-ecoOrange">3. Kayıt oluşturun</p>
+              <p class="mt-1 text-gray-600">Yeni kayıt ekleyin; <strong>Detayları gör</strong> ile geçmişi, <strong>Sonraki adım</strong> ile bir sonraki aşamayı işleyin.</p>
+            </div>
+          </div>
+
+          <p id="server-mode-banner" class="hidden mt-4 text-sm text-emerald-900 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 leading-relaxed"></p>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            <button type="button" id="btn-open-create" class="rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen px-5 py-2.5 text-sm font-semibold text-white shadow-md">
+              Yeni kayıt ekle
+            </button>
+            <button type="button" id="btn-seed" class="rounded-full border border-gray-200 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50">
+              Örnek kayıtları göster
+            </button>
+            <button type="button" id="btn-reset" class="rounded-full border border-red-200 bg-white px-4 py-2.5 text-sm font-semibold text-red-700 hover:bg-red-50">
+              Tüm kayıtları sil
+            </button>
+          </div>
+        </section>
+
+        <section class="grid grid-cols-2 md:grid-cols-5 gap-3" id="stat-cards"></section>
+
+        <section class="glass-panel rounded-[2rem] border border-white/70 p-4 md:p-6 shadow-soft">
+          <h2 class="text-lg font-bold text-ecoGray mb-3">Kayıt listesi</h2>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+            <input type="search" id="filter-q" placeholder="Takip numarası, tür veya firma ile ara…" class="flex-1 rounded-xl border border-gray-200 px-4 py-2.5 text-sm outline-none focus:border-ecoBlue focus:ring-2 focus:ring-ecoBlue/20" />
+            <select id="filter-status" class="rounded-xl border border-gray-200 px-4 py-2.5 text-sm outline-none focus:border-ecoBlue bg-white min-w-[180px]">
+              <option value="">Tüm aşamalar</option>
+            </select>
+          </div>
+          <div class="overflow-x-auto rounded-xl border border-gray-100">
+            <table class="min-w-full text-sm">
+              <thead class="bg-slate-50 text-left text-xs font-semibold text-slate-600">
+                <tr>
+                  <th class="px-4 py-3">Takip no</th>
+                  <th class="px-4 py-3">Atık</th>
+                  <th class="px-4 py-3 hidden md:table-cell">Toplayan firma</th>
+                  <th class="px-4 py-3">Bulunduğu aşama</th>
+                  <th class="px-4 py-3 hidden xl:table-cell" title="Mevzuat ve doluluk bilgilerinden hesaplanan özet puan">Uygunluk</th>
+                  <th class="px-4 py-3 hidden lg:table-cell">Bertaraf (kg)</th>
+                  <th class="px-4 py-3 text-right">Ne yapabilirim?</th>
+                </tr>
+              </thead>
+              <tbody id="ledger-body" class="divide-y divide-gray-100 bg-white"></tbody>
+            </table>
+          </div>
+          <p id="empty-hint" class="hidden text-center text-gray-500 py-12 px-4">
+            <span class="text-4xl block mb-2">📋</span>
+            Henüz kayıt yok. Başlamak için <strong>Yeni kayıt ekle</strong> veya <strong>Örnek kayıtları göster</strong> düğmesine basın.
+          </p>
+        </section>
+
+        <details class="glass-panel rounded-[2rem] border border-white/70 p-5 shadow-soft text-sm text-gray-600">
+          <summary class="cursor-pointer font-semibold text-ecoGray">Kurumsal kullanıcılar: Fabric ve teknik notlar</summary>
+          <p class="mt-3 leading-relaxed">
+            <strong>Bu cihazda:</strong> Veriler yalnızca bu tarayıcıda saklanır (<code class="bg-gray-100 px-1 rounded text-xs">localStorage</code>).
+            <strong>Sunucu modu:</strong> Veriler bilgisayarınızdaki <code class="bg-gray-100 px-1 rounded text-xs">npm start</code> sunucusuna gider; demo ortamda sırayla blok dosyasına yazılır. Tam kurumsal kurulum için <code class="bg-gray-100 px-1 rounded text-xs">atik-dlt</code> içindeki Hyperledger Fabric adımlarını izleyin (<code class="bg-gray-100 px-1 rounded text-xs">npm run start:fabric</code>).
+          </p>
+        </details>
+      </main>
+
+      <footer class="mt-12 md:mt-16 border-t border-slate-200/80 bg-gradient-to-b from-transparent to-white/70 rounded-t-[2rem]">
+        <div class="py-10 md:py-12">
+          <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+            <div>
+              <p class="flex items-center gap-2 font-bold text-ecoGray"><span class="text-lg" aria-hidden="true">♻</span> Atık AI</p>
+              <p class="mt-3 text-gray-600 leading-relaxed">Takip paneli yerel veya sunucu modunda çalışır; kurumsal kurulum için Fabric rehberine bakın.</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Platform</p>
+              <ul class="mt-3 space-y-2 text-gray-600">
+                <li><a class="hover:text-ecoBlue transition" href="Atik.html">Ana sayfa</a></li>
+                <li><a class="hover:text-ecoBlue transition" href="nasil.html">Nasıl çalışır?</a></li>
+                <li><a class="hover:text-ecoBlue transition" href="turler.html">Atık türleri</a></li>
+                <li><a class="hover:text-ecoBlue transition" href="kutuphane.html">Mevzuat kütüphanesi</a></li>
+                <li><a class="hover:text-ecoBlue transition" href="chatbot.html">AI Asistan</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Kurumsal</p>
+              <ul class="mt-3 space-y-2 text-gray-600">
+                <li><a class="hover:text-ecoBlue transition" href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a class="hover:text-ecoBlue transition" href="giris.html">Giriş</a></li>
+              </ul>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Not</p>
+              <p class="mt-3 text-gray-600 leading-relaxed">Demo veri ve zincir; üretimde yedekleme ve erişim politikası tanımlayın.</p>
+            </div>
+          </div>
+          <p class="mt-8 pt-6 border-t border-slate-200/70 text-center text-xs text-slate-500">© <span id="site-year"></span> Atık AI · Sürdürülebilir atık yönetimi</p>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Yeni kayıt -->
+  <div id="modal-create" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/50">
+    <div class="glass-panel max-w-xl w-full rounded-2xl border border-white/80 p-6 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex items-center justify-between gap-2 mb-4">
+        <div>
+          <h2 class="text-lg font-bold text-ecoGray">Yeni atık kaydı</h2>
+          <p class="text-xs text-gray-500 mt-1">Önce temel bilgileri doldurun; isterseniz aşağıda ek alanları açın.</p>
+        </div>
+        <button type="button" class="modal-close text-2xl leading-none text-gray-400 hover:text-gray-700">&times;</button>
+      </div>
+      <form id="form-create" class="space-y-4">
+        <p class="text-xs font-semibold text-ecoBlue uppercase tracking-wider">Temel bilgiler</p>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1">Atık türü</label>
+          <select name="wasteType" id="blokzincir-waste-type" required class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm">
+            <option value="Kağıt / karton">Kağıt / karton</option>
+            <option value="Plastik">Plastik</option>
+            <option value="Cam">Cam</option>
+            <option value="Metal">Metal</option>
+            <option value="Tehlikeli atık">Tehlikeli atık</option>
+            <option value="Organik">Organik</option>
+            <option value="Elektronik">Elektronik</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1">EWC kodu (Excel)</label>
+          <select
+            name="ewcCodeRaw"
+            id="blokzincir-ewc-code"
+            required
+            class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white"
+          >
+            <option value="">Atık türüne göre doldurulur</option>
+          </select>
+          <p id="blokzincir-ewc-hint" class="mt-1 text-[11px] text-slate-500 leading-snug"></p>
+          <p class="mt-1.5 text-[11px] text-slate-500">
+            <a href="/data/ewc_kodlari.pdf" class="font-medium text-ecoBlue hover:underline" target="_blank" rel="noopener noreferrer">ewc_kodlari.pdf</a>
+            — Avrupa Atık Kataloğu tam liste (proje klasörü).
+          </p>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1">Toplam ağırlık (kg)</label>
+          <input name="weightKg" type="number" step="0.01" min="0" required class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm" placeholder="örn. 1250" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1">Toplama firması</label>
+          <input name="collector" type="text" required class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm" placeholder="Örn. Yeşil Toplama A.Ş." />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1">Atığı üreten işletme (isteğe bağlı)</label>
+          <input name="owner" type="text" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm" placeholder="Örn. ABC Gıda A.Ş." />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-500 mb-1">Not</label>
+          <textarea id="blokzincir-note" name="note" rows="2" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm resize-none" placeholder="İsteğe bağlı kısa açıklama"></textarea>
+        </div>
+
+        <details class="rounded-xl border border-gray-100 bg-slate-50/50 p-3 group">
+          <summary class="cursor-pointer font-semibold text-sm text-ecoGray list-none flex items-center justify-between">
+            <span>Konum ve doğrulama</span>
+            <span class="text-ecoBlue text-xs group-open:hidden">Aç</span>
+            <span class="text-ecoBlue text-xs hidden group-open:inline">Kapat</span>
+          </summary>
+          <div class="mt-3 space-y-3 pt-2 border-t border-gray-100">
+            <p class="text-xs text-gray-500">Nerede toplandı veya işlendiğini yazın. İsterseniz harita koordinatı ekleyin.</p>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1">İl</label>
+              <select name="logisticsLocality" id="logistics-locality-il-select" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white outline-none focus:ring-2 focus:ring-ecoBlue/40">
+                <option value="">İl seçin</option>
+              </select>
+            </div>
+            <div class="mt-3 rounded-xl bg-white/70 border border-slate-200 p-4">
+              <div class="flex items-center justify-between gap-3">
+                <p class="text-sm font-semibold text-ecoGray">Konumunuzu doğrulayın</p>
+                <button
+                  type="button"
+                  id="logistics-verify-location-btn"
+                  class="rounded-full px-4 py-2 text-xs font-semibold text-white shadow-md shadow-ecoGreen/30 transition hover:opacity-[0.97] bg-gradient-to-r from-ecoBlue to-ecoGreen"
+                >
+                  Konum al
+                </button>
+              </div>
+              <p id="logistics-verify-location-msg" class="mt-2 text-xs text-gray-600 hidden"></p>
+              <p id="logistics-verify-location-meta" class="mt-1 text-[11px] text-slate-500 hidden"></p>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">Enlem (isteğe bağlı)</label>
+                <input name="logisticsLat" type="number" step="any" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white" placeholder="38.41" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">Boylam (isteğe bağlı)</label>
+                <input name="logisticsLon" type="number" step="any" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white" placeholder="27.14" />
+              </div>
+            </div>
+            <label class="flex items-start gap-2 text-sm text-gray-700">
+              <input type="checkbox" name="logisticsApiValidated" class="h-4 w-4 mt-0.5 rounded border-gray-300 text-ecoGreen" />
+              <span>Konum/resmi sistemden doğrulandı (kurumunuz onayladıysa işaretleyin)</span>
+            </label>
+          </div>
+        </details>
+
+        <details class="rounded-xl border border-gray-100 bg-slate-50/50 p-3 group">
+          <summary class="cursor-pointer font-semibold text-sm text-ecoGray list-none flex items-center justify-between">
+            <span>Kapasite, bertaraf ve planlama</span>
+            <span class="text-ecoBlue text-xs group-open:hidden">Aç</span>
+            <span class="text-ecoBlue text-xs hidden group-open:inline">Kapat</span>
+          </summary>
+          <div class="mt-3 space-y-3 pt-2 border-t border-gray-100">
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1" for="intermediate-requirement-select">Ara işlem gereksinimi</label>
+              <select
+                id="intermediate-requirement-select"
+                name="intermediateRequirement"
+                class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white text-ecoGray outline-none focus:ring-2 focus:ring-ecoBlue/40"
+                aria-describedby="intermediate-requirement-hint"
+              >
+                <option value="no">Hayır — ara işlem gerekmiyor</option>
+                <option value="yes">Evet — ara işlem adımı gerekli</option>
+              </select>
+              <p id="intermediate-requirement-hint" class="mt-1.5 text-[11px] text-gray-500 leading-snug">
+                «Evet» seçtiğinizde atık türüne göre Excel tabanlı öneri varsa aşağıda gösterilir.
+              </p>
+            </div>
+            <div id="intermediate-ara-islem-box" class="rounded-xl bg-ecoBlue/5 border border-ecoBlue/20 p-4 hidden">
+              <p class="text-sm font-semibold text-ecoGray">Excel’den öneri</p>
+              <p id="intermediate-ara-islem-text" class="mt-2 text-xs text-gray-700 leading-relaxed"></p>
+              <p id="intermediate-ara-islem-source" class="mt-1 text-[11px] text-slate-500 hidden"></p>
+              <p id="intermediate-ara-islem-meta" class="mt-1 text-[11px] text-slate-500 hidden"></p>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1">Tesis kapasitesi (kg) — doluluk hesabı için</label>
+              <input name="facilityCapacityKg" type="number" step="0.01" min="0" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white" placeholder="Örn. 10000" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1">Bertaraf edilen miktar (kg)</label>
+              <input name="disposalAmountKg" type="number" step="0.01" min="0" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white" placeholder="0" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1">Takip / sözleşme numarası</label>
+              <input name="supplyChainRef" type="text" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white" placeholder="Örn. SÖZ-2025-0142" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">Beklenen gelecek atık (kg)</label>
+                <input name="futureWasteKg" type="number" step="0.01" min="0" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white" placeholder="İsteğe bağlı" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">Beklenen bertaraf (kg)</label>
+                <input name="futureDisposalKg" type="number" step="0.01" min="0" class="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm bg-white" placeholder="İsteğe bağlı" />
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <div class="flex gap-2 pt-2">
+          <button type="submit" class="flex-1 rounded-full bg-gradient-to-r from-ecoBlue to-ecoGreen py-3 text-sm font-semibold text-white">Kaydı kaydet</button>
+          <button type="button" class="modal-close rounded-full border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-600">Vazgeç</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Detay + zaman çizelgesi -->
+  <div id="modal-detail" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-slate-900/50">
+    <div class="glass-panel max-w-2xl w-full rounded-2xl border border-white/80 p-6 shadow-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-2 mb-4">
+        <div>
+          <h2 class="text-lg font-bold" id="detail-title">Kayıt</h2>
+          <p class="text-sm text-gray-500 mt-1" id="detail-sub"></p>
+        </div>
+        <button type="button" class="modal-close-d text-2xl leading-none text-gray-400 hover:text-gray-700">&times;</button>
+      </div>
+      <div id="detail-meta" class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm mb-4"></div>
+      <div id="detail-chain-panel" class="rounded-2xl border border-ecoBlue/20 bg-ecoBlue/[0.06] p-4 mb-6 text-sm"></div>
+      <h3 class="text-sm font-bold text-ecoGray mb-2">Geçmiş: ne oldu, ne zaman?</h3>
+      <p class="text-xs text-gray-500 mb-3">Taşıma ve onay adımları aşağıda kronolojik sırayla listelenir.</p>
+      <div id="detail-timeline" class="relative pl-8 space-y-4 timeline-line"></div>
+      <div class="mt-6 flex flex-wrap gap-2 border-t border-gray-100 pt-4">
+        <button type="button" id="detail-advance" class="rounded-full bg-ecoGreen/15 px-4 py-2 text-sm font-semibold text-ecoGreen hover:bg-ecoGreen/25">Sonraki adıma geç</button>
+        <button type="button" id="detail-update-recovery" class="rounded-full bg-ecoBlue/10 px-4 py-2 text-sm font-semibold text-ecoBlue hover:bg-ecoBlue/20 hidden">Geri kazanılan miktarı güncelle</button>
+        <button type="button" id="detail-logistics-api" class="rounded-full bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-900 hover:bg-amber-200">Konumu doğrulandı işaretle</button>
+        <button type="button" id="detail-edit-chain" class="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">Ek bilgileri düzenle</button>
+      </div>
+      <div id="chain-edit-panel" class="hidden mt-4 border-t border-gray-100 pt-4 space-y-3"></div>
+    </div>
+  </div>
+
+  <script src="assets/ewc-form-helper.js"></script>
+  <script>
+    (function () {
+      var STORAGE_KEY = "atikAiWasteLedgerV3";
+      var LEGACY_KEY = "atikAiWasteLedgerV2";
+      var __params = new URLSearchParams(window.location.search);
+      var DEFAULT_API_PORT = "5055";
+      var locApi = window.location;
+      var isHttpApi = locApi.protocol === "http:" || locApi.protocol === "https:";
+      var pagePortApi = String(locApi.port || (locApi.protocol === "https:" ? "443" : "80"));
+      var apiPortParam = (__params.get("port") || "").trim();
+      // Live Server (5500/5501 vb.): statik sunucu POST kabul etmez → DLT API 5055
+      var livePreviewPorts = { "5500": 1, "5501": 1, "5502": 1, "5173": 1, "4173": 1, "3000": 1 };
+      var apiPort;
+      if (apiPortParam) {
+        apiPort = apiPortParam;
+      } else if (!isHttpApi) {
+        apiPort = DEFAULT_API_PORT;
+      } else if (pagePortApi === DEFAULT_API_PORT || pagePortApi === "5040") {
+        apiPort = pagePortApi;
+      } else if (livePreviewPorts[pagePortApi]) {
+        apiPort = DEFAULT_API_PORT;
+      } else {
+        apiPort = pagePortApi;
+      }
+      var apiHostBlok = isHttpApi ? window.location.hostname || "127.0.0.1" : "127.0.0.1";
+      var API_BASE = "http://" + apiHostBlok + ":" + apiPort;
+      var apiMode = __params.get("local") !== "1";
+      var __apiCache = null;
+      var hubWs = null;
+      var hubReconnectTimer = null;
+
+      function apiUrl(path) {
+        return API_BASE + path;
+      }
+
+      async function apiFetch(path, opts) {
+        var o = opts || {};
+        var headers = Object.assign({ Accept: "application/json" }, o.headers || {});
+        var init = Object.assign({}, o, { headers: headers });
+        if (o.body != null && typeof o.body === "object" && !(o.body instanceof FormData)) {
+          headers["Content-Type"] = "application/json";
+          init.body = JSON.stringify(o.body);
+        }
+        var r = await fetch(apiUrl(path), init);
+        var text = await r.text();
+        var data = text ? JSON.parse(text) : null;
+        if (!r.ok) {
+          var msg = (data && data.error) || text || String(r.status);
+          if (r.status === 405) {
+            msg =
+              "API bu adreste POST kabul etmiyor (405). Blokzincir sayfasını Live Server yerine " +
+              "http://127.0.0.1:" +
+              DEFAULT_API_PORT +
+              "/blokzincir.html adresinden açın veya atik-dlt klasöründe npm start çalıştırın.";
+          }
+          throw new Error(msg);
+        }
+        return data;
+      }
+
+      async function apiSync() {
+        if (!apiMode) return;
+        __apiCache = await apiFetch("/api/waste");
+      }
+
+      function wsHubUrl() {
+        try {
+          var u = new URL(API_BASE);
+          var proto = u.protocol === "https:" ? "wss:" : "ws:";
+          return proto + "//" + u.host + "/ws/hub";
+        } catch (_e) {
+          return "ws://localhost:" + apiPort + "/ws/hub";
+        }
+      }
+
+      function setHubStatus(text, isWarn) {
+        var el = document.getElementById("hub-ws-status");
+        if (!el) return;
+        if (!apiMode || !text) {
+          el.classList.add("hidden");
+          el.textContent = "";
+          return;
+        }
+        el.classList.remove("hidden");
+        el.textContent = text;
+        el.className =
+          "mt-2 text-xs " + (isWarn ? "text-amber-800 font-medium" : "text-emerald-800/90");
+      }
+
+      function scheduleHubReconnect() {
+        if (!apiMode) return;
+        if (hubReconnectTimer) return;
+        hubReconnectTimer = setTimeout(function () {
+          hubReconnectTimer = null;
+          connectLedgerHub();
+        }, 3500);
+      }
+
+      function connectLedgerHub() {
+        if (!apiMode) return;
+        if (hubReconnectTimer) {
+          clearTimeout(hubReconnectTimer);
+          hubReconnectTimer = null;
+        }
+        if (hubWs) {
+          try {
+            hubWs.close();
+          } catch (_e) {}
+          hubWs = null;
+        }
+        setHubStatus("Canlı hub: bağlanıyor…", true);
+        var url = wsHubUrl();
+        var ws;
+        try {
+          ws = new WebSocket(url);
+        } catch (_e) {
+          setHubStatus("Canlı güncelleme açılamadı (WebSocket).", true);
+          scheduleHubReconnect();
+          return;
+        }
+        hubWs = ws;
+        ws.onopen = function () {
+          setHubStatus("Canlı güncelleme: açık — sunucudaki kayıt değişince liste yenilenir.");
+          try {
+            ws.send(JSON.stringify({ op: "sub", topic: "ledger" }));
+          } catch (_e2) {}
+        };
+        ws.onmessage = function (ev) {
+          var msg;
+          try {
+            msg = JSON.parse(ev.data);
+          } catch (_e3) {
+            return;
+          }
+          if (msg.op === "hello" || msg.op === "subscribed" || msg.op === "pong") return;
+          if (msg.op !== "event" || msg.topic !== "ledger") return;
+          var sid = selectedId;
+          apiSync()
+            .then(function () {
+              refresh();
+              if (sid) {
+                var hit = loadRecords().filter(function (r) {
+                  return r.id === sid;
+                })[0];
+                if (hit) openDetail(sid);
+                else closeDetail();
+              }
+            })
+            .catch(function (err) {
+              console.warn("Hub sonrası senkron", err);
+            });
+        };
+        ws.onerror = function () {
+          setHubStatus("Canlı hub bağlantı hatası; yeniden denenecek…", true);
+        };
+        ws.onclose = function () {
+          hubWs = null;
+          if (!apiMode) return;
+          setHubStatus("Canlı hub kapandı; yeniden bağlanıyor…", true);
+          scheduleHubReconnect();
+        };
+      }
+
+      async function maybeStartLedgerHub() {
+        if (!apiMode) {
+          setHubStatus("");
+          return;
+        }
+        try {
+          var r = await fetch(apiUrl("/health"));
+          var h = r.ok ? await r.json() : null;
+          if (!h || !h.webSocketHub) {
+            setHubStatus("");
+            return;
+          }
+        } catch (_e) {
+          setHubStatus("");
+          return;
+        }
+        connectLedgerHub();
+      }
+
+      function setupNavLinks() {}
+
+      async function updateConnectionUI() {
+        var bar = document.getElementById("conn-status-bar");
+        var txt = document.getElementById("conn-status-text");
+        var banner = document.getElementById("server-mode-banner");
+        if (!bar || !txt) return;
+        var dot = bar.querySelector("span.rounded-full");
+        function setDot(cls) {
+          if (dot) dot.className = "inline-block h-2 w-2 rounded-full mr-2 align-middle " + cls;
+        }
+
+        if (apiMode) {
+          bar.classList.remove("hidden");
+          try {
+            var r = await fetch(apiUrl("/health"));
+            var h = r.ok ? await r.json() : null;
+            if (!r.ok || !h || h.ok === false) throw new Error((h && h.error) || "Sunucu yanıt vermedi");
+            var isFabric = h.mode === "hyperledger-fabric";
+            bar.className =
+              "rounded-2xl border px-4 py-3 text-sm shadow-sm " +
+              (isFabric ? "bg-violet-50 border-violet-200 text-violet-900" : "bg-emerald-50 border-emerald-200 text-emerald-900");
+            setDot(isFabric ? "bg-violet-500" : "bg-emerald-500");
+            var recPart = h.records != null ? " (" + h.records + " kayıt)" : "";
+            if (isFabric) {
+              txt.innerHTML =
+                "<strong>Gerçek blokzincir (Hyperledger Fabric)</strong> — Kayıtlar kurumsal ağda tutuluyor." +
+                "<span class=\"opacity-90\">" +
+                escapeHtml(recPart) +
+                "</span>";
+              if (banner) {
+                banner.classList.remove("hidden");
+                banner.innerHTML =
+                  "Fabric ortamında blok ve işlem geçmişi genelde Docker ağı ve kurum araçlarıyla izlenir; bu sayfa kayıt yönetimi içindir.";
+              }
+            } else {
+              txt.innerHTML =
+                "<strong>Sunucuya bağlısınız</strong> — Güncellemeler sırayla güvenli kayda yazılıyor." +
+                "<span class=\"text-emerald-900/90\">" +
+                escapeHtml(recPart) +
+                "</span>";
+              if (banner) {
+                banner.classList.remove("hidden");
+                var blocksUrl = apiUrl("/api/blocks");
+                banner.innerHTML =
+                  'Demo modunda işlemler dosyada zincirlenir. Teknik inceleme için <a class="font-semibold underline text-ecoBlue" href="' +
+                  blocksUrl +
+                  '" target="_blank" rel="noopener noreferrer">blok listesini açın</a>.';
+              }
+            }
+          } catch (e) {
+            bar.className = "rounded-2xl border px-4 py-3 text-sm bg-amber-50 border-amber-200 text-amber-950 shadow-sm";
+            setDot("bg-amber-500");
+            txt.innerHTML =
+              "<strong>Sunucuya ulaşılamıyor.</strong> <code class=\"text-xs bg-white/70 px-1 rounded\">atik-dlt</code> içinde <code class=\"text-xs bg-white/70 px-1 rounded\">npm start</code> çalıştırın.";
+            if (banner) {
+              banner.classList.add("hidden");
+              banner.innerHTML = "";
+            }
+          }
+        } else {
+          bar.classList.add("hidden");
+          if (banner) {
+            banner.classList.add("hidden");
+            banner.innerHTML = "";
+          }
+        }
+      }
+
+      var CARBON_KG_PER_KG = {
+        "Kağıt / karton": 0.9,
+        Plastik: 2.5,
+        Cam: 0.85,
+        Metal: 1.2,
+        "Tehlikeli atık": 4,
+        Organik: 0.5,
+        Elektronik: 5,
+      };
+
+      var STAGES = [
+        {
+          id: "kayit",
+          label: "Kayıt / depo",
+          userLabel: "Kayıt alındı",
+          statHint: "Depoda veya sahada",
+          hint: "Toplama firması kaydı oluşturdu; atık depoda veya sahada.",
+        },
+        {
+          id: "tasimada",
+          label: "Nakliyede",
+          userLabel: "Yolda",
+          statHint: "Merkeze taşınıyor",
+          hint: "Geri dönüşüm merkezine sevk; yolda.",
+        },
+        {
+          id: "gd_merkezi",
+          label: "G.D. merkezinde",
+          userLabel: "Merkezde",
+          statHint: "Teslim alındı, işlenecek",
+          hint: "Teslim alındı; ayrıştırma bekleniyor.",
+        },
+        {
+          id: "ayristirildi",
+          label: "Ayrıştırıldı",
+          userLabel: "Ayrıştırıldı",
+          statHint: "Geri kazanım netleşti",
+          hint: "Geri kazanılabilir miktar netleşti.",
+        },
+        {
+          id: "kapandi",
+          label: "Süreç kapandı",
+          userLabel: "Tamamlandı",
+          statHint: "Kayıt kapandı",
+          hint: "Kayıt tamamlandı (satış / bertaraf / arşiv).",
+        },
+      ];
+
+      function stageUserLabel(s) {
+        if (!s) return "";
+        return s.userLabel || s.label || "";
+      }
+
+      function stageIndex(id) {
+        for (var i = 0; i < STAGES.length; i++) if (STAGES[i].id === id) return i;
+        return 0;
+      }
+
+      function nowIso() {
+        return new Date().toISOString();
+      }
+
+      function formatTr(iso) {
+        try {
+          var d = new Date(iso);
+          return d.toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" });
+        } catch (e) {
+          return iso;
+        }
+      }
+
+      function defaultsChainFields() {
+        return {
+          schemaVersion: 3,
+          logisticsLocality: "",
+          logisticsLat: null,
+          logisticsLon: null,
+          logisticsApiValidated: false,
+          logisticsApiCheckedAt: null,
+          intermediateProcessRequired: false,
+          facilityCapacityKg: null,
+          disposalAmountKg: 0,
+          futureWasteKg: null,
+          futureDisposalKg: null,
+          supplyChainRef: "",
+        };
+      }
+
+      function upgradeRecord(r) {
+        var d = defaultsChainFields();
+        for (var k in d) if (r[k] === undefined) r[k] = d[k];
+        r.schemaVersion = 3;
+        return r;
+      }
+
+      function loadRecords() {
+        if (apiMode) {
+          return __apiCache ? __apiCache.map(upgradeRecord) : [];
+        }
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) {
+            var old = localStorage.getItem(LEGACY_KEY);
+            if (old) {
+              var arr = JSON.parse(old);
+              if (Array.isArray(arr)) {
+                arr = arr.map(upgradeRecord);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+                localStorage.removeItem(LEGACY_KEY);
+                return arr;
+              }
+            }
+            return [];
+          }
+          var arr2 = JSON.parse(raw);
+          if (!Array.isArray(arr2)) return [];
+          return arr2.map(upgradeRecord);
+        } catch (e2) {
+          return [];
+        }
+      }
+
+      function saveRecords(list) {
+        if (apiMode) return;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      }
+
+      function parseNum(v) {
+        if (v === null || v === undefined || v === "") return null;
+        var n = parseFloat(String(v).replace(",", "."));
+        return isNaN(n) ? null : n;
+      }
+
+      function computeDerivations(r) {
+        var w = Number(r.weightKg) || 0;
+        var disposal = Number(r.disposalAmountKg) || 0;
+        if (disposal > w) disposal = w;
+        var netAfterDisposal = Math.max(0, w - disposal);
+        var cap = parseNum(r.facilityCapacityKg);
+        var capUtilPct = cap != null && cap > 0 ? Math.min(100, (w / cap) * 100) : null;
+        var factor = CARBON_KG_PER_KG[r.wasteType] != null ? CARBON_KG_PER_KG[r.wasteType] : 1.5;
+        var carbonKgCO2e = Math.round(w * factor * 100) / 100;
+
+        var s = 0;
+        if (r.logisticsApiValidated) s += 30;
+        else if (r.logisticsLocality && String(r.logisticsLocality).trim()) s += 12;
+        if (r.intermediateProcessRequired) s += 10;
+        if (disposal > 0 && disposal <= w) s += 18;
+        else s += 4;
+        if (r.supplyChainRef && String(r.supplyChainRef).trim()) s += 15;
+        if (cap != null && cap > 0) {
+          if (w / cap <= 1) s += 15;
+          else s += 5;
+        }
+        if (parseNum(r.futureWasteKg) != null) s += 8;
+        if (parseNum(r.futureDisposalKg) != null) s += 8;
+        var complianceScore = Math.min(100, Math.round(s));
+
+        return {
+          netAfterDisposalKg: Math.round(netAfterDisposal * 100) / 100,
+          capacityUtilizationPct: capUtilPct != null ? Math.round(capUtilPct * 10) / 10 : null,
+          carbonKgCO2e: carbonKgCO2e,
+          complianceScore: complianceScore,
+          disposalClampedKg: disposal,
+        };
+      }
+
+      function complianceBadgeClass(score) {
+        if (score >= 75) return "bg-emerald-100 text-emerald-800";
+        if (score >= 50) return "bg-amber-100 text-amber-900";
+        return "bg-red-100 text-red-800";
+      }
+
+      function genId() {
+        var y = new Date().getFullYear();
+        var n = Math.floor(Math.random() * 90000) + 10000;
+        return "ATK-" + y + "-" + n;
+      }
+
+      function seedSamples() {
+        var t = nowIso();
+        var base = defaultsChainFields();
+        return [
+          Object.assign({}, base, {
+            id: "ATK-2025-10001",
+            wasteType: "Plastik",
+            weightKg: 820,
+            collector: "Ekolojik Toplama Ltd.",
+            owner: "Delta Ambalaj San.",
+            reusableKg: null,
+            stageId: "tasimada",
+            updatedAt: t,
+            logisticsLocality: "İzmir / Bornova",
+            logisticsLat: 38.42,
+            logisticsLon: 27.14,
+            logisticsApiValidated: true,
+            logisticsApiCheckedAt: t,
+            intermediateProcessRequired: true,
+            facilityCapacityKg: 5000,
+            disposalAmountKg: 0,
+            futureWasteKg: 900,
+            futureDisposalKg: 120,
+            supplyChainRef: "TZ-PLS-2025-0341",
+            events: [
+              { stageId: "kayit", at: t, actor: "Ekolojik Toplama Ltd.", note: "Çuval tartımı yapıldı, depoya alındı." },
+              { stageId: "tasimada", at: t, actor: "Lojistik: Anadolu Nakliyat", note: "G.D. merkezine çıkış; araç plaka 34 ABC 901." },
+            ],
+          }),
+          Object.assign({}, base, {
+            id: "ATK-2025-10002",
+            wasteType: "Kağıt / karton",
+            weightKg: 2400,
+            collector: "Yeşil Toplama A.Ş.",
+            owner: "KutuMatbaa A.Ş.",
+            reusableKg: 1980,
+            stageId: "ayristirildi",
+            updatedAt: t,
+            logisticsLocality: "Ankara / Sincan",
+            logisticsApiValidated: false,
+            intermediateProcessRequired: false,
+            facilityCapacityKg: 10000,
+            disposalAmountKg: 320,
+            futureWasteKg: 2600,
+            futureDisposalKg: 400,
+            supplyChainRef: "TZ-KGT-2025-0098",
+            events: [
+              { stageId: "kayit", at: t, actor: "Yeşil Toplama A.Ş.", note: "Balya numaraları sisteme işlendi." },
+              { stageId: "tasimada", at: t, actor: "Nakliye", note: "Merkeze sevk." },
+              { stageId: "gd_merkezi", at: t, actor: "İzmir Geri Dönüşüm", note: "Kantar girişi tamamlandı." },
+              { stageId: "ayristirildi", at: t, actor: "İzmir Geri Dönüşüm", note: "Saf kağıt fraksiyonu: 1980 kg geri kazanım." },
+            ],
+          }),
+        ];
+      }
+
+      var selectedId = null;
+
+      function badgeClass(stageId) {
+        var map = {
+          kayit: "bg-blue-100 text-blue-800",
+          tasimada: "bg-amber-100 text-amber-900",
+          gd_merkezi: "bg-violet-100 text-violet-800",
+          ayristirildi: "bg-emerald-100 text-emerald-800",
+          kapandi: "bg-slate-200 text-slate-700",
+        };
+        return map[stageId] || "bg-gray-100 text-gray-700";
+      }
+
+      function fillStatusFilter() {
+        var sel = document.getElementById("filter-status");
+        while (sel.children.length > 1) sel.removeChild(sel.lastChild);
+        STAGES.forEach(function (s) {
+          var o = document.createElement("option");
+          o.value = s.id;
+          o.textContent = stageUserLabel(s);
+          sel.appendChild(o);
+        });
+      }
+
+      function renderStats(records) {
+        var el = document.getElementById("stat-cards");
+        el.innerHTML = "";
+        STAGES.forEach(function (s) {
+          var c = records.filter(function (r) {
+            return r.stageId === s.id;
+          }).length;
+          var div = document.createElement("div");
+          div.className = "glass-panel rounded-2xl border border-white/70 p-4 shadow-sm";
+          div.innerHTML =
+            '<p class="text-2xl font-bold text-ecoGray">' +
+            c +
+            '</p><p class="text-sm font-semibold text-gray-800 mt-1 leading-tight">' +
+            escapeHtml(stageUserLabel(s)) +
+            "</p>" +
+            (s.statHint
+              ? '<p class="text-xs text-gray-500 mt-1 leading-snug">' + escapeHtml(s.statHint) + "</p>"
+              : "");
+          el.appendChild(div);
+        });
+      }
+
+      function renderTable(records) {
+        var q = (document.getElementById("filter-q").value || "").toLowerCase().trim();
+        var fs = document.getElementById("filter-status").value;
+        var filtered = records.filter(function (r) {
+          if (fs && r.stageId !== fs) return false;
+          if (!q) return true;
+          var blob = (
+            r.id +
+            " " +
+            r.wasteType +
+            " " +
+            r.collector +
+            " " +
+            (r.owner || "") +
+            " " +
+            (r.logisticsLocality || "") +
+            " " +
+            (r.supplyChainRef || "") +
+            " " +
+            (r.ewcCode || "") +
+            " " +
+            (r.ewcDescription || "")
+          ).toLowerCase();
+          return blob.indexOf(q) !== -1;
+        });
+
+        var tbody = document.getElementById("ledger-body");
+        var empty = document.getElementById("empty-hint");
+        tbody.innerHTML = "";
+        if (filtered.length === 0) {
+          empty.classList.remove("hidden");
+          return;
+        }
+        empty.classList.add("hidden");
+
+        filtered.forEach(function (r) {
+          var st = STAGES[stageIndex(r.stageId)] || STAGES[0];
+          var d = computeDerivations(r);
+          var tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-50/80";
+          tr.innerHTML =
+            '<td class="px-4 py-3 font-mono text-xs font-semibold text-ecoBlue">' +
+            r.id +
+            '</td><td class="px-4 py-3"><div class="font-medium">' +
+            escapeHtml(r.wasteType) +
+            '</div><div class="text-xs text-gray-500">' +
+            r.weightKg +
+            " kg</div>" +
+            (r.ewcCode
+              ? '<div class="text-[11px] text-slate-600 mt-0.5 font-mono">' + escapeHtml(r.ewcCode) + "</div>"
+              : "") +
+            "</td>" +
+            '<td class="px-4 py-3 hidden md:table-cell text-gray-700">' +
+            escapeHtml(r.collector) +
+            '</td><td class="px-4 py-3"><span class="inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ' +
+            badgeClass(r.stageId) +
+            '">' +
+            escapeHtml(stageUserLabel(st)) +
+            '</span></td><td class="px-4 py-3 hidden xl:table-cell"><span class="inline-flex rounded-full px-2 py-0.5 text-xs font-bold ' +
+            complianceBadgeClass(d.complianceScore) +
+            '">' +
+            d.complianceScore +
+            "</span></td>" +
+            '<td class="px-4 py-3 hidden lg:table-cell text-gray-600">' +
+            d.disposalClampedKg +
+            '</td><td class="px-4 py-3 text-right whitespace-nowrap">' +
+            '<button type="button" data-action="detail" data-id="' +
+            escapeHtml(r.id) +
+            '" class="text-ecoBlue text-sm font-semibold hover:underline mr-2">Detayları gör</button>' +
+            '<button type="button" data-action="advance" data-id="' +
+            escapeHtml(r.id) +
+            '" class="text-ecoGreen text-sm font-semibold hover:underline">Sonraki adım</button>' +
+            "</td>";
+          tbody.appendChild(tr);
+        });
+      }
+
+      function escapeHtml(s) {
+        if (!s) return "";
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function findRecord(id) {
+        return loadRecords().filter(function (r) {
+          return r.id === id;
+        })[0];
+      }
+
+      function hoverTipCard(extraClass, tipText, bodyHtml) {
+        return (
+          '<div class="hover-tip-card ' +
+          (extraClass || "") +
+          '" tabindex="0">' +
+          '<div class="hover-tip-popup" role="tooltip">' +
+          escapeHtml(tipText) +
+          "</div>" +
+          bodyHtml +
+          "</div>"
+        );
+      }
+
+      function tipLabel(text) {
+        return (
+          '<p class="text-[11px] text-gray-500 flex items-center flex-wrap gap-x-1">' +
+          escapeHtml(text) +
+          '<span class="hover-tip-hint" aria-hidden="true">ⓘ</span></p>'
+        );
+      }
+
+      function renderChainPanelHtml(r) {
+        var d = computeDerivations(r);
+        var capTxt =
+          d.capacityUtilizationPct != null
+            ? "%" + d.capacityUtilizationPct + " — tesis doluluk oranı"
+            : "Belirtilmedi (kapasite girilirse hesaplanır)";
+        var apiTxt = r.logisticsApiValidated
+          ? "Evet" + (r.logisticsApiCheckedAt ? " · " + formatTr(r.logisticsApiCheckedAt) : "")
+          : "Hayır";
+
+        var tips = {
+          section:
+            "Bu bölümde kaydınızın uygunluk özeti, çevresel kabaca tahmin ve tesis / lojistik ile ilgili ek alanlar gösterilir. Her kutunun üzerine gelerek (veya kutuya tıklayıp odak vererek) açıklamayı okuyabilirsiniz.",
+          compliance:
+            "0–100 arası özet skor: konum bilgisi, konumun onaylanması, bertaraf miktarı, tesis kapasitesi, takip referansı ve planlanan gelecek verilerine göre otomatik hesaplanır. Yüksek puan daha çok alanın doldurulduğunu gösterir; resmi mevzuat uygunluğu veya denetim yerine geçmez.",
+          carbon:
+            "Seçilen atık türü için tanımlı emisyon katsayısı ile toplam kg çarpılarak bulunan kabaca kg CO₂e karşılığıdır. Karşılaştırma ve farkındalık içindir; resmi karbon muhasebesi veya raporlama değildir.",
+          capacity:
+            "Girdiğiniz toplam atık ağırlığı ile tesis kapasitesi (kg) karşılaştırılarak doluluk yüzdesi hesaplanır. %100, kapasiteye kadar dolduğunuzu; üzeri girildiyse kapasite aşımı riskine işaret edebilir.",
+          disposal:
+            "Güvenli bertaraf, gömme, yakma vb. ile tesis dışına çıkan atık miktarı (kilogram). Sistem, değeri toplam ağırlığı geçmeyecek şekilde sınırlar.",
+          netAfter:
+            "Toplam ağırlıktan bertaraf edilen miktar çıkarılarak hesaplanır: geri dönüşüme giden veya depoda kalan net miktarı gösterir.",
+          locality:
+            "Atığın toplandığı veya işlendiği bölge (ör. il/ilçe). Lojistik ve izlenebilirlik için kullanılır.",
+          apiValidated:
+            "Konum veya yerellik bilgisinin kayıt altında onaylandığını gösterir. Bu demoda form veya düğümle işaretlenir; gerçek sistemde harita API’si veya resmi doğrulama ile bağlanabilir.",
+          intermediate:
+            "Ayrıştırma veya geri dönüşümden önce ek işlem (temizleme, parçalama, ön işlem vb.) gerekip gerekmediğini belirtir.",
+          supplyRef:
+            "İç takip numarası, tedarik zinciri referansı veya evrak no. Denetim ve eşleştirme için kullanılır; farklı sistemlerle bağlantı kurmayı kolaylaştırır.",
+          futureWaste:
+            "Önümüzdeki dönem için planlanan veya tahmin edilen atık girişi (kg). Kapasite ve lojistik planlamasına yardımcı olur.",
+          futureDisposal:
+            "İleride bertarafa gidecek miktar için planlanan veya tahmin edilen değer (kg). Operasyonel planlama ve raporlama içindir.",
+          reusable:
+            "Ayrıştırma sonrası geri dönüştürülebilir fraksiyonun kilogram cinsinden tutarı. Süreç aşamasına göre girilebilir veya güncellenebilir.",
+        };
+
+        var head = hoverTipCard(
+          "mb-3",
+          tips.section,
+          '<p class="text-xs font-bold uppercase tracking-wider text-ecoBlue">Özet ve uygunluk bilgileri<span class="hover-tip-hint font-normal normal-case">(fareyle üzerine gelin)</span></p>'
+        );
+
+        return (
+          head +
+          '<div class="grid sm:grid-cols-2 gap-3">' +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.compliance,
+            tipLabel("Uygunluk puanı") +
+              '<p class="text-2xl font-bold ' +
+              (d.complianceScore >= 75 ? "text-emerald-700" : d.complianceScore >= 50 ? "text-amber-800" : "text-red-700") +
+              '">' +
+              d.complianceScore +
+              "/100</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.carbon,
+            tipLabel("Tahmini karbon etkisi") +
+              '<p class="text-2xl font-bold text-ecoGray">' +
+              d.carbonKgCO2e +
+              ' <span class="text-sm font-normal text-gray-500">kg CO₂e</span></p>'
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.capacity,
+            tipLabel("Tesis doluluğu") + '<p class="font-semibold">' + escapeHtml(capTxt) + "</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.disposal,
+            tipLabel("Bertaraf edilen (kg)") + '<p class="font-semibold">' + d.disposalClampedKg + "</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60 sm:col-span-2",
+            tips.netAfter,
+            tipLabel("Bertaraf sonrası kalan miktar") +
+              '<p class="font-semibold text-lg">' +
+              d.netAfterDisposalKg +
+              " kg</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.locality,
+            tipLabel("Konum / bölge") + '<p class="font-medium">' + escapeHtml(r.logisticsLocality || "—") + "</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.apiValidated,
+            tipLabel("Konum doğrulandı mı?") + '<p class="font-medium">' + escapeHtml(apiTxt) + "</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.intermediate,
+            tipLabel("Ara işlem gerekli mi?") +
+              '<p class="font-medium">' +
+              escapeHtml(r.intermediateProcessRequired ? "Evet" : "Hayır") +
+              "</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.supplyRef,
+            tipLabel("Takip / referans no") +
+              '<p class="font-mono text-xs break-all">' +
+              escapeHtml(r.supplyChainRef || "—") +
+              "</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.futureWaste,
+            tipLabel("Beklenen gelecek atık (kg)") +
+              '<p class="font-medium">' +
+              (parseNum(r.futureWasteKg) != null ? parseNum(r.futureWasteKg) : "—") +
+              "</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-white/80 p-3 border border-white/60",
+            tips.futureDisposal,
+            tipLabel("Beklenen gelecek bertaraf (kg)") +
+              '<p class="font-medium">' +
+              (parseNum(r.futureDisposalKg) != null ? parseNum(r.futureDisposalKg) : "—") +
+              "</p>"
+          ) +
+          (r.reusableKg != null
+            ? hoverTipCard(
+                "rounded-xl bg-white/80 p-3 border border-white/60",
+                tips.reusable,
+                tipLabel("Geri kazanılan (kg)") + '<p class="font-medium">' + r.reusableKg + "</p>"
+              )
+            : "") +
+          "</div>"
+        );
+      }
+
+      function openDetail(id) {
+        selectedId = id;
+        var r = findRecord(id);
+        if (!r) return;
+        var st = STAGES[stageIndex(r.stageId)];
+        document.getElementById("detail-title").textContent = r.id;
+        document.getElementById("detail-sub").textContent =
+          stageUserLabel(st) + " · Son güncelleme: " + formatTr(r.updatedAt);
+        var meta = document.getElementById("detail-meta");
+        var metaTips = {
+          type: "Kayda seçilen atık sınıfı (ör. kağıt, plastik). Raporlama ve karbon kabası tahmininde tür bilgisine göre katsayı kullanılır.",
+          ewc: "Avrupa Atık Kataloğu (EWC) alt kodu; Excel çıktısı (ewc_codes_from_xlsx.json) ile uyumludur.",
+          weight: "Bu kayıt için tartılan veya beyan edilen toplam ağırlık. Bertaraf, kapasite ve kalan miktar hesapları bu değere göre yapılır.",
+          collector: "Atığı toplayan veya ilk kaydı oluşturan firma / operatör. Sahadaki sorumluluk ve iletişim için kullanılır.",
+          owner: "Atığın mülkiyeti veya sözleşmedeki üretici / işletme tarafı. Çok taraflı süreçlerde kimlik netliği sağlar.",
+        };
+        meta.innerHTML =
+            hoverTipCard(
+            "rounded-xl bg-slate-50 p-2",
+            metaTips.type,
+            '<p class="text-xs text-gray-500 flex items-center gap-1">Tür<span class="hover-tip-hint" aria-hidden="true">ⓘ</span></p><p class="font-medium">' +
+              escapeHtml(r.wasteType) +
+              "</p>"
+          ) +
+          (r.ewcCode
+            ? hoverTipCard(
+                "rounded-xl bg-slate-50 p-2",
+                metaTips.ewc,
+                '<p class="text-xs text-gray-500 flex items-center gap-1">EWC<span class="hover-tip-hint" aria-hidden="true">ⓘ</span></p><p class="font-medium font-mono text-sm">' +
+                  escapeHtml(r.ewcCode) +
+                  "</p>" +
+                  (r.ewcDescription
+                    ? '<p class="text-xs text-gray-600 mt-1 leading-snug">' + escapeHtml(r.ewcDescription) + "</p>"
+                    : "")
+              )
+            : "") +
+          hoverTipCard(
+            "rounded-xl bg-slate-50 p-2",
+            metaTips.weight,
+            '<p class="text-xs text-gray-500 flex items-center gap-1">Ağırlık<span class="hover-tip-hint" aria-hidden="true">ⓘ</span></p><p class="font-medium">' +
+              r.weightKg +
+              " kg</p>"
+          ) +
+          hoverTipCard(
+            "rounded-xl bg-slate-50 p-2",
+            metaTips.collector,
+            '<p class="text-xs text-gray-500 flex items-center gap-1">Toplama firması<span class="hover-tip-hint" aria-hidden="true">ⓘ</span></p><p class="font-medium">' +
+              escapeHtml(r.collector) +
+              "</p>"
+          ) +
+          (r.owner
+            ? hoverTipCard(
+                "rounded-xl bg-slate-50 p-2 col-span-2 sm:col-span-3",
+                metaTips.owner,
+                '<p class="text-xs text-gray-500 flex items-center gap-1">Sahip<span class="hover-tip-hint" aria-hidden="true">ⓘ</span></p><p class="font-medium">' +
+                  escapeHtml(r.owner) +
+                  "</p>"
+              )
+            : "");
+
+        document.getElementById("detail-chain-panel").innerHTML = renderChainPanelHtml(r);
+        var editP = document.getElementById("chain-edit-panel");
+        editP.classList.add("hidden");
+        editP.innerHTML = "";
+
+        var tl = document.getElementById("detail-timeline");
+        tl.innerHTML = "";
+        (r.events || []).forEach(function (ev, idx) {
+          var sg = STAGES[stageIndex(ev.stageId)];
+          var row = document.createElement("div");
+          row.className = "relative";
+          row.innerHTML =
+            '<span class="absolute left-[-1.65rem] top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white border-2 border-ecoBlue text-[10px] font-bold text-ecoBlue">' +
+            (idx + 1) +
+            '</span><p class="text-sm font-semibold">' +
+            escapeHtml(stageUserLabel(sg)) +
+            '</p><p class="text-xs text-gray-500">' +
+            formatTr(ev.at) +
+            " · " +
+            escapeHtml(ev.actor || "—") +
+            '</p><p class="text-sm text-gray-700 mt-1">' +
+            escapeHtml(ev.note || "") +
+            "</p>";
+          tl.appendChild(row);
+        });
+
+        var adv = document.getElementById("detail-advance");
+        var upd = document.getElementById("detail-update-recovery");
+        adv.disabled = r.stageId === "kapandi";
+        adv.textContent = r.stageId === "kapandi" ? "Süreç tamamlandı" : "Sonraki adıma geç";
+        upd.classList.toggle("hidden", r.stageId !== "gd_merkezi" && r.stageId !== "ayristirildi");
+        document.getElementById("modal-detail").classList.remove("hidden");
+        document.getElementById("modal-detail").classList.add("flex");
+      }
+
+      function closeDetail() {
+        document.getElementById("modal-detail").classList.add("hidden");
+        document.getElementById("modal-detail").classList.remove("flex");
+        document.getElementById("chain-edit-panel").classList.add("hidden");
+        selectedId = null;
+      }
+
+      function showChainEditForm() {
+        if (!selectedId) return;
+        var r = findRecord(selectedId);
+        if (!r) return;
+        var p = document.getElementById("chain-edit-panel");
+        p.classList.remove("hidden");
+        p.innerHTML =
+          '<p class="text-sm font-semibold text-ecoGray">Ek bilgileri güncelle</p>' +
+          '<div class="grid sm:grid-cols-2 gap-2">' +
+          '<label class="text-xs text-gray-500">Yerellik<input id="ce-loc" class="mt-1 w-full rounded-lg border border-gray-200 px-2 py-2 text-sm" value="' +
+          escapeHtml(r.logisticsLocality || "") +
+          '" /></label>' +
+          '<label class="text-xs text-gray-500">Bertaraf (kg)<input id="ce-disposal" type="number" step="0.01" min="0" class="mt-1 w-full rounded-lg border border-gray-200 px-2 py-2 text-sm" value="' +
+          (r.disposalAmountKg != null ? r.disposalAmountKg : 0) +
+          '" /></label>' +
+          '<label class="text-xs text-gray-500">Tesis kapasitesi (kg)<input id="ce-cap" type="number" step="0.01" min="0" class="mt-1 w-full rounded-lg border border-gray-200 px-2 py-2 text-sm" value="' +
+          (r.facilityCapacityKg != null ? r.facilityCapacityKg : "") +
+          '" /></label>' +
+          '<label class="text-xs text-gray-500">TZ referansı<input id="ce-tz" class="mt-1 w-full rounded-lg border border-gray-200 px-2 py-2 text-sm" value="' +
+          escapeHtml(r.supplyChainRef || "") +
+          '" /></label>' +
+          '<label class="text-xs text-gray-500">Gelecek atık (kg)<input id="ce-fw" type="number" step="0.01" min="0" class="mt-1 w-full rounded-lg border border-gray-200 px-2 py-2 text-sm" value="' +
+          (parseNum(r.futureWasteKg) != null ? parseNum(r.futureWasteKg) : "") +
+          '" /></label>' +
+          '<label class="text-xs text-gray-500">Gelecek bertaraf (kg)<input id="ce-fd" type="number" step="0.01" min="0" class="mt-1 w-full rounded-lg border border-gray-200 px-2 py-2 text-sm" value="' +
+          (parseNum(r.futureDisposalKg) != null ? parseNum(r.futureDisposalKg) : "") +
+          '" /></label></div>' +
+          '<label class="flex items-center gap-2 text-sm mt-2"><input type="checkbox" id="ce-api" ' +
+          (r.logisticsApiValidated ? "checked" : "") +
+          ' /> Konum doğrulandı olarak işaretle</label>' +
+          '<label class="flex items-center gap-2 text-sm"><input type="checkbox" id="ce-inter" ' +
+          (r.intermediateProcessRequired ? "checked" : "") +
+          " /> Ara işlem gerekli</label>" +
+          '<button type="button" id="ce-save" class="mt-2 rounded-full bg-ecoGreen px-4 py-2 text-sm font-semibold text-white">Kaydet</button>';
+        document.getElementById("ce-save").addEventListener("click", function () {
+          var capv = document.getElementById("ce-cap").value.trim();
+          var fw = document.getElementById("ce-fw").value.trim();
+          var fd = document.getElementById("ce-fd").value.trim();
+          var patch = {
+            logisticsLocality: document.getElementById("ce-loc").value.trim(),
+            disposalAmountKg: parseFloat(document.getElementById("ce-disposal").value) || 0,
+            facilityCapacityKg: capv === "" ? null : parseFloat(capv),
+            supplyChainRef: document.getElementById("ce-tz").value.trim(),
+            futureWasteKg: fw === "" ? null : parseFloat(fw),
+            futureDisposalKg: fd === "" ? null : parseFloat(fd),
+            logisticsApiValidated: document.getElementById("ce-api").checked,
+            intermediateProcessRequired: document.getElementById("ce-inter").checked,
+            eventNote: "Zincir alanları güncellendi: bertaraf, kapasite, TZ, projeksiyon, lojistik.",
+            actor: "Zincir yöneticisi",
+          };
+          if (apiMode) {
+            apiFetch("/api/waste/" + encodeURIComponent(selectedId), { method: "PATCH", body: patch })
+              .then(function () {
+                return apiSync();
+              })
+              .then(function () {
+                refresh();
+                openDetail(selectedId);
+              })
+              .catch(function (err) {
+                alert(err.message);
+              });
+            return;
+          }
+          var list = loadRecords();
+          var x = list.filter(function (z) {
+            return z.id === selectedId;
+          })[0];
+          if (!x) return;
+          x.logisticsLocality = patch.logisticsLocality;
+          x.disposalAmountKg = patch.disposalAmountKg;
+          x.facilityCapacityKg = patch.facilityCapacityKg;
+          x.supplyChainRef = patch.supplyChainRef;
+          x.futureWasteKg = patch.futureWasteKg;
+          x.futureDisposalKg = patch.futureDisposalKg;
+          x.logisticsApiValidated = patch.logisticsApiValidated;
+          if (x.logisticsApiValidated) x.logisticsApiCheckedAt = nowIso();
+          x.intermediateProcessRequired = patch.intermediateProcessRequired;
+          x.updatedAt = nowIso();
+          x.events = x.events || [];
+          x.events.push({
+            stageId: x.stageId,
+            at: x.updatedAt,
+            actor: patch.actor,
+            note: patch.eventNote,
+          });
+          saveRecords(list);
+          refresh();
+          openDetail(selectedId);
+        });
+      }
+
+      function advanceRecord(id) {
+        var list = loadRecords();
+        var r = list.filter(function (x) {
+          return x.id === id;
+        })[0];
+        if (!r || r.stageId === "kapandi") return Promise.resolve();
+        var i = stageIndex(r.stageId);
+        if (i >= STAGES.length - 1) return Promise.resolve();
+        var next = STAGES[i + 1];
+        var reusableKg = null;
+
+        if (next.id === "ayristirildi") {
+          var def = r.weightKg * 0.75;
+          var inp = window.prompt("Geri kazanılabilir ağırlık (kg) — öneri: " + def.toFixed(1), String(Math.round(def * 10) / 10));
+          if (inp === null) return Promise.resolve();
+          var num = parseFloat(inp.replace(",", "."));
+          if (isNaN(num) || num < 0) {
+            alert("Geçerli bir sayı girin.");
+            return Promise.resolve();
+          }
+          reusableKg = num;
+        }
+
+        if (apiMode) {
+          var body = next.id === "ayristirildi" ? { reusableKg: reusableKg } : {};
+          return apiFetch("/api/waste/" + encodeURIComponent(id) + "/advance", { method: "POST", body: body })
+            .then(function () {
+              return apiSync();
+            })
+            .then(function () {
+              refresh();
+              if (selectedId === id) openDetail(id);
+            });
+        }
+
+        r.reusableKg = next.id === "ayristirildi" ? reusableKg : r.reusableKg;
+        r.stageId = next.id;
+        r.updatedAt = nowIso();
+        r.events = r.events || [];
+        var actor = "Sistem kullanıcısı";
+        if (next.id === "tasimada") actor = "Nakliye operatörü";
+        if (next.id === "gd_merkezi") actor = "G.D. merkezi kabul";
+        if (next.id === "ayristirildi") actor = "G.D. merkezi ayrıştırma";
+        if (next.id === "kapandi") actor = "Yönetici";
+        r.events.push({
+          stageId: next.id,
+          at: r.updatedAt,
+          actor: actor,
+          note: next.hint,
+        });
+        saveRecords(list);
+        refresh();
+        if (selectedId === id) openDetail(id);
+        return Promise.resolve();
+      }
+
+      function refresh() {
+        var records = loadRecords();
+        renderStats(records);
+        renderTable(records);
+      }
+
+      async function boot() {
+        setupNavLinks();
+        fillStatusFilter();
+        if (apiMode) {
+          try {
+            await apiSync();
+            if (__apiCache.length === 0) {
+              await apiFetch("/api/seed", { method: "POST" });
+              await apiSync();
+            }
+          } catch (err) {
+            console.error(err);
+            alert("DLT sunucusu yok veya kapalı. atik-dlt klasöründe: npm install && npm start\nHata: " + err.message);
+            apiMode = false;
+          }
+        }
+        if (!apiMode && loadRecords().length === 0) {
+          saveRecords(seedSamples());
+        }
+        refresh();
+        await updateConnectionUI();
+        await maybeStartLedgerHub();
+      }
+
+      boot().catch(function (err) {
+        console.error(err);
+      });
+
+      document.getElementById("btn-open-create").addEventListener("click", function () {
+        document.getElementById("modal-create").classList.remove("hidden");
+        document.getElementById("modal-create").classList.add("flex");
+      });
+
+      document.querySelectorAll(".modal-close").forEach(function (b) {
+        b.addEventListener("click", function () {
+          document.getElementById("modal-create").classList.add("hidden");
+          document.getElementById("modal-create").classList.remove("flex");
+        });
+      });
+
+      document.querySelectorAll(".modal-close-d").forEach(function (b) {
+        b.addEventListener("click", closeDetail);
+      });
+
+      document.getElementById("form-create").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var fd = new FormData(e.target);
+        var ewcRaw = (fd.get("ewcCodeRaw") || "").toString().trim();
+        if (!ewcRaw) {
+          alert("Lütfen Excel listesinden bir EWC kodu seçin.");
+          return;
+        }
+        var ewcSel = document.getElementById("blokzincir-ewc-code");
+        var ewcOpt = ewcSel && ewcSel.selectedIndex >= 0 ? ewcSel.options[ewcSel.selectedIndex] : null;
+        var ewcDescription = (ewcOpt && ewcOpt.getAttribute("data-description")) || "";
+        var ewcSource = (ewcOpt && ewcOpt.getAttribute("data-source")) || "";
+        var ewcFmt =
+          window.ATIK_EWC && typeof window.ATIK_EWC.formatEwcCode === "function"
+            ? window.ATIK_EWC.formatEwcCode(ewcRaw)
+            : ewcRaw;
+        var t = nowIso();
+        var capStr = (fd.get("facilityCapacityKg") || "").toString().trim();
+        var latStr = (fd.get("logisticsLat") || "").toString().trim();
+        var lonStr = (fd.get("logisticsLon") || "").toString().trim();
+        var fwStr = (fd.get("futureWasteKg") || "").toString().trim();
+        var fdStr = (fd.get("futureDisposalKg") || "").toString().trim();
+        var wasteTypeVal = (fd.get("wasteType") || "").toString();
+        var araRec = window.getAraIslemRec ? window.getAraIslemRec(wasteTypeVal) : null;
+        var noteUser = (fd.get("note") || "Yeni kayıt oluşturuldu.").toString();
+        var imReq = (fd.get("intermediateRequirement") || "no").toString();
+        var intermediateProcessRequired = imReq === "yes";
+        var hasAraRec = !!(araRec && araRec.araIslem && intermediateProcessRequired);
+        if (hasAraRec && noteUser.indexOf("ÖNERİLEN ARA İŞLEM:") === -1) {
+          var tipLabel =
+            araRec.islemTipi === 1 || String(araRec.islemTipi) === "1.0" ? "Uygun" : araRec.islemTipi === 0 || String(araRec.islemTipi) === "0.0" ? "Uygun değil" : "";
+          var costLabel = araRec.maliyetPuan != null && araRec.maliyetPuan !== "" ? "Maliyet Puanı: " + araRec.maliyetPuan : "";
+          noteUser +=
+            "\n\nÖNERİLEN ARA İŞLEM: " +
+            String(araRec.araIslem) +
+            (araRec.kaynak ? "\nKaynak: " + String(araRec.kaynak) : "") +
+            (costLabel ? "\n" + costLabel : "") +
+            (tipLabel ? "\nİşlem tipi: " + tipLabel : "");
+        }
+        var rec = Object.assign({}, defaultsChainFields(), {
+          id: genId(),
+          wasteType: fd.get("wasteType"),
+          ewcCodeRaw: ewcRaw,
+          ewcCode: ewcFmt,
+          ewcDescription: ewcDescription,
+          ewcSource: ewcSource,
+          weightKg: parseFloat(fd.get("weightKg")),
+          collector: fd.get("collector"),
+          owner: fd.get("owner") || "",
+          reusableKg: null,
+          stageId: "kayit",
+          updatedAt: t,
+          logisticsLocality: (fd.get("logisticsLocality") || "").toString().trim(),
+          logisticsLat: latStr === "" ? null : parseFloat(latStr.replace(",", ".")),
+          logisticsLon: lonStr === "" ? null : parseFloat(lonStr.replace(",", ".")),
+          logisticsApiValidated: fd.get("logisticsApiValidated") === "on",
+          logisticsApiCheckedAt: fd.get("logisticsApiValidated") === "on" ? t : null,
+          intermediateProcessRequired: intermediateProcessRequired,
+          facilityCapacityKg: capStr === "" ? null : parseFloat(capStr.replace(",", ".")),
+          disposalAmountKg: parseFloat((fd.get("disposalAmountKg") || "0").toString().replace(",", ".")) || 0,
+          futureWasteKg: fwStr === "" ? null : parseFloat(fwStr.replace(",", ".")),
+          futureDisposalKg: fdStr === "" ? null : parseFloat(fdStr.replace(",", ".")),
+          supplyChainRef: (fd.get("supplyChainRef") || "").toString().trim(),
+          events: [
+            {
+              stageId: "kayit",
+              at: t,
+              actor: fd.get("collector"),
+              note: noteUser + " Zincir alanları ilk yüklemede tanımlandı.",
+            },
+          ],
+        });
+        if (rec.logisticsLat != null && isNaN(rec.logisticsLat)) rec.logisticsLat = null;
+        if (rec.logisticsLon != null && isNaN(rec.logisticsLon)) rec.logisticsLon = null;
+
+        function closeModal() {
+          e.target.reset();
+          if (typeof window.__atikRebuildBlokzincirEwc === "function") window.__atikRebuildBlokzincirEwc();
+          document.getElementById("modal-create").classList.add("hidden");
+          document.getElementById("modal-create").classList.remove("flex");
+          refresh();
+        }
+
+        if (apiMode) {
+          var payload = Object.assign({}, rec);
+          delete payload.id;
+          apiFetch("/api/waste", { method: "POST", body: payload })
+            .then(function () {
+              return apiSync();
+            })
+            .then(function () {
+              refresh();
+              closeModal();
+            })
+            .catch(function (err) {
+              alert(err.message || "Kayıt kaydedilemedi.");
+            });
+          return;
+        }
+        var list = loadRecords();
+        list.unshift(rec);
+        saveRecords(list);
+        closeModal();
+      });
+
+      document.getElementById("btn-seed").addEventListener("click", function () {
+        if (!confirm("Mevcut kayıtların üzerine örnek veri seti yazılsın mı?")) return;
+        if (apiMode) {
+          apiFetch("/api/seed", { method: "POST" })
+            .then(function () {
+              return apiSync();
+            })
+            .then(function () {
+              refresh();
+            })
+            .catch(function (err) {
+              alert(err.message);
+            });
+          return;
+        }
+        saveRecords(seedSamples());
+        refresh();
+      });
+
+      document.getElementById("btn-reset").addEventListener("click", function () {
+        if (!confirm("Tüm atık kayıtları silinsin mi?")) return;
+        if (apiMode) {
+          apiFetch("/api/waste", { method: "DELETE" })
+            .then(function () {
+              return apiSync();
+            })
+            .then(function () {
+              refresh();
+            })
+            .catch(function (err) {
+              alert(err.message);
+            });
+          return;
+        }
+        localStorage.removeItem(STORAGE_KEY);
+        refresh();
+      });
+
+      document.getElementById("filter-q").addEventListener("input", refresh);
+      document.getElementById("filter-status").addEventListener("change", refresh);
+
+      document.getElementById("ledger-body").addEventListener("click", function (e) {
+        var btn = e.target.closest("button[data-action]");
+        if (!btn) return;
+        var id = btn.getAttribute("data-id");
+        if (btn.getAttribute("data-action") === "detail") openDetail(id);
+        if (btn.getAttribute("data-action") === "advance")
+          advanceRecord(id).catch(function (err) {
+            alert(err.message);
+          });
+      });
+
+      document.getElementById("detail-advance").addEventListener("click", function () {
+        if (selectedId)
+          advanceRecord(selectedId).catch(function (err) {
+            alert(err.message);
+          });
+      });
+
+      document.getElementById("detail-update-recovery").addEventListener("click", function () {
+        if (!selectedId) return;
+        var r = findRecord(selectedId);
+        if (!r) return;
+        var cur = r.reusableKg != null ? String(r.reusableKg) : "";
+        var inp = window.prompt("Geri kazanılabilir ağırlık (kg)", cur);
+        if (inp === null) return;
+        var num = parseFloat(inp.replace(",", "."));
+        if (isNaN(num) || num < 0) return;
+        if (apiMode) {
+          apiFetch("/api/waste/" + encodeURIComponent(selectedId), {
+            method: "PATCH",
+            body: {
+              reusableKg: num,
+              actor: "G.D. merkezi",
+              eventNote: "Geri kazanım kg güncellendi: " + num + " kg",
+            },
+          })
+            .then(function () {
+              return apiSync();
+            })
+            .then(function () {
+              refresh();
+              openDetail(selectedId);
+            })
+            .catch(function (err) {
+              alert(err.message);
+            });
+          return;
+        }
+        var list = loadRecords();
+        var x = list.filter(function (z) {
+          return z.id === selectedId;
+        })[0];
+        x.reusableKg = num;
+        x.updatedAt = nowIso();
+        x.events = x.events || [];
+        x.events.push({
+          stageId: x.stageId,
+          at: x.updatedAt,
+          actor: "G.D. merkezi",
+          note: "Geri kazanım kg güncellendi: " + num + " kg",
+        });
+        saveRecords(list);
+        refresh();
+        openDetail(selectedId);
+      });
+
+      document.getElementById("detail-logistics-api").addEventListener("click", function () {
+        if (!selectedId) return;
+        if (apiMode) {
+          apiFetch("/api/waste/" + encodeURIComponent(selectedId) + "/logistics-attest", { method: "POST" })
+            .then(function () {
+              return apiSync();
+            })
+            .then(function () {
+              refresh();
+              openDetail(selectedId);
+            })
+            .catch(function (err) {
+              alert(err.message);
+            });
+          return;
+        }
+        var list = loadRecords();
+        var x = list.filter(function (z) {
+          return z.id === selectedId;
+        })[0];
+        if (!x) return;
+        var t = nowIso();
+        x.logisticsApiValidated = true;
+        x.logisticsApiCheckedAt = t;
+        x.updatedAt = t;
+        x.events = x.events || [];
+        x.events.push({
+          stageId: x.stageId,
+          at: t,
+          actor: "Lojistik API (simülasyon)",
+          note: "Konum / yerellik verisi doğrulandı; üretimde oracle veya resmi API yanıtı hash’lenerek zincire yazılır.",
+        });
+        saveRecords(list);
+        refresh();
+        openDetail(selectedId);
+      });
+
+      document.getElementById("detail-edit-chain").addEventListener("click", showChainEditForm);
+    })();
+  </script>
+  <script src="assets/ara-islem-recommendations.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var wasteTypeSelect = document.getElementById("blokzincir-waste-type");
+      var interSel = document.getElementById("intermediate-requirement-select");
+      var box = document.getElementById("intermediate-ara-islem-box");
+      var txtEl = document.getElementById("intermediate-ara-islem-text");
+      var srcEl = document.getElementById("intermediate-ara-islem-source");
+      var metaEl = document.getElementById("intermediate-ara-islem-meta");
+
+      var ewcCatalogBz =
+        window.ATIK_EWC && Array.isArray(window.ATIK_EWC.catalogFallback) ? window.ATIK_EWC.catalogFallback.slice() : [];
+
+      function rebuildBlokzincirEwcSelect() {
+        var wt = document.getElementById("blokzincir-waste-type");
+        var sel = document.getElementById("blokzincir-ewc-code");
+        var hint = document.getElementById("blokzincir-ewc-hint");
+        if (!wt || !sel || !window.ATIK_EWC) return;
+        var codes = window.ATIK_EWC.byBlokzincirCategory[wt.value] || [];
+        sel.innerHTML = "";
+        var opt0 = document.createElement("option");
+        opt0.value = "";
+        opt0.textContent = codes.length ? "EWC kodu seçin" : "Önce atık türü seçin";
+        sel.appendChild(opt0);
+        var byCode = {};
+        ewcCatalogBz.forEach(function (row) {
+          if (row && row.code) byCode[row.code] = row;
+        });
+        codes.forEach(function (c) {
+          var row = byCode[c];
+          if (!row) return;
+          var o = document.createElement("option");
+          o.value = c;
+          o.textContent = window.ATIK_EWC.formatEwcCode(c) + " — " + row.description;
+          o.setAttribute("data-description", row.description);
+          if (row.source) o.setAttribute("data-source", row.source);
+          sel.appendChild(o);
+        });
+        if (hint) {
+          hint.textContent = codes.length
+            ? "Liste, projedeki ewc_codes_from_xlsx.json ile eşleşir (yüklenemezse yerleşik yedek kullanılır)."
+            : "";
+        }
+      }
+
+      window.__atikRebuildBlokzincirEwc = rebuildBlokzincirEwcSelect;
+
+      var btnOpenCreate = document.getElementById("btn-open-create");
+      if (btnOpenCreate) {
+        btnOpenCreate.addEventListener("click", function () {
+          window.setTimeout(function () {
+            rebuildBlokzincirEwcSelect();
+          }, 0);
+        });
+      }
+
+      function fillAraIslemBoxFromRec(rec) {
+        if (!txtEl) return;
+        if (rec && rec.araIslem) {
+          txtEl.textContent = rec.araIslem || "";
+          if (srcEl) {
+            if (rec.kaynak) {
+              srcEl.textContent = "Kaynak: " + rec.kaynak;
+              srcEl.classList.remove("hidden");
+            } else {
+              srcEl.textContent = "";
+              srcEl.classList.add("hidden");
+            }
+          }
+          if (metaEl) {
+            var tipLabel =
+              rec.islemTipi === 1 || String(rec.islemTipi) === "1.0"
+                ? "Uygun"
+                : rec.islemTipi === 0 || String(rec.islemTipi) === "0.0"
+                  ? "Uygun değil"
+                  : "";
+            var costLabel = rec.maliyetPuan != null && rec.maliyetPuan !== "" ? "Maliyet: " + rec.maliyetPuan : "";
+            var metaParts = [];
+            if (costLabel) metaParts.push(costLabel);
+            if (tipLabel) metaParts.push("İşlem tipi: " + tipLabel);
+            if (metaParts.length) {
+              metaEl.textContent = metaParts.join(" · ");
+              metaEl.classList.remove("hidden");
+            } else {
+              metaEl.textContent = "";
+              metaEl.classList.add("hidden");
+            }
+          }
+        } else {
+          txtEl.textContent =
+            "Ara işlem gereksinimi listeden seçildi. Bu atık türü için Excel’de özel öneri yoksa tesis prosedürünüze göre ara adımı tanımlayın.";
+          if (srcEl) srcEl.classList.add("hidden");
+          if (metaEl) metaEl.classList.add("hidden");
+        }
+      }
+
+      function updateIntermediateRec() {
+        if (!wasteTypeSelect || !interSel || !box) return;
+        var val = wasteTypeSelect.value || "";
+        var rec = window.getAraIslemRec ? window.getAraIslemRec(val) : null;
+        var mode = interSel.value || "no";
+        var needIntermediate = mode === "yes";
+
+        if (!needIntermediate) {
+          box.classList.add("hidden");
+          if (txtEl) txtEl.textContent = "";
+          if (srcEl) srcEl.classList.add("hidden");
+          if (metaEl) metaEl.classList.add("hidden");
+          return;
+        }
+
+        box.classList.remove("hidden");
+        fillAraIslemBoxFromRec(rec);
+      }
+
+      function onWasteTypeChange() {
+        rebuildBlokzincirEwcSelect();
+        updateIntermediateRec();
+      }
+
+      if (wasteTypeSelect) wasteTypeSelect.addEventListener("change", onWasteTypeChange);
+      if (interSel) interSel.addEventListener("change", updateIntermediateRec);
+
+      rebuildBlokzincirEwcSelect();
+      updateIntermediateRec();
+
+      fetch("assets/ewc_codes_from_xlsx.json", { cache: "no-store" })
+        .then(function (r) {
+          return r.ok ? r.json() : Promise.reject();
+        })
+        .then(function (j) {
+          ewcCatalogBz = j;
+        })
+        .catch(function () {})
+        .finally(function () {
+          rebuildBlokzincirEwcSelect();
+          updateIntermediateRec();
+        });
+    });
+  </script>
+  <script src="assets/blokzincir-logistics-location.js" defer></script>
+  <script src="assets/site-nav.js" defer></script>
+</body>
+</html>

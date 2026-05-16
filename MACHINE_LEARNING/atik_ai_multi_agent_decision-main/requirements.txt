@@ -1,0 +1,146 @@
+# =============================================================================
+# ATIK AI: Çoklu Ajanlı Hibrit Karar Destek Sistemi
+# Gereksinim Listesi (Requirements)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# TEMEL VERİ İŞLEME
+# -----------------------------------------------------------------------------
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0              # Excel dosyaları için
+
+# -----------------------------------------------------------------------------
+# VERİTABANI BAĞLANTILARI
+# -----------------------------------------------------------------------------
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.9       # PostgreSQL bağlantısı
+
+# -----------------------------------------------------------------------------
+# FAZ 1: BİLGİ GRAFİĞİ İNŞASI (W2RKG)
+# -----------------------------------------------------------------------------
+# LLM Tabanlı Olay Argümanı Çıkarma (EAE)
+openai>=1.12.0               # GPT-4o API erişimi
+anthropic>=0.18.0            # Claude API (alternatif)
+transformers>=4.38.0         # LLaMA, BERT modelleri
+accelerate>=0.27.0           # Model hızlandırma
+
+# Varlık Füzyonu - Sentence-BERT
+sentence-transformers>=2.5.0 # Kosinüs benzerliği için vektörel ifadeler
+torch>=2.2.0                 # PyTorch (neural network backend)
+torchvision>=0.17.0
+
+# Akademik Veri Toplama
+scholarly>=1.7.0             # Google Scholar API
+requests>=2.31.0             # HTTP istekleri
+beautifulsoup4>=4.12.0       # Web scraping
+pybliometrics>=3.5.0         # Scopus API
+
+# Metin İşleme
+spacy>=3.7.0                 # NLP pipeline
+nltk>=3.8.0                  # Doğal dil işleme
+regex>=2023.12.0
+
+# -----------------------------------------------------------------------------
+# FAZ 2: SİNİR AĞLARI İLE TAHMİNLEME (Bi-Encoder)
+# -----------------------------------------------------------------------------
+scikit-learn>=1.4.0          # ML utilities, Sigmoid, MLP
+xgboost>=2.0.0               # Gradient boosting (alternatif)
+lightgbm>=4.3.0              # Hafif gradient boosting
+
+# Bi-Encoder için ek kütüphaneler
+faiss-cpu>=1.7.4             # Hızlı vektör arama
+hnswlib>=0.8.0               # Approximate nearest neighbors
+
+# -----------------------------------------------------------------------------
+# FAZ 3: ÇOKLU AJANLI OPERASYONELKOORDİNASYON (Multi-Agent RAG)
+# -----------------------------------------------------------------------------
+# === AGNO FRAMEWORK (Ana Ajan Sistemi) ===
+agno>=2.5.0                  # Multi-agent framework (Team, Workflow, Agent)
+
+# LangChain (alternatif, backward compat)
+langchain>=0.1.9             # Ana framework
+langchain-community>=0.0.24
+langchain-openai>=0.0.8
+langgraph>=0.0.26            # Çoklu ajan orkestrasyonu
+
+# RAG (Retrieval-Augmented Generation)
+chromadb>=0.4.22             # Vektör veritabanı
+pinecone-client>=3.0.0       # Bulut vektör DB (alternatif)
+llama-index>=0.10.0          # Doküman indeksleme
+
+# Ajan hafızası ve state yönetimi
+redis>=5.0.0                 # Distributed state
+pydantic>=2.6.0              # Veri validasyonu
+
+# -----------------------------------------------------------------------------
+# FAZ 4: EKONOMİK FİZİBİLİTE (SWAN & Optimizasyon)
+# -----------------------------------------------------------------------------
+
+# === MESAFE HESAPLAMA STRATEJİSİ ===
+# Faz 1 (MVP): OSMnx + NetworkX - ÜCRETSİZ
+osmnx>=1.9.0                 # OpenStreetMap yol ağı analizi
+networkx>=3.2.0              # Graf tabanlı yol optimizasyonu
+
+# Faz 2 (Scaling): OpenRouteService - ÜCRETSİZ API
+openrouteservice>=2.3.3      # OpenRouteService API client
+polyline>=2.0.0              # Route polyline decode
+
+# Faz 3 (Production): Hybrid - Opsiyonel
+# googlemaps>=4.10.0         # Google Maps API (ücretli, kritik kararlar için)
+
+# Koordinat işlemleri
+geopy>=2.4.1                 # Koordinat bazlı mesafe, geocoding
+
+# === DISTANCE MATRIX CACHE SİSTEMİ ===
+redis>=5.0.0                 # Distributed cache (requirements'tan taşındı)
+hiredis>=2.3.0               # Redis C parser (performans)
+diskcache>=5.6.0             # Disk-based fallback cache
+
+# === OPTİMİZASYON KÜTÜPHANELERİ ===
+scipy>=1.12.0                # Bilimsel hesaplama
+pulp>=2.7.0                  # Lineer programlama
+ortools>=9.8.0               # Google OR-Tools (VRP, TSP, constraint)
+cvxpy>=1.4.0                 # Konveks optimizasyon
+
+# Finansal Hesaplama
+numpy-financial>=1.0.0       # NPV, IRR hesaplamaları
+requests>=2.32.0
+# -----------------------------------------------------------------------------
+# API VE WEB SERVİSLERİ
+# -----------------------------------------------------------------------------
+fastapi>=0.109.0             # REST API framework
+uvicorn>=0.27.0              # ASGI server
+httpx>=0.27.0                # Async HTTP client
+aiohttp>=3.9.0               # Async requests
+
+# -----------------------------------------------------------------------------
+# VERİ GÖRSELLEŞTİRME VE RAPORLAMA
+# -----------------------------------------------------------------------------
+matplotlib>=3.8.0
+plotly>=5.19.0               # İnteraktif grafikler
+seaborn>=0.13.0              # İstatistiksel görselleştirme
+dash>=2.15.0                 # Dashboard uygulaması
+
+# -----------------------------------------------------------------------------
+# LOGLAMA VE İZLEME
+# -----------------------------------------------------------------------------
+loguru>=0.7.0                # Gelişmiş loglama
+tqdm>=4.66.0                 # İlerleme çubukları
+python-dotenv>=1.0.0         # Ortam değişkenleri
+pyyaml>=6.0.1                # YAML config dosyaları
+
+# -----------------------------------------------------------------------------
+# TEST VE GELİŞTİRME
+# -----------------------------------------------------------------------------
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+black>=24.1.0                # Kod formatlama
+mypy>=1.8.0                  # Tip kontrolü
+
+# -----------------------------------------------------------------------------
+# ZAMANSAL UYUM VE PLANLAMA
+# -----------------------------------------------------------------------------
+schedule>=1.2.0              # İş planlama
+celery>=5.3.0                # Dağıtık görev kuyruğu
+apscheduler>=3.10.0          # Gelişmiş zamanlama

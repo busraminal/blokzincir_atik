@@ -1,0 +1,28 @@
+ATIK — Tek hikâyeli demo (sunum notu)
+=====================================
+
+Mod: Demo zincir (USE_FABRIC kapalı) + Docker (ML API + Postgres) + Node aynı portta.
+
+1) Veri ve ML API (Docker)
+   - MLOPS klasörü:  docker compose up --build -d
+   - İlk seed için gerekirse:  docker compose down -v  sonra tekrar up
+   - Swagger: http://127.0.0.1:8000/docs
+
+2) Zincir + Web (Node)
+   - Proje kökü:  .\start-atik-dev.ps1
+   - Tarayıcı: http://127.0.0.1:5055/  (PORT .env ile değişebilir)
+   - Blokzincir sunucu modu:  http://127.0.0.1:5055/blokzincir.html?server=1
+
+3) Akış cümlesi (hoca)
+   "Kullanıcı arayüzünden atık kaydı oluşturuluyor; kayıt Node API ile demo deftere yazılıyor;
+    aynı origin üzerinden ATIK AI (Docker’daki FastAPI) ile NACE–EWC önerisi ve eşleşme
+    uçları kullanılabiliyor; isteğe Fabric ile gerçek dağıtık deftere geçiş scriptleri mevcut."
+
+4) Fabric modu (ayrı)
+   - BLOCKCHAIN\atik-dlt\scripts\Calistir-TamStack.ps1
+   - Türkçesiz kısa yol önerilir (WSL wslpath).
+
+5) LLM
+   - Windows’ta Ollama: ollama serve (11434)
+   - Docker API: OLLAMA_BASE_URL=http://host.docker.internal:11434 (compose’da varsayılan)
+   - Test: POST /api/v1/llm/waste-advice?nace_code=38.12

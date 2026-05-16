@@ -1,0 +1,3 @@
+Bu klasöre ham verileri koyun:
+- ewc_kodlari.pdf  →  tarayıcıda /data/ewc_kodlari.pdf
+- Ara işlem / EWC Excel dosyaları (*.xlsx)  →  WEB/gen_ara_islem_recommendations.py bunları buradan okur

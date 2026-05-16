@@ -1,0 +1,9 @@
+{
+  "name": "atik-web",
+  "private": true,
+  "description": "Tek port: WEB + BLOCKCHAIN/atik-dlt Express. Live Server kullanmayın — npm start.",
+  "scripts": {
+    "start": "npm start --prefix BLOCKCHAIN/atik-dlt",
+    "dev": "npm start --prefix BLOCKCHAIN/atik-dlt"
+  }
+}
